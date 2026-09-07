@@ -1,0 +1,17 @@
+{
+  "name": "seoul-3d",
+  "version": "1.0.0",
+  "description": "OpenStreetMap 벡터타일과 SRTM 표고로 만든 인터랙티브 3D 미니어처 도시",
+  "scripts": {
+    "build:seoul": "node tools/build-city.mjs seoul",
+    "serve": "python3 -m http.server 8747"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@mapbox/vector-tile": "^3.0.0",
+    "pbf": "^5.1.2"
+  }
+}

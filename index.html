@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>서울 3D 아틀라스</title>
+<style>
+  :root {
+    --accent: #1f6b5a;
+    --panel: rgba(255,255,255,.94);
+    --ink: #1b2b26;
+    --muted: #7d8b86;
+    --line: #e6eae6;
+    font-family: -apple-system, BlinkMacSystemFont, 'KoddiUD OnGothic', 'Segoe UI', sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin:0; height:100%; overflow:hidden; color:var(--ink); background:#dde5e0; }
+  canvas { position:absolute; inset:0; display:block; width:100%; height:100%; }
+
+  .card { background:var(--panel); border-radius:16px; box-shadow:0 6px 28px rgba(30,50,45,.14); backdrop-filter:blur(8px); }
+
+  #title { position:absolute; top:26px; left:32px; z-index:3; pointer-events:none; }
+  #title .eyebrow { font-size:11px; letter-spacing:.28em; color:var(--accent); font-weight:600; }
+  #title h1 { margin:2px 0 0; font-size:42px; letter-spacing:-.02em; display:flex; align-items:baseline; gap:12px; }
+  #title h1 span { font-size:20px; letter-spacing:.18em; color:var(--muted); font-weight:500; }
+  #title p { margin:4px 0 0; font-size:13px; color:var(--muted); }
+
+  #panel { position:absolute; top:150px; left:32px; width:288px; max-height:calc(100vh - 250px);
+           z-index:3; display:flex; flex-direction:column; padding:22px 0 0; }
+  #panel h2 { margin:0 20px 14px; font-size:17px; }
+  .lm-head { margin:0 20px 6px; display:flex; justify-content:space-between; font-size:11px; letter-spacing:.16em; color:var(--muted); }
+  #landmarks { overflow-y:auto; padding:4px 10px 10px; }
+  #landmarks button { width:100%; display:flex; align-items:center; gap:12px; padding:9px 10px; border:0;
+    background:none; font:inherit; text-align:left; cursor:pointer; border-radius:10px; color:inherit; }
+  #landmarks button:hover { background:#eef4f1; }
+  .num { flex:none; width:28px; height:26px; border:1px solid var(--line); border-radius:6px; display:grid; place-items:center; font-size:11px; color:var(--muted); }
+  .nm { flex:1; min-width:0; }
+  .nm b { display:block; font-size:14px; font-weight:600; }
+  .nm i { display:block; font-size:11px; color:var(--muted); font-style:normal; }
+  .arrow { color:var(--muted); font-size:13px; }
+
+  #time { position:absolute; top:26px; right:100px; z-index:3; display:flex; padding:5px; gap:2px; }
+  #time button { border:0; background:none; font:inherit; font-size:13px; padding:9px 16px; border-radius:11px;
+                 cursor:pointer; color:var(--muted); display:flex; align-items:center; gap:7px; }
+  #time button.on { background:var(--accent); color:#fff; }
+  #info-btn { position:absolute; top:26px; right:32px; z-index:3; width:52px; height:52px; border:0; cursor:pointer;
+              font-size:18px; color:var(--accent); font-style:italic; font-weight:600; }
+
+  #tools { position:absolute; bottom:26px; left:50%; transform:translateX(-50%); z-index:3; display:flex; padding:8px; gap:2px; }
+  #tools button { border:0; background:none; font:inherit; font-size:12px; padding:10px 18px; border-radius:11px; cursor:pointer;
+                  color:var(--ink); display:flex; flex-direction:column; align-items:center; gap:6px; }
+  #tools button:hover { background:#eef4f1; }
+  #tools button.on { color:var(--accent); }
+  #tools svg { width:19px; height:19px; stroke:currentColor; fill:none; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+
+  #place { position:absolute; right:32px; bottom:112px; z-index:3; width:268px; padding:20px 22px; }
+  #place .eyebrow { font-size:10px; letter-spacing:.2em; color:var(--muted); }
+  #place h3 { margin:8px 0 6px; font-size:22px; }
+  #place p { margin:0; font-size:13px; color:var(--muted); line-height:1.55; }
+  #place .coord { margin-top:14px; font-size:12px; color:var(--muted); font-variant-numeric:tabular-nums; }
+
+  #hint { position:absolute; bottom:98px; left:50%; transform:translateX(-50%); z-index:2; font-size:12px;
+          color:var(--muted); background:rgba(255,255,255,.7); padding:5px 16px; border-radius:20px; }
+  #note { position:absolute; bottom:14px; left:32px; z-index:3; font-size:11px; color:var(--muted); }
+  #fps { position:absolute; bottom:14px; right:32px; z-index:3; font-size:11px; color:var(--muted); font-variant-numeric:tabular-nums; }
+
+  /* 3D 위에 뜨는 랜드마크 이름표 */
+  #labels { position:absolute; inset:0; z-index:2; pointer-events:none; }
+  .label { position:absolute; transform:translate(-50%,-100%); white-space:nowrap; font-size:12px; font-weight:600;
+           color:var(--ink); background:rgba(255,255,255,.88); padding:3px 9px; border-radius:12px;
+           box-shadow:0 2px 8px rgba(30,50,45,.12); }
+  .label::after { content:''; position:absolute; left:50%; top:100%; width:1px; height:14px; background:rgba(60,80,75,.35); }
+
+  #load { position:absolute; inset:0; z-index:10; display:grid; place-items:center; background:#e7ece7; transition:opacity .6s; }
+  #load .in { text-align:center; width:280px; }
+  #load .eyebrow { font-size:11px; letter-spacing:.28em; color:var(--accent); font-weight:600; }
+  #load h1 { margin:6px 0 22px; font-size:38px; }
+  #load .bar { height:3px; background:#d2dcd6; border-radius:2px; overflow:hidden; }
+  #load .bar i { display:block; height:100%; width:0; background:var(--accent); transition:width .35s; }
+  #load p { margin:12px 0 0; font-size:12px; color:var(--muted); }
+
+  #about { position:absolute; inset:0; z-index:11; background:rgba(20,35,30,.4); display:none; place-items:center; }
+  #about.open { display:grid; }
+  #about > div { position:relative; width:min(560px,90vw); max-height:80vh; overflow:auto; padding:34px 38px; line-height:1.75; font-size:13px; }
+  #about h4 { margin:0 0 4px; font-size:20px; }
+  #about .eyebrow { font-size:10px; letter-spacing:.2em; color:var(--muted); }
+  #about dt { font-weight:600; margin-top:14px; }
+  #about dd { margin:2px 0 0; color:var(--muted); }
+  #about .close { position:absolute; top:6px; right:10px; border:0; background:none; font-size:22px; cursor:pointer; color:var(--muted); }
+
+  body.dark { --panel:rgba(20,30,36,.92); --ink:#e9f1ef; --muted:#8fa3a4; --line:#31414a; --accent:#6fd6b8; }
+  body.dark #landmarks button:hover, body.dark #tools button:hover { background:#25343c; }
+  body.dark #time button.on { color:#0f1a1d; }
+  body.dark #hint { background:rgba(20,30,36,.72); }
+  body.dark .label { background:rgba(20,30,36,.86); color:#e9f1ef; }
+
+  @media (max-width:860px) {
+    #panel, #place, #hint { display:none; }
+    #title h1 { font-size:30px; }
+    #time { right:88px; } #time button span { display:none; }
+  }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="labels"></div>
+
+<div id="title">
+  <div class="eyebrow">SOUTH KOREA · SPATIAL ATLAS</div>
+  <h1>서울 <span>SEOUL</span></h1>
+  <p>한강을 따라, 도시 너머로</p>
+</div>
+
+<aside id="panel" class="card">
+  <h2>어디로 가볼까요?</h2>
+  <div class="lm-head"><span>LANDMARKS</span><span id="lm-count"></span></div>
+  <div id="landmarks"></div>
+</aside>
+
+<div id="time" class="card">
+  <button data-t="day" class="on">☀ <span>낮</span></button>
+  <button data-t="dusk">◑ <span>노을</span></button>
+  <button data-t="night">☾ <span>야경</span></button>
+</div>
+<button id="info-btn" class="card">i</button>
+
+<div id="place" class="card">
+  <div class="eyebrow">A CITY IN MINIATURE</div>
+  <h3 id="place-name">서울, 한눈에</h3>
+  <p id="place-desc">한강과 산, 그 사이에 펼쳐진 도시</p>
+  <div class="coord" id="place-coord">37.5450° N &nbsp; 126.9880° E</div>
+</div>
+
+<div id="hint">드래그 회전 · 휠 확대 · 오른쪽 드래그 이동</div>
+
+<nav id="tools" class="card">
+  <button data-a="home"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>서울 전체</button>
+  <button data-a="tour"><svg viewBox="0 0 24 24"><path d="M6 4l13 8-13 8z"/></svg>자동 비행</button>
+  <button data-a="labels" class="on"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>이름표</button>
+  <button data-a="full"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>전체 화면</button>
+</nav>
+
+<div id="note">— OpenStreetMap 기반 · 높이 3× 과장 · 랜드마크는 캐리커쳐</div>
+<div id="fps"></div>
+
+<div id="load"><div class="in">
+  <div class="eyebrow">SOUTH KOREA · SPATIAL ATLAS</div>
+  <h1>서울</h1>
+  <div class="bar"><i id="bar"></i></div>
+  <p id="load-msg">데이터를 내려받는 중</p>
+</div></div>
+
+<div id="about"><div class="card">
+  <button class="close">×</button>
+  <div class="eyebrow">ABOUT THIS ATLAS</div>
+  <h4>서울을 닮은 작은 세계</h4>
+  <p>서울 전역과 가장자리의 주변 지역을 담은 인터랙티브 미니어처입니다. 실제 도로·수계·표고 데이터를 바탕으로 만들었습니다.</p>
+  <p>건물은 OpenStreetMap에 수록된 윤곽을 사각 기둥 하나로 단순화한 모형입니다. 지형과 건물 높이는 보기 쉽도록 3배로 강조했습니다. 랜드마크는 특징만 남겨 크게 과장한 캐리커쳐이며, 실측 복원이 아닙니다.</p>
+  <dl>
+    <dt>건물 · 도로 · 수계 · 녹지</dt><dd>OpenFreeMap / OpenMapTiles · © OpenStreetMap contributors (ODbL) · 2026-08-30 스냅샷</dd>
+    <dt>지형</dt><dd>AWS Terrain Tiles / Mapzen · SRTM 등</dd>
+    <dt>렌더링</dt><dd>Three.js</dd>
+  </dl>
+  <p style="color:var(--muted)">길 안내나 측량용 지도가 아닙니다.</p>
+</div></div>
+
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.185.1/examples/jsm/"
+} }
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { City } from './app.js';
+import { LANDMARKS } from './landmarks.js';
+
+const city = new City(document.getElementById('c'));
+// 콘솔에서 씬을 만져볼 수 있게 열어둔다
+window.city = city; window.THREE = THREE; window.__err = [];
+addEventListener('error', e => window.__err.push(String(e.message)));
+const bar = document.getElementById('bar'), msg = document.getElementById('load-msg');
+
+await city.load('seoul', (text, p) => { msg.textContent = text; bar.style.width = (p*100).toFixed(0) + '%'; });
+
+// 초기 시점: 한강 남쪽에서 도심과 북한산을 바라본다
+const HOME = { lon: 127.005, lat: 37.542, dist: 16500, pitch: 0.40, bearing: -0.16 };
+city.start();
+city.placeCamera(HOME.lon, HOME.lat, HOME.dist, HOME.pitch, HOME.bearing);
+
+bar.style.width = '100%';
+setTimeout(() => {
+  const el = document.getElementById('load');
+  el.style.opacity = 0;
+  setTimeout(() => el.remove(), 700);
+}, 250);
+
+// 랜드마크 목록
+const list = document.getElementById('landmarks');
+document.getElementById('lm-count').textContent = LANDMARKS.length + '곳';
+LANDMARKS.forEach((lm, i) => {
+  const b = document.createElement('button');
+  b.innerHTML = `<span class="num">${String(i+1).padStart(2,'0')}</span><span class="nm"><b></b><i></i></span><span class="arrow">↗</span>`;
+  b.querySelector('b').textContent = lm.name;
+  b.querySelector('i').textContent = lm.en;
+  b.onclick = () => goto(i);
+  list.append(b);
+});
+
+function goto(i) {
+  const lm = LANDMARKS[i];
+  city.flyTo(lm.lon, lm.lat, 1900, 0.42, (i * 1.1) % (Math.PI * 2) - Math.PI);
+  document.getElementById('place-name').textContent = lm.name;
+  document.getElementById('place-desc').textContent = lm.desc;
+  document.getElementById('place-coord').textContent = `${lm.lat.toFixed(4)}° N   ${lm.lon.toFixed(4)}° E`;
+}
+
+// 이름표 오버레이
+const labelHost = document.getElementById('labels');
+const labelEls = city.labelAnchors.map(a => {
+  const d = document.createElement('div');
+  d.className = 'label';
+  d.textContent = a.lm.name;
+  labelHost.append(d);
+  return d;
+});
+const v = new THREE.Vector3();
+let showLabels = true, frames = 0, t0 = performance.now();
+city.onFrame = () => {
+  if (++frames % 30 === 0) {
+    const now = performance.now();
+    document.getElementById('fps').textContent = Math.round(30000 / (now - t0)) + ' fps';
+    t0 = now;
+  }
+  city.labelAnchors.forEach((a, i) => {
+    const el = labelEls[i];
+    if (!showLabels) { el.style.display = 'none'; return; }
+    v.copy(a.pos).project(city.camera);
+    const dist = city.camera.position.distanceTo(a.pos);
+    const vis = v.z < 1 && dist < 46000;
+    el.style.display = vis ? 'block' : 'none';
+    if (!vis) return;
+    el.style.left = (v.x * 0.5 + 0.5) * innerWidth + 'px';
+    el.style.top = (-v.y * 0.5 + 0.5) * innerHeight + 'px';
+    el.style.opacity = Math.max(.3, Math.min(1, (46000 - dist) / 22000));
+  });
+};
+
+// 컨트롤
+document.querySelectorAll('#time button').forEach(b => b.onclick = () => {
+  document.querySelectorAll('#time button').forEach(x => x.classList.toggle('on', x === b));
+  city.applyTheme(b.dataset.t);
+  document.body.classList.toggle('dark', b.dataset.t === 'night');
+});
+
+let tour = null;
+const actions = {
+  home() { stopTour(); city.flyTo(HOME.lon, HOME.lat, HOME.dist, HOME.pitch, HOME.bearing); },
+  tour(btn) {
+    if (tour) return stopTour();
+    let i = -1;
+    const step = () => goto(i = (i + 1) % LANDMARKS.length);
+    step(); tour = setInterval(step, 7000); btn.classList.add('on');
+  },
+  labels(btn) { showLabels = btn.classList.toggle('on'); },
+  full() { document.fullscreenElement ? document.exitFullscreen() : document.body.requestFullscreen(); },
+};
+document.querySelectorAll('#tools button').forEach(b => b.onclick = () => actions[b.dataset.a](b));
+function stopTour() { clearInterval(tour); tour = null; document.querySelector('#tools [data-a=tour]').classList.remove('on'); }
+
+const about = document.getElementById('about');
+document.getElementById('info-btn').onclick = () => about.classList.add('open');
+about.onclick = e => { if (e.target === about || e.target.classList.contains('close')) about.classList.remove('open'); };
+</script>
+</body>
+</html>

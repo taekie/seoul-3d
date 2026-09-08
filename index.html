@@ -25,8 +25,9 @@
   #title h1 span { font-size:20px; letter-spacing:.18em; color:var(--muted); font-weight:500; }
   #title p { margin:4px 0 0; font-size:13px; color:var(--muted); }
 
-  #panel { position:absolute; top:150px; left:32px; width:288px; max-height:calc(100vh - 250px);
-           z-index:3; display:flex; flex-direction:column; padding:22px 0 0; }
+  #panel { position:absolute; top:96px; right:32px; width:288px; max-height:calc(100vh - 402px); min-height:220px;
+           z-index:3; display:none; flex-direction:column; padding:22px 0 0; }
+  #panel.open { display:flex; }
   #panel h2 { margin:0 20px 14px; font-size:17px; }
   .lm-head { margin:0 20px 6px; display:flex; justify-content:space-between; font-size:11px; letter-spacing:.16em; color:var(--muted); }
   #landmarks { overflow-y:auto; padding:4px 10px 10px; }
@@ -39,12 +40,16 @@
   .nm i { display:block; font-size:11px; color:var(--muted); font-style:normal; }
   .arrow { color:var(--muted); font-size:13px; }
 
-  #time { position:absolute; top:26px; right:100px; z-index:3; display:flex; padding:5px; gap:2px; }
+  #topbar { position:absolute; top:26px; right:32px; z-index:3; display:flex; align-items:center; gap:10px; }
+  #time { display:flex; padding:5px; gap:2px; }
   #time button { border:0; background:none; font:inherit; font-size:13px; padding:9px 16px; border-radius:11px;
                  cursor:pointer; color:var(--muted); display:flex; align-items:center; gap:7px; }
   #time button.on { background:var(--accent); color:#fff; }
-  #info-btn { position:absolute; top:26px; right:32px; z-index:3; width:52px; height:52px; border:0; cursor:pointer;
-              font-size:18px; color:var(--accent); font-style:italic; font-weight:600; }
+  #info-btn, #lm-btn { width:52px; height:52px; border:0; cursor:pointer; color:var(--accent);
+                       display:grid; place-items:center; padding:0; }
+  #info-btn { font-size:18px; font-style:italic; font-weight:600; }
+  #lm-btn svg { width:21px; height:21px; stroke:currentColor; fill:none; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+  #lm-btn.on { background:var(--accent); color:#fff; }
 
   #tools { position:absolute; bottom:26px; left:50%; transform:translateX(-50%); z-index:3; display:flex; padding:8px; gap:2px; }
   #tools button { border:0; background:none; font:inherit; font-size:12px; padding:10px 18px; border-radius:11px; cursor:pointer;
@@ -95,7 +100,8 @@
   body.dark .label { background:rgba(20,30,36,.86); color:#e9f1ef; }
 
   @media (max-width:860px) {
-    #panel, #place, #hint { display:none; }
+    #place, #hint { display:none; }
+    #panel { left:16px; right:16px; width:auto; top:88px; max-height:calc(100vh - 190px); }
     #title h1 { font-size:30px; }
     #time { right:88px; } #time button span { display:none; }
   }
@@ -111,18 +117,23 @@
   <p>한강을 따라, 도시 너머로</p>
 </div>
 
+<div id="topbar">
+  <div id="time" class="card">
+    <button data-t="day" class="on">☀ <span>낮</span></button>
+    <button data-t="dusk">◑ <span>노을</span></button>
+    <button data-t="night">☾ <span>야경</span></button>
+  </div>
+  <button id="lm-btn" class="card" title="어디로 가볼까요?" aria-label="랜드마크 목록">
+    <svg viewBox="0 0 24 24"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+  </button>
+  <button id="info-btn" class="card">i</button>
+</div>
+
 <aside id="panel" class="card">
   <h2>어디로 가볼까요?</h2>
   <div class="lm-head"><span>LANDMARKS</span><span id="lm-count"></span></div>
   <div id="landmarks"></div>
 </aside>
-
-<div id="time" class="card">
-  <button data-t="day" class="on">☀ <span>낮</span></button>
-  <button data-t="dusk">◑ <span>노을</span></button>
-  <button data-t="night">☾ <span>야경</span></button>
-</div>
-<button id="info-btn" class="card">i</button>
 
 <div id="place" class="card">
   <div class="eyebrow">A CITY IN MINIATURE</div>
@@ -268,6 +279,9 @@ const actions = {
 };
 document.querySelectorAll('#tools button').forEach(b => b.onclick = () => actions[b.dataset.a](b));
 function stopTour() { clearInterval(tour); tour = null; document.querySelector('#tools [data-a=tour]').classList.remove('on'); }
+
+const panel = document.getElementById('panel'), lmBtn = document.getElementById('lm-btn');
+lmBtn.onclick = () => lmBtn.classList.toggle('on', panel.classList.toggle('open'));
 
 const about = document.getElementById('about');
 document.getElementById('info-btn').onclick = () => about.classList.add('open');

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>서울 3D 아틀라스</title>
+<title>3D 아틀라스</title>
 <style>
   :root {
     --accent: #1f6b5a;
@@ -25,14 +25,23 @@
   #title h1 span { font-size:20px; letter-spacing:.18em; color:var(--muted); font-weight:500; }
   #title p { margin:4px 0 0; font-size:13px; color:var(--muted); }
 
-  #panel { position:absolute; top:150px; left:32px; width:288px; max-height:calc(100vh - 250px);
+  #panel { position:absolute; top:150px; right:32px; width:288px; max-height:calc(100vh - 330px);
            z-index:3; display:flex; flex-direction:column; padding:22px 0 0; }
-  #panel h2 { margin:0 20px 14px; font-size:17px; }
+  .pn-head { display:flex; align-items:center; justify-content:space-between; margin:0 14px 14px 20px; }
+  .pn-head h2 { margin:0; font-size:17px; }
+  #panel-toggle { border:0; background:none; cursor:pointer; color:var(--muted); width:30px; height:30px;
+                  border-radius:9px; display:grid; place-items:center; }
+  #panel-toggle svg { width:16px; height:16px; stroke:currentColor; fill:none; stroke-width:1.8;
+                      stroke-linecap:round; stroke-linejoin:round; transition:transform .18s; }
+  #panel.collapsed { padding-bottom:22px; }
+  #panel.collapsed .pn-head { margin-bottom:0; }
+  #panel.collapsed .lm-head, #panel.collapsed #landmarks { display:none; }
+  #panel.collapsed #panel-toggle svg { transform:rotate(180deg); }
   .lm-head { margin:0 20px 6px; display:flex; justify-content:space-between; font-size:11px; letter-spacing:.16em; color:var(--muted); }
   #landmarks { overflow-y:auto; padding:4px 10px 10px; }
   #landmarks button { width:100%; display:flex; align-items:center; gap:12px; padding:9px 10px; border:0;
     background:none; font:inherit; text-align:left; cursor:pointer; border-radius:10px; color:inherit; }
-  #landmarks button:hover { background:#eef4f1; }
+  #landmarks button:hover, #panel-toggle:hover { background:#eef4f1; }
   .num { flex:none; width:28px; height:26px; border:1px solid var(--line); border-radius:6px; display:grid; place-items:center; font-size:11px; color:var(--muted); }
   .nm { flex:1; min-width:0; }
   .nm b { display:block; font-size:14px; font-weight:600; }
@@ -53,7 +62,7 @@
   #tools button.on { color:var(--accent); }
   #tools svg { width:19px; height:19px; stroke:currentColor; fill:none; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
 
-  #place { position:absolute; right:32px; bottom:112px; z-index:3; width:268px; padding:20px 22px; }
+  #place { position:absolute; left:32px; bottom:112px; z-index:3; width:268px; padding:20px 22px; }
   #place .eyebrow { font-size:10px; letter-spacing:.2em; color:var(--muted); }
   #place h3 { margin:8px 0 6px; font-size:22px; }
   #place p { margin:0; font-size:13px; color:var(--muted); line-height:1.55; }
@@ -63,6 +72,23 @@
           color:var(--muted); background:rgba(255,255,255,.7); padding:5px 16px; border-radius:20px; }
   #note { position:absolute; bottom:14px; left:32px; z-index:3; font-size:11px; color:var(--muted); }
   #fps { position:absolute; bottom:14px; right:32px; z-index:3; font-size:11px; color:var(--muted); font-variant-numeric:tabular-nums; }
+  #compass { position:absolute; right:32px; bottom:70px; z-index:3; width:82px; height:82px;
+    border:1px solid var(--line); border-radius:50%; color:var(--ink); cursor:pointer; padding:0; }
+  #compass:hover { border-color:var(--accent); }
+  #compass:focus-visible { outline:2px solid var(--accent); outline-offset:4px; }
+  #compass [data-direction] { position:absolute; left:50%; top:50%; font-size:10px; font-weight:600; line-height:1; }
+  #compass [data-direction="0"] { color:var(--accent); font-weight:800; }
+  .compass-needle { position:absolute; width:32px; height:40px; left:24px; top:20px; }
+  .compass-north { fill:var(--accent); }
+  .compass-south { fill:var(--muted); opacity:.4; }
+  #motion-panel { position:absolute; z-index:4; bottom:132px; left:50%; transform:translateX(-50%);
+    width:min(360px,calc(100% - 32px)); padding:12px 32px 12px 14px; font-size:12px; line-height:1.5; }
+  #motion-panel[hidden], #motion-recenter[hidden] { display:none; }
+  #motion-panel p { margin:0; }
+  #motion-panel button { font:inherit; cursor:pointer; color:var(--accent); background:none; border:0; }
+  #motion-recenter { margin-top:7px; padding:4px 0; font-weight:600!important; text-decoration:underline; text-underline-offset:3px; }
+  #motion-dismiss { position:absolute; right:7px; top:7px; width:24px; height:24px; font-size:18px!important; }
+  #motion-panel button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
 
   /* 3D 위에 뜨는 랜드마크 이름표 */
   #labels { position:absolute; inset:0; z-index:2; pointer-events:none; }
@@ -87,16 +113,40 @@
   #about dt { font-weight:600; margin-top:14px; }
   #about dd { margin:2px 0 0; color:var(--muted); }
   #about .close { position:absolute; top:6px; right:10px; border:0; background:none; font-size:22px; cursor:pointer; color:var(--muted); }
+  #city-switch { display:flex; flex-wrap:wrap; gap:10px; margin:10px 0 22px; }
+  #city-switch a { flex:1 1 100px; padding:10px 14px; border:1px solid var(--line); border-radius:12px;
+    color:var(--ink); text-decoration:none; font-weight:600; }
+  #city-switch a:hover, #city-switch a:focus-visible { border-color:var(--accent); outline:2px solid var(--accent); outline-offset:2px; }
+  #city-switch a[aria-current=page] { border-color:var(--accent); background:var(--accent); color:#fff; }
+  #city-switch small { display:block; font-size:10px; font-weight:400; letter-spacing:.12em; }
+  body.dark #city-switch a[aria-current=page] { color:#0f1a1d; }
 
   body.dark { --panel:rgba(20,30,36,.92); --ink:#e9f1ef; --muted:#8fa3a4; --line:#31414a; --accent:#6fd6b8; }
-  body.dark #landmarks button:hover, body.dark #tools button:hover { background:#25343c; }
+  body.dark #landmarks button:hover, body.dark #tools button:hover,
+  body.dark #panel-toggle:hover { background:#25343c; }
   body.dark #time button.on { color:#0f1a1d; }
   body.dark #hint { background:rgba(20,30,36,.72); }
+  .map-label { border:1px solid rgba(83,112,99,.14); font-family:inherit; cursor:pointer; opacity:0;
+    transition:opacity .18s ease; max-width:230px; display:flex; align-items:center; gap:5px; }
+  .map-label > span:last-child { overflow:hidden; text-overflow:ellipsis; }
+  .map-label.selected { outline:2px solid var(--accent); }
+  .map-label:focus-visible { outline:2px solid var(--accent); }
+  .poi-label { font-size:11px; font-weight:600; background:rgba(255,255,249,.94); }
+  .poi-dot { width:6px; height:6px; border-radius:50%; flex:none; }
+  @media (prefers-reduced-motion:reduce) { .map-label { transition:none; } }
   body.dark .label { background:rgba(20,30,36,.86); color:#e9f1ef; }
 
   @media (max-width:860px) {
+    #compass { right:16px; bottom:108px; }
+    #motion-panel { left:16px; bottom:108px; width:calc(100% - 132px); max-width:360px; transform:none; font-size:11px; }
+    #tools { width:calc(100% - 32px); max-width:360px; }
+    #tools button { flex:1; min-width:0; padding:10px 4px; font-size:11px; white-space:nowrap; }
     #panel, #place, #hint { display:none; }
-    #title h1 { font-size:30px; }
+    #title { top:88px; left:16px; }
+    #title .eyebrow { font-size:8px; letter-spacing:.15em; }
+    #title h1 { font-size:28px; }
+    #title h1 span { font-size:13px; }
+    #title p { font-size:11px; }
     #time { right:88px; } #time button span { display:none; }
   }
 </style>
@@ -112,7 +162,12 @@
 </div>
 
 <aside id="panel" class="card">
-  <h2>어디로 가볼까요?</h2>
+  <div class="pn-head">
+    <h2>어디로 가볼까요?</h2>
+    <button id="panel-toggle" aria-label="목록 접기" aria-expanded="true">
+      <svg viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg>
+    </button>
+  </div>
   <div class="lm-head"><span>LANDMARKS</span><span id="lm-count"></span></div>
   <div id="landmarks"></div>
 </aside>
@@ -122,7 +177,12 @@
   <button data-t="dusk">◑ <span>노을</span></button>
   <button data-t="night">☾ <span>야경</span></button>
 </div>
-<button id="info-btn" class="card">i</button>
+<button id="info-btn" class="card" aria-label="도시 전환 및 지도 정보">i</button>
+<button id="compass" class="card" aria-label="나침반: 북쪽을 위로 맞추기" title="북쪽을 위로 맞추기">
+  <span data-direction="0" aria-hidden="true">N</span><span data-direction="90" aria-hidden="true">E</span>
+  <span data-direction="180" aria-hidden="true">S</span><span data-direction="270" aria-hidden="true">W</span>
+  <svg class="compass-needle" viewBox="0 0 32 40" aria-hidden="true"><path class="compass-north" d="M16 2 24 22 16 18 8 22Z"/><path class="compass-south" d="M16 38 8 18 16 22 24 18Z"/><circle cx="16" cy="20" r="2" fill="var(--panel)"/></svg>
+</button>
 
 <div id="place" class="card">
   <div class="eyebrow">A CITY IN MINIATURE</div>
@@ -131,14 +191,20 @@
   <div class="coord" id="place-coord">37.5450° N &nbsp; 126.9880° E</div>
 </div>
 
-<div id="hint">드래그 회전 · 휠 확대 · 오른쪽 드래그 이동</div>
+<div id="hint">드래그 회전 · 1초 꾹 누르면 이동 · Space/Shift+드래그 이동 · 휠 확대</div>
 
 <nav id="tools" class="card">
   <button data-a="home"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>서울 전체</button>
   <button data-a="tour"><svg viewBox="0 0 24 24"><path d="M6 4l13 8-13 8z"/></svg>자동 비행</button>
-  <button data-a="labels" class="on"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>이름표</button>
+  <button data-a="labels" class="on" aria-pressed="true" title="확대하면 주변 공원·대학·역·문화시설 이름표가 나타납니다"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>이름표</button>
+  <button data-a="motion" aria-pressed="false" title="휴대폰을 기울여 주변 둘러보기"><svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M10 17h4M3 8l-2 4 2 4M21 8l2 4-2 4"/></svg>기울여 보기</button>
   <button data-a="full"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>전체 화면</button>
 </nav>
+<div id="motion-panel" class="card" hidden>
+  <p id="motion-status" role="status"></p>
+  <button id="motion-recenter" hidden>시점 맞추기</button>
+  <button id="motion-dismiss" aria-label="기울여 보기 닫기">×</button>
+</div>
 
 <div id="note">— OpenStreetMap 기반 · 높이 3× 과장 · 랜드마크는 캐리커쳐</div>
 <div id="fps"></div>
@@ -152,10 +218,12 @@
 
 <div id="about"><div class="card">
   <button class="close">×</button>
+  <div class="eyebrow">도시 선택</div>
+  <nav id="city-switch" aria-label="도시 전환"></nav>
   <div class="eyebrow">ABOUT THIS ATLAS</div>
-  <h4>서울을 닮은 작은 세계</h4>
-  <p>서울 전역과 가장자리의 주변 지역을 담은 인터랙티브 미니어처입니다. 실제 도로·수계·표고 데이터를 바탕으로 만들었습니다.</p>
-  <p>건물은 OpenStreetMap에 수록된 윤곽을 사각 기둥 하나로 단순화한 모형입니다. 지형과 건물 높이는 보기 쉽도록 3배로 강조했습니다. 랜드마크는 특징만 남겨 크게 과장한 캐리커쳐이며, 실측 복원이 아닙니다.</p>
+  <h4 id="about-title"></h4>
+  <p id="about-lede"></p>
+  <p id="about-note">건물은 OpenStreetMap에 수록된 윤곽을 사각 기둥 하나로 단순화한 모형입니다. 지형과 건물 높이는 보기 쉽도록 3배로 강조했습니다. 랜드마크는 특징만 남겨 크게 과장한 캐리커쳐이며, 실측 복원이 아닙니다.</p>
   <dl>
     <dt>건물 · 도로 · 수계 · 녹지</dt><dd>OpenFreeMap / OpenMapTiles · © OpenStreetMap contributors (ODbL) · 2026-08-30 스냅샷</dd>
     <dt>지형</dt><dd>AWS Terrain Tiles / Mapzen · SRTM 등</dd>
@@ -163,6 +231,68 @@
   </dl>
   <p style="color:var(--muted)">길 안내나 측량용 지도가 아닙니다.</p>
 </div></div>
+
+<script>
+// ?city=jeju 로 도시를 고른다. 데이터·랜드마크는 tools/build-city.mjs와 landmarks.js에 있고,
+// 여기 있는 건 화면에 찍히는 문구와 첫 시점뿐이다.
+const CITY = {
+  chapelhill: {
+    name:'채플힐', en:'CHAPEL HILL', region:'NORTH CAROLINA, USA', tag:'캐롤라이나 블루, 숲속의 대학 도시', all:'채플힐 전체',
+    place:['채플힐, 한눈에','UNC 캠퍼스와 프랭클린 스트리트, 카보로까지'], coord:'35.9130° N   79.0550° W',
+    home:{lon:-79.051,lat:35.911,dist:8500,pitch:.58,bearing:-.2},
+    aboutTitle:'숲속에 담긴 작은 채플힐',
+    aboutLede:'미국 노스캐롤라이나주 채플힐과 인접한 카보로를 담았습니다. UNC 캠퍼스를 중심으로 실제 건물·도로·녹지·표고 데이터를 미니어처로 표현합니다.',
+  },
+  seoul: {
+    name: '서울', en: 'SEOUL', tag: '한강을 따라, 도시 너머로', all: '서울 전체',
+    place: ['서울, 한눈에', '한강과 산, 그 사이에 펼쳐진 도시'], coord: '37.5450° N \u00a0 126.9880° E',
+    home: { lon: 127.005, lat: 37.542, dist: 16500, pitch: 0.40, bearing: -0.16 },
+    aboutTitle: '서울을 닮은 작은 세계',
+    aboutLede: '서울 전역과 가장자리의 주변 지역을 담은 인터랙티브 미니어처입니다. 실제 도로·수계·표고 데이터를 바탕으로 만들었습니다.',
+  },
+  jeju: {
+    name: '제주', en: 'JEJU', tag: '한라에서 바다까지, 오름이 점점이', all: '제주 전체',
+    place: ['제주, 한눈에', '화산이 빚은 섬, 한라산과 그 자락'], coord: '33.3750° N \u00a0 126.5650° E',
+    home: { lon: 126.545, lat: 33.335, dist: 58000, pitch: 0.28, bearing: 0.18 },
+    aboutTitle: '바다에 뜬 작은 화산섬',
+    aboutLede: '제주 본섬 전체와 우도·비양도·차귀도까지 담은 인터랙티브 미니어처입니다. 해안선과 표고는 실제 데이터를 따랐지만, 건물은 OpenStreetMap에 올라온 것만 서 있어 제주시 바깥은 실제보다 한산합니다.',
+  },
+};
+const CITY_ID = CITY[new URLSearchParams(location.search).get('city')] ? new URLSearchParams(location.search).get('city') : 'seoul';
+{
+  const c = CITY[CITY_ID], $ = q => document.querySelector(q);
+  document.querySelectorAll('#title .eyebrow,#load .eyebrow').forEach(el=>el.textContent=(c.region||'SOUTH KOREA')+' · SPATIAL ATLAS');
+  document.title = c.name + ' 3D 아틀라스';
+  $('#title h1').innerHTML = c.name + ' <span>' + c.en + '</span>';
+  $('#title p').textContent = c.tag;
+  $('#load h1').textContent = c.name;
+  $('#place-name').textContent = c.place[0];
+  $('#place-desc').textContent = c.place[1];
+  $('#place-coord').textContent = c.coord;
+  $('#about-title').textContent = c.aboutTitle;
+  $('#about-lede').textContent = c.aboutLede;
+  if(CITY_ID==='jeju'){
+    const term=document.createElement('dt');term.textContent='해수욕장 위치';
+    const source=document.createElement('dd'),link=document.createElement('a');
+    link.href='https://www.visitjeju.net/';link.textContent='제주관광공사 Visit Jeju';link.style.color='inherit';source.append(link);
+    $('#about dl').append(term,source);
+  }
+  for (const id of ['seoul','jeju','chapelhill']) {
+    const entry = CITY[id];
+    const link = document.createElement('a');
+    const url = new URL(location.href); url.searchParams.set('city', id);
+    link.href = url.href;
+    link.textContent = entry.name;
+    const subtitle = document.createElement('small'); subtitle.textContent = entry.en; link.append(subtitle);
+    if (id === CITY_ID) {
+      link.setAttribute('aria-current', 'page');
+      link.addEventListener('click', event => event.preventDefault());
+    }
+    $('#city-switch').append(link);
+  }
+  $('#tools [data-a=home]').lastChild.nodeValue = c.all;
+}
+</script>
 
 <script type="importmap">
 { "imports": {
@@ -174,7 +304,9 @@
 <script type="module">
 import * as THREE from 'three';
 import { City } from './app.js';
-import { LANDMARKS } from './landmarks.js';
+import { NeighborhoodLabels, poiCategoryName } from './neighborhood-labels.js';
+import { mountCompass } from './compass.js';
+import { DeviceLook } from './device-look.js';
 
 const city = new City(document.getElementById('c'));
 // 콘솔에서 씬을 만져볼 수 있게 열어둔다
@@ -182,10 +314,11 @@ window.city = city; window.THREE = THREE; window.__err = [];
 addEventListener('error', e => window.__err.push(String(e.message)));
 const bar = document.getElementById('bar'), msg = document.getElementById('load-msg');
 
-await city.load('seoul', (text, p) => { msg.textContent = text; bar.style.width = (p*100).toFixed(0) + '%'; });
+await city.load(CITY_ID, (text, p) => { msg.textContent = text; bar.style.width = (p*100).toFixed(0) + '%'; });
 
-// 초기 시점: 한강 남쪽에서 도심과 북한산을 바라본다
-const HOME = { lon: 127.005, lat: 37.542, dist: 16500, pitch: 0.40, bearing: -0.16 };
+const LM = city.landmarks;
+const coordinates = (lat,lon) => `${Math.abs(lat).toFixed(4)}° ${lat<0?'S':'N'}   ${Math.abs(lon).toFixed(4)}° ${lon<0?'W':'E'}`;
+const HOME = CITY[CITY_ID].home;
 city.start();
 city.placeCamera(HOME.lon, HOME.lat, HOME.dist, HOME.pitch, HOME.bearing);
 
@@ -198,8 +331,8 @@ setTimeout(() => {
 
 // 랜드마크 목록
 const list = document.getElementById('landmarks');
-document.getElementById('lm-count').textContent = LANDMARKS.length + '곳';
-LANDMARKS.forEach((lm, i) => {
+document.getElementById('lm-count').textContent = LM.length + '곳';
+LM.forEach((lm, i) => {
   const b = document.createElement('button');
   b.innerHTML = `<span class="num">${String(i+1).padStart(2,'0')}</span><span class="nm"><b></b><i></i></span><span class="arrow">↗</span>`;
   b.querySelector('b').textContent = lm.name;
@@ -209,42 +342,60 @@ LANDMARKS.forEach((lm, i) => {
 });
 
 function goto(i) {
-  const lm = LANDMARKS[i];
-  city.flyTo(lm.lon, lm.lat, 1900, 0.42, (i * 1.1) % (Math.PI * 2) - Math.PI);
+  const lm = LM[i];
+  poiLabels.select('landmark:' + lm.id);
+  city.focusLandmark(lm, (i * 1.1) % (Math.PI * 2) - Math.PI);
   document.getElementById('place-name').textContent = lm.name;
   document.getElementById('place-desc').textContent = lm.desc;
-  document.getElementById('place-coord').textContent = `${lm.lat.toFixed(4)}° N   ${lm.lon.toFixed(4)}° E`;
+  document.getElementById('place-coord').textContent = coordinates(lm.lat,lm.lon);
 }
 
-// 이름표 오버레이
-const labelHost = document.getElementById('labels');
-const labelEls = city.labelAnchors.map(a => {
-  const d = document.createElement('div');
-  d.className = 'label';
-  d.textContent = a.lm.name;
-  labelHost.append(d);
-  return d;
+// Zoom-dependent neighbourhood labels, with a small screen-space collision budget.
+const poiLabels = new NeighborhoodLabels(city, document.getElementById('labels'), p => {
+  stopTour();
+  if (p.lm) { goto(LM.findIndex(lm => lm.id === p.lm.id)); return; }
+  const distance = Math.min(1800, Math.max(900, city.camera.position.distanceTo(city.controls.target) * .75));
+  city.flyTo(p.lon, p.lat, distance, .65, -.35);
+  document.getElementById('place-name').textContent = p.name;
+  document.getElementById('place-desc').textContent = poiCategoryName(p.category);
+  document.getElementById('place-coord').textContent = coordinates(p.lat,p.lon);
 });
-const v = new THREE.Vector3();
+window.poiLabels = poiLabels;
+poiLabels.load().then(pois=>{
+  if(CITY_ID!=='chapelhill'||!pois)return;
+  const destinations=[
+    {id:'local:chapel-watch-village',name:'채플 워치 빌리지'},
+    {id:'poi:442306042',name:'해리스티터 · 채플힐 노스'},
+  ];
+  const section=document.createElement('div');section.id='neighborhood-shortcuts';
+  const heading=document.createElement('div');heading.className='lm-head';heading.textContent='동네 둘러보기';heading.style.marginTop='16px';section.append(heading);
+  for(const item of destinations){
+    const p=pois.find(p=>p.id===item.id);if(!p)continue;
+    const button=document.createElement('button');button.dataset.poiShortcut=p.id;
+    const text=document.createElement('span');text.className='nm';
+    const name=document.createElement('b');name.textContent=item.name;
+    const subtitle=document.createElement('i');subtitle.textContent=p.name;text.append(name,subtitle);button.append(text);
+    button.onclick=()=>{poiLabels.select(p.id);poiLabels.onSelect(p);};section.append(button);
+  }
+  list.append(section);
+});
 let showLabels = true, frames = 0, t0 = performance.now();
+const updateCompass=mountCompass(city,document.getElementById('compass'),()=>stopTour());
+const deviceLook=new DeviceLook(city,{
+  button:document.querySelector('[data-a=motion]'),panel:document.getElementById('motion-panel'),
+  status:document.getElementById('motion-status'),recenter:document.getElementById('motion-recenter'),onEnable:()=>stopTour(),
+});
+window.deviceLook=deviceLook;
+city.beforeFrame=now=>deviceLook.update(now);
+document.getElementById('motion-dismiss').onclick=()=>deviceLook.stop();
 city.onFrame = () => {
   if (++frames % 30 === 0) {
     const now = performance.now();
     document.getElementById('fps').textContent = Math.round(30000 / (now - t0)) + ' fps';
     t0 = now;
   }
-  city.labelAnchors.forEach((a, i) => {
-    const el = labelEls[i];
-    if (!showLabels) { el.style.display = 'none'; return; }
-    v.copy(a.pos).project(city.camera);
-    const dist = city.camera.position.distanceTo(a.pos);
-    const vis = v.z < 1 && dist < 46000;
-    el.style.display = vis ? 'block' : 'none';
-    if (!vis) return;
-    el.style.left = (v.x * 0.5 + 0.5) * innerWidth + 'px';
-    el.style.top = (-v.y * 0.5 + 0.5) * innerHeight + 'px';
-    el.style.opacity = Math.max(.3, Math.min(1, (46000 - dist) / 22000));
-  });
+  poiLabels.update();
+  updateCompass();
 };
 
 // 컨트롤
@@ -256,18 +407,26 @@ document.querySelectorAll('#time button').forEach(b => b.onclick = () => {
 
 let tour = null;
 const actions = {
-  home() { stopTour(); city.flyTo(HOME.lon, HOME.lat, HOME.dist, HOME.pitch, HOME.bearing); },
+  motion() { deviceLook.toggle(); },
+  home() { stopTour(); poiLabels.select(null); city.flyTo(HOME.lon, HOME.lat, HOME.dist, HOME.pitch, HOME.bearing); },
   tour(btn) {
     if (tour) return stopTour();
     let i = -1;
-    const step = () => goto(i = (i + 1) % LANDMARKS.length);
+    const step = () => goto(i = (i + 1) % LM.length);
     step(); tour = setInterval(step, 7000); btn.classList.add('on');
   },
-  labels(btn) { showLabels = btn.classList.toggle('on'); },
+  labels(btn) { showLabels = btn.classList.toggle('on'); poiLabels.setEnabled(showLabels); btn.setAttribute('aria-pressed', String(showLabels)); },
   full() { document.fullscreenElement ? document.exitFullscreen() : document.body.requestFullscreen(); },
 };
 document.querySelectorAll('#tools button').forEach(b => b.onclick = () => actions[b.dataset.a](b));
 function stopTour() { clearInterval(tour); tour = null; document.querySelector('#tools [data-a=tour]').classList.remove('on'); }
+
+const panel = document.getElementById('panel'), panelBtn = document.getElementById('panel-toggle');
+panelBtn.onclick = () => {
+  const off = panel.classList.toggle('collapsed');
+  panelBtn.setAttribute('aria-expanded', String(!off));
+  panelBtn.setAttribute('aria-label', off ? '목록 펼치기' : '목록 접기');
+};
 
 const about = document.getElementById('about');
 document.getElementById('info-btn').onclick = () => about.classList.add('open');

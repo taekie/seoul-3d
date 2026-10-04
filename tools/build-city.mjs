@@ -8,8 +8,15 @@ import { writeFileSync, mkdirSync } from 'fs';
 const TILES = 'https://tiles.openfreemap.org/planet/20260830_080001_pt/{z}/{x}/{y}.pbf';
 const Z = 14, EXTENT = 4096, R = 40075016.686;
 
+// unit   좌표 저장 단위(m). 폭이 65km를 넘으면 Int16(±32767m)을 벗어나므로 2를 쓴다.
+// tree   나무 격자 간격(m). 숲이 넓은 곳은 키워서 데이터를 줄인다.
+// hRef   지형 색 램프가 최상단 색에 닿는 표고(m).
+// gLo    램프에서 건너뛸 앞쪽 색 수. 섬은 1 — 도시 바닥용 크림색을 빼야 해안이 백사장이 안 된다.
+// bRef   건물 색 램프가 끝 색에 닿는 높이(m). 저층 도시는 낮춰야 색이 퍼진다.
 const CITIES = {
   seoul:   { center: [126.9880, 37.5450], bbox: [126.74, 37.41, 127.20, 37.70] },
+  jeju:    { center: [126.5650, 33.3750], bbox: [126.14, 33.17, 126.99, 33.58], unit: 2, tree: 68, hRef: 460, gLo: 1, bRef: 60 },
+  chapelhill: { center: [-79.055, 35.913], bbox: [-79.13, 35.865, -78.98, 35.995], tree: 48, hRef: 260, bRef: 45 },
   busan:   { center: [129.0403, 35.1180], bbox: [128.92, 35.05, 129.22, 35.27] },
   newyork: { center: [-73.9840, 40.7480], bbox: [-74.06, 40.66, -73.88, 40.84] },
   paris:   { center: [2.3400, 48.8600],   bbox: [2.22, 48.80, 2.47, 48.92] },
@@ -19,6 +26,10 @@ const lon2x = (lon, z) => (lon + 180) / 360 * 2 ** z;
 const lat2y = (lat, z) => (1 - Math.log(Math.tan(lat*Math.PI/180) + 1/Math.cos(lat*Math.PI/180)) / Math.PI) / 2 * 2 ** z;
 
 const ROAD_CLASS = { motorway: 3, trunk: 2.4, primary: 2, secondary: 1.5, tertiary: 1.1 };
+
+// 피복 종류 — 0 잔디 · 1 숲 · 2 골프장 · 3 밭·과수원 · 4 부지 · 5 공원
+// 1과 5에는 나무를 심는다. 5(공원·국립공원)는 숲 폴리곤과 통째로 겹치므로 바닥을 깔지 않는다.
+const SITE = new Set(['cemetery', 'school', 'university', 'theme_park', 'pitch', 'track', 'stadium', 'zoo']);
 
 async function fetchTile(x, y) {
   const url = TILES.replace('{z}', Z).replace('{x}', x).replace('{y}', y);
@@ -85,8 +96,11 @@ function thin(flat, minDist) {
 }
 
 const city = process.argv[2] || 'seoul';
-const { center, bbox } = CITIES[city];
-if (!center) throw new Error(`unknown city: ${city}`);
+const conf = CITIES[city];
+if (!conf) throw new Error(`unknown city: ${city}`);
+const { center, bbox } = conf;
+const UNIT = conf.unit ?? 1;                       // bin 좌표 1단위 = UNIT 미터
+const TREE_GRID = conf.tree ?? 34;
 
 const kx = R * Math.cos(center[1] * Math.PI / 180);
 const cx = lon2x(center[0], Z), cy = lat2y(center[1], Z);
@@ -103,8 +117,7 @@ console.log(`${city}: z${Z} 타일 ${x1-x0+1}×${y1-y0+1} = ${jobs.length}개`);
 
 const bld = [];            // [x, y, w, d, ang, h] 평탄 배열
 const trees = [];          // [x, y, scale*100]
-const water = [], greens = [], roads = [];
-const TREE_GRID = 34;
+const water = [], oceans = [], greens = [], roads = [];
 const seen = new Set();    // 타일 경계에서 잘린 같은 건물 중복 억제
 
 function polysOf(feature, tx, ty) {
@@ -138,7 +151,7 @@ await Promise.all(Array.from({ length: CONC }, async (_, w) => {
         const key = `${Math.round(bx)},${Math.round(by)}`;
         if (seen.has(key)) continue;
         seen.add(key);
-        bld.push(Math.round(bx), Math.round(by), Math.round(bw), Math.round(bd), Math.round(ang), h);
+        bld.push(Math.round(bx / UNIT), Math.round(by / UNIT), Math.round(bw), Math.round(bd), Math.round(ang), h);
       }
     }
 
@@ -146,25 +159,33 @@ await Promise.all(Array.from({ length: CONC }, async (_, w) => {
     if (wl) for (let k = 0; k < wl.length; k++) {
       const f = wl.feature(k);
       if (f.properties.brunnel === 'tunnel') continue;
+      const sea = f.properties.class === 'ocean';
       for (const poly of polysOf(f, tx, ty)) {
-        const rings = poly.map(r => thin(r, 12)).filter(r => r.length >= 8);
-        if (rings.length) water.push(rings);
+        const rings = poly.map(r => thin(r, sea ? 30 : 12)).filter(r => r.length >= 8);
+        if (rings.length) (sea ? oceans : water).push(rings);
       }
     }
 
-    for (const name of ['landcover', 'park']) {
+    for (const name of ['landcover', 'park', 'landuse']) {
       const lc = tile.layers[name];
       if (!lc) continue;
       for (let k = 0; k < lc.length; k++) {
-        const f = lc.feature(k), cls = f.properties.class ?? 'park';
-        const treed = name === 'park' || cls === 'wood';
-        if (!treed && cls !== 'grass') continue;
+        const f = lc.feature(k), cls = f.properties.class ?? 'park', sub = f.properties.subclass;
+        let kind;
+        if (name === 'park') kind = 5;
+        else if (name === 'landuse') { if (!SITE.has(cls)) continue; kind = 4; }
+        else if (cls === 'wood') kind = 1;
+        else if (sub === 'golf_course') kind = 2;      // class는 grass지만 색을 따로 준다
+        else if (cls === 'grass') kind = 0;
+        else if (cls === 'farmland') kind = 3;         // 밭·감귤과수원
+        else continue;
+        const treed = kind === 1 || kind === 5;
         for (const poly of polysOf(f, tx, ty)) {
           const ring = poly[0];
           const area = ringArea(ring);
           if (area < 2500) continue;
           const thinned = thin(ring, 15);
-          if (thinned.length >= 8) greens.push({ t: treed ? 1 : 0, r: thinned });
+          if (thinned.length >= 8) greens.push({ t: kind, r: thinned });
           if (!treed) continue;
           let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
           for (let m = 0; m < ring.length; m += 2) {
@@ -176,7 +197,7 @@ await Promise.all(Array.from({ length: CONC }, async (_, w) => {
               const jx = gx + (Math.random()-.5)*TREE_GRID*.85, jy = gy + (Math.random()-.5)*TREE_GRID*.85;
               if (!inRing(ring, jx, jy)) continue;
               if (poly.length > 1 && poly.slice(1).some(h => inRing(h, jx, jy))) continue;
-              trees.push(Math.round(jx), Math.round(jy), Math.round(70 + Math.random()*70));
+              trees.push(Math.round(jx / UNIT), Math.round(jy / UNIT), Math.round(70 + Math.random()*70));
             }
         }
       }
@@ -205,11 +226,12 @@ const bin = (name, arr) => {
 };
 const bb = bin('buildings', bld);
 const tb = bin('trees', trees);
-const meta = { city, center, bbox, z: Z, kx, counts: { buildings: bld.length/6, trees: trees.length/3 } };
-const jsonPath = `data/${city}.json`;
-writeFileSync(jsonPath, JSON.stringify({ meta, water, greens, roads }));
+const meta = { city, center, bbox, z: Z, kx, unit: UNIT, hRef: conf.hRef ?? 420, groundLo: conf.gLo ?? 0, bRef: conf.bRef ?? 165, sea: oceans.length > 0,
+               counts: { buildings: bld.length/6, trees: trees.length/3 } };
+const payload = JSON.stringify({ meta, water, oceans, greens, roads });
+writeFileSync(`data/${city}.json`, payload);
 
 const mb = n => (n/1048576).toFixed(2);
 console.log(`\ndata/${city}.buildings.bin  ${mb(bb)}MB  (${bld.length/6}동)`);
 console.log(`data/${city}.trees.bin      ${mb(tb)}MB  (${trees.length/3}그루)`);
-console.log(`data/${city}.json           ${mb(JSON.stringify({meta,water,greens,roads}).length)}MB  (물 ${water.length} · 녹지 ${greens.length} · 도로 ${roads.length})`);
+console.log(`data/${city}.json           ${mb(payload.length)}MB  (물 ${water.length} · 바다 ${oceans.length} · 녹지 ${greens.length} · 도로 ${roads.length})`);

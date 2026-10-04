@@ -1,0 +1,15 @@
+{
+  "source": "Chapel Watch Village official neighborhood map",
+  "sourceUrl": "https://chapelwatchvillage.com/neighborhood/",
+  "pois": [
+    {
+      "id": "local:chapel-watch-village",
+      "name": "Chapel Watch Village",
+      "category": "neighborhood",
+      "lon": -79.0708392,
+      "lat": 35.9681188,
+      "tier": 2,
+      "sourceUrl": "https://chapelwatchvillage.com/neighborhood/"
+    }
+  ]
+}

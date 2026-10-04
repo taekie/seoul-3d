@@ -1,0 +1,87 @@
+{
+  "source": "제주관광공사 Visit Jeju",
+  "retrievedAt": "2026-10-04",
+  "pois": [
+    {
+      "id": "visitjeju:CONT_000000000500697",
+      "name": "협재해수욕장",
+      "category": "beach",
+      "lon": 126.2389861,
+      "lat": 33.3924809,
+      "tier": 1,
+      "sourceUrl": "https://www.visitjeju.net/kr/detail/view?contentsid=CONT_000000000500697"
+    },
+    {
+      "id": "visitjeju:CONT_000000000500693",
+      "name": "함덕해수욕장",
+      "category": "beach",
+      "lon": 126.6690893,
+      "lat": 33.5427261,
+      "tier": 1,
+      "sourceUrl": "https://www.visitjeju.net/kr/detail/view?contentsid=CONT_000000000500693"
+    },
+    {
+      "id": "visitjeju:CONT_000000000500083",
+      "name": "김녕해수욕장",
+      "category": "beach",
+      "lon": 126.7598808,
+      "lat": 33.5570238,
+      "tier": 1,
+      "sourceUrl": "https://www.visitjeju.net/kr/detail/view?contentsid=CONT_000000000500083"
+    },
+    {
+      "id": "visitjeju:CONT_000000000500604",
+      "name": "중문색달해수욕장",
+      "category": "beach",
+      "lon": 126.4066129,
+      "lat": 33.2473598,
+      "tier": 1,
+      "sourceUrl": "https://www.visitjeju.net/kr/detail/view?contentsid=CONT_000000000500604"
+    },
+    {
+      "id": "visitjeju:CNTS_000000000001196",
+      "name": "표선해수욕장",
+      "category": "beach",
+      "lon": 126.83810144720462,
+      "lat": 33.32723069299215,
+      "tier": 1,
+      "sourceUrl": "https://www.visitjeju.net/kr/detail/view?contentsid=CNTS_000000000001196"
+    },
+    {
+      "id": "visitjeju:CONT_000000000500079",
+      "name": "금능해수욕장",
+      "category": "beach",
+      "lon": 126.23591,
+      "lat": 33.390003,
+      "tier": 1,
+      "sourceUrl": "https://www.visitjeju.net/kr/detail/view?contentsid=CONT_000000000500079"
+    },
+    {
+      "id": "visitjeju:CNTS_200000000007344",
+      "name": "이호테우해수욕장",
+      "category": "beach",
+      "lon": 126.4559518,
+      "lat": 33.4961851,
+      "tier": 1,
+      "sourceUrl": "https://www.visitjeju.net/kr/detail/view?contentsid=CNTS_200000000007344"
+    },
+    {
+      "id": "visitjeju:CONT_000000000500496",
+      "name": "월정리해수욕장",
+      "category": "beach",
+      "lon": 126.798641,
+      "lat": 33.5551118,
+      "tier": 1,
+      "sourceUrl": "https://www.visitjeju.net/kr/detail/view?contentsid=CONT_000000000500496"
+    },
+    {
+      "id": "visitjeju:CONT_000000000500301",
+      "name": "삼양해수욕장",
+      "category": "beach",
+      "lon": 126.5863,
+      "lat": 33.525845,
+      "tier": 1,
+      "sourceUrl": "https://www.visitjeju.net/kr/detail/view?contentsid=CONT_000000000500301"
+    }
+  ]
+}

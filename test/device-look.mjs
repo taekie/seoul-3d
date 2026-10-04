@@ -18,7 +18,9 @@ try{
    };
    window.sensorInterval=setInterval(window.emitSensor,100);
  });
- await p.goto('http://localhost:8747/?city=chapelhill');
+ await p.goto((process.env.CITY_TEST_URL||'http://localhost:8747/')+'?city=chapelhill');
+ await p.click('#lm-btn');assert(await p.locator('#panel').isVisible());
+ await p.click('#lm-btn');assert(!(await p.locator('#panel').isVisible()));
  await p.waitForFunction(()=>window.deviceLook&&!document.getElementById('load'),null,{timeout:180000});
  const state=()=>p.evaluate(()=>({enabled:deviceLook.enabled,theta:city.controls.getAzimuthalAngle(),phi:city.controls.getPolarAngle(),target:city.controls.target.toArray(),radius:city.camera.position.distanceTo(city.controls.target),offset:city.camera.position.clone().sub(city.controls.target).normalize().toArray(),touch:city.controls.touches.ONE}));
  await p.click('[data-a=motion]');assert.equal((await state()).enabled,false);
@@ -28,7 +30,7 @@ try{
  await p.click('[data-a=motion]');await p.waitForTimeout(250);assert((await state()).enabled);
  assert.equal(await p.locator('[data-a=motion]').getAttribute('aria-pressed'),'true');
  assert(distance(initial.offset,(await state()).offset)<.001,'Enable should preserve the current view');
- await p.evaluate(()=>sensorPose={alpha:0,beta:73,gamma:18});await p.waitForTimeout(650);
+ await p.evaluate(()=>sensorPose={alpha:0,beta:73,gamma:18});await p.waitForTimeout(1200);
  const tilted=await state();assert(distance(initial.offset,tilted.offset)>.04,'Tilt should change viewing angle');
  assert(distance(initial.target,tilted.target)<.001);assert(Math.abs(initial.radius-tilted.radius)<.01);
  assert(Math.abs(tilted.theta-initial.theta)<=Math.PI/6+.01);assert(Math.abs(tilted.phi-initial.phi)<=Math.PI/10+.01);
@@ -38,13 +40,13 @@ try{
  const cdp=await p.context().newCDPSession(p),beforePan=await state();
  await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:170,y:370}]});
  await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:235,y:420}]});
- await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await p.waitForTimeout(650);
+ await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await p.waitForTimeout(1200);
  const afterPan=await state();assert(distance(beforePan.target,afterPan.target)>10,'Single touch must pan while gyro is enabled');
  assert(distance(beforePan.offset,afterPan.offset)<.001);
  const beforePinch=await state();
  await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:140,y:370},{x:240,y:370}]});
  await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:100,y:370},{x:280,y:370}]});
- await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await p.waitForTimeout(650);
+ await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await p.waitForTimeout(1200);
  assert((await state()).radius<beforePinch.radius,'Pinch should zoom');
  const beforeLandscape=await state();await p.evaluate(()=>{mockAngle=90;window.dispatchEvent(new Event('orientationchange'));});await p.waitForTimeout(250);
  assert(distance(beforeLandscape.offset,(await state()).offset)<.003,'Screen rotation should recalibrate without jumping');

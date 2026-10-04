@@ -85,7 +85,7 @@ export class NeighborhoodLabels {
     const distance=this.city.camera.position.distanceTo(this.city.controls.target);
     if(now>=this.nextLayout) {
       this.nextLayout=now+120;
-      const obstacles=[...document.querySelectorAll('#title,#panel,#place,#tools,#time,#info-btn,#hint,#compass,#motion-panel')].filter(el=>el.getClientRects().length).map(el=>el.getBoundingClientRect());
+      const obstacles=[...document.querySelectorAll('#title,#panel,#place,#tools,#topbar,#time,#info-btn,#hint,#compass,#motion-panel')].filter(el=>el.getClientRects().length).map(el=>el.getBoundingClientRect());
       const candidates=[];
       for(const p of this.candidates(distance)){
         if(p.category==='landmark'&&this.city.camera.position.distanceTo(p.pos)>46000*this.city.scale)continue;

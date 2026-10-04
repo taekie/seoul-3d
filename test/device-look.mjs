@@ -30,8 +30,11 @@ try{
  await p.click('[data-a=motion]');await p.waitForTimeout(250);assert((await state()).enabled);
  assert.equal(await p.locator('[data-a=motion]').getAttribute('aria-pressed'),'true');
  assert(distance(initial.offset,(await state()).offset)<.001,'Enable should preserve the current view');
+ await p.evaluate(()=>sensorPose={alpha:0,beta:40,gamma:0});await p.waitForTimeout(1200);
+ assert((await state()).phi<initial.phi-.1,'Lowering the phone must produce a more overhead view');
  await p.evaluate(()=>sensorPose={alpha:0,beta:73,gamma:18});await p.waitForTimeout(1200);
  const tilted=await state();assert(distance(initial.offset,tilted.offset)>.04,'Tilt should change viewing angle');
+ assert(tilted.phi>initial.phi+.05,'Raising the phone must produce a lower viewing angle');
  assert(distance(initial.target,tilted.target)<.001);assert(Math.abs(initial.radius-tilted.radius)<.01);
  assert(Math.abs(tilted.theta-initial.theta)<=Math.PI/6+.01);assert(Math.abs(tilted.phi-initial.phi)<=Math.PI/10+.01);
  await p.click('#motion-recenter');await p.waitForTimeout(250);

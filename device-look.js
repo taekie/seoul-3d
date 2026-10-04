@@ -94,7 +94,8 @@ export class DeviceLook {
     this.yaw+=(yaw-this.yaw)*blend;this.pitch+=(pitch-this.pitch)*blend;
     this.city.sensorMoving=Math.abs(this.yaw-oldYaw)+Math.abs(this.pitch-oldPitch)>.0002;
     const controls=this.city.controls,radius=this.city.camera.position.distanceTo(controls.target);
-    const phi=clamp(this.basePhi-this.pitch,Math.max(.15,controls.minPolarAngle),controls.maxPolarAngle);
+    // Lowering the phone toward horizontal raises the view toward a bird's-eye angle.
+    const phi=clamp(this.basePhi+this.pitch,Math.max(.15,controls.minPolarAngle),controls.maxPolarAngle);
     this.city.camera.position.setFromSphericalCoords(radius,phi,this.baseTheta+this.yaw).add(controls.target);
     controls.update();
   }

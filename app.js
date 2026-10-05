@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { MapControls } from './map-controls.js';
+import { MapControls } from './map-controls.js?v=2';
 import { installPanGesture } from './pan-gesture.js';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { landmarksOf, buildLandmark } from './landmarks.js';

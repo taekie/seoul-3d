@@ -23,18 +23,20 @@ export class DeviceLook {
       clearTimeout(this.sensorTimeout);
       if(!this.baseline)this.calibrate();
     };
-    this.onScreenChange=()=>{this.releaseMove();if(this.enabled){this.baseline=null;this.latest=null;this.watchSensor();}};
-    this.moveButton.addEventListener('pointerdown',e=>{
-      if(!this.enabled||!this.latest||this.movePointer!==undefined)return;
-      e.preventDefault();e.stopPropagation();this.movePointer=e.pointerId;
-      this.moveButton.setPointerCapture(e.pointerId);this.beginMove();
-    });
-    for(const event of ['pointerup','pointercancel','lostpointercapture'])this.moveButton.addEventListener(event,()=>this.releaseMove());
-    this.moveButton.addEventListener('contextmenu',e=>e.preventDefault());
-    this.moveButton.addEventListener('keydown',e=>{if([' ','Enter'].includes(e.key)){e.preventDefault();if(!e.repeat)this.beginMove();}});
-    this.moveButton.addEventListener('keyup',e=>{if([' ','Enter'].includes(e.key))this.releaseMove();});
-    this.moveButton.addEventListener('blur',()=>this.releaseMove());
-    window.addEventListener('blur',()=>this.releaseMove());
+    this.onScreenChange=()=>this.stop();
+    for(const [control,mode] of [[this.button,'look'],[this.moveButton,'move']]){
+      control.addEventListener('pointerdown',e=>{
+        if(this.holdMode)return;
+        e.preventDefault();e.stopPropagation();control.setPointerCapture(e.pointerId);
+        this.holdMode=mode;this.toggle();
+      });
+      for(const event of ['pointerup','pointercancel','lostpointercapture'])control.addEventListener(event,()=>{if(this.holdMode===mode)this.stop();});
+      control.addEventListener('contextmenu',e=>e.preventDefault());
+      control.addEventListener('keydown',e=>{if([' ','Enter'].includes(e.key)){e.preventDefault();if(!e.repeat&&!this.holdMode){this.holdMode=mode;this.toggle();}}});
+      control.addEventListener('keyup',e=>{if([' ','Enter'].includes(e.key)&&this.holdMode===mode)this.stop();});
+      control.addEventListener('blur',()=>{if(this.holdMode===mode)this.stop();});
+    }
+    window.addEventListener('blur',()=>{if(this.enabled)this.stop();});
     this.recenter.addEventListener('click',()=>this.calibrate());
     document.addEventListener('visibilitychange',()=>{if(document.hidden&&(this.enabled||this.pending))this.stop('기울여 보기가 꺼졌습니다. 다시 켜서 계속 볼 수 있어요.');});
   }
@@ -52,9 +54,9 @@ export class DeviceLook {
   message(text) {this.panel.hidden=true;this.status.textContent=text;this.button.title=text;this.button.setAttribute('aria-label',text);}
   async toggle() {
     if(this.enabled||this.pending){this.stop();return;}
-    if(!window.isSecureContext){this.message('아이폰 센서는 HTTPS 주소에서 사용할 수 있어요. HTTPS로 접속해 주세요.');return;}
+    if(!window.isSecureContext){this.stop('아이폰 센서는 HTTPS 주소에서 사용할 수 있어요. HTTPS로 접속해 주세요.');return;}
     const api=window.DeviceOrientationEvent;
-    if(!api){this.message('이 브라우저에서는 기울기 센서를 사용할 수 없어요. 아이폰 Safari에서 열어 주세요.');return;}
+    if(!api){this.stop('이 브라우저에서는 기울기 센서를 사용할 수 없어요. 아이폰 Safari에서 열어 주세요.');return;}
     const token=++this.token;this.pending=true;this.button.setAttribute('aria-busy','true');
     this.message('휴대폰을 편하게 들고 센서 접근을 허용해 주세요.');
     try{
@@ -64,7 +66,9 @@ export class DeviceLook {
       if(permission!=='granted'){this.stop('센서 접근이 허용되지 않았어요. Safari의 웹사이트 설정에서 동작·방향 접근을 확인해 주세요.');return;}
       this.pending=false;this.button.removeAttribute('aria-busy');this.enabled=true;
       this.onEnable();this.city.anim=null;
-      this.moveButton.hidden=false;this.button.classList.add('on');this.button.setAttribute('aria-pressed','true');
+      this.moving=this.holdMode==='move';
+      const active=this.moving?this.moveButton:this.button;
+      active.classList.add('on');active.setAttribute('aria-pressed','true');
       this.savedTouches={...this.city.controls.touches};
       Object.assign(this.city.controls.touches,{ONE:THREE.TOUCH.PAN,TWO:THREE.TOUCH.DOLLY_PAN});
       this.latest=null;this.baseline=null;this.needsRebase=false;this.lastFrame=performance.now();
@@ -94,8 +98,8 @@ export class DeviceLook {
     window.removeEventListener('orientationchange',this.onScreenChange);
     screen.orientation?.removeEventListener('change',this.onScreenChange);
     if(this.savedTouches)Object.assign(this.city.controls.touches,this.savedTouches);
-    this.releaseMove();this.moveButton.hidden=true;this.savedTouches=null;this.enabled=false;this.pending=false;this.baseline=null;this.latest=null;
-    this.city.sensorMoving=false;this.button.classList.remove('on');this.button.setAttribute('aria-pressed','false');
+    this.releaseMove();this.holdMode=null;this.savedTouches=null;this.enabled=false;this.pending=false;this.baseline=null;this.latest=null;
+    this.city.sensorMoving=false;for(const control of [this.button,this.moveButton]){control.classList.remove('on');control.setAttribute('aria-pressed','false');}
     this.button.removeAttribute('aria-busy');this.recenter.hidden=true;
     if(message)this.message(message);else this.panel.hidden=true;
   }

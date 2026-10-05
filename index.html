@@ -129,9 +129,13 @@
   .compass-needle { position:absolute; width:32px; height:40px; left:24px; top:20px; }
   .compass-north { fill:var(--accent); }
   .compass-south { fill:var(--muted); opacity:.4; }
-  #motion-move { position:absolute; right:48px; bottom:162px; z-index:4; width:50px; height:44px; border:1px solid var(--line); border-radius:16px; color:var(--ink); font-family:inherit; font-size:12px; font-weight:600; touch-action:none; user-select:none; -webkit-user-select:none; -webkit-touch-callout:none; cursor:grab; }
-  #motion-move[hidden] { display:none; }
-  #motion-move.on { background:var(--accent); color:white; cursor:grabbing; }
+  #motion-controls { position:absolute; right:24px; bottom:162px; z-index:4; display:flex; gap:6px; }
+  #motion-controls button { min-width:50px; height:44px; padding:0 10px; border:1px solid var(--line); border-radius:16px; color:var(--ink); font:600 12px sans-serif; touch-action:none; user-select:none; -webkit-user-select:none; -webkit-touch-callout:none; cursor:grab; }
+  #motion-controls button.on { background:var(--accent); color:white; cursor:grabbing; }
+  #motion-controls button:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
+  #panel [data-a=tour] { display:flex; align-items:center; gap:8px; width:100%; margin:8px 0 16px; padding:12px; border:1px solid var(--line); border-radius:10px; background:transparent; color:var(--ink); font:inherit; cursor:pointer; }
+  #panel [data-a=tour].on { background:var(--accent); color:white; }
+  #panel [data-a=tour] svg { width:16px; height:16px; fill:none; stroke:currentColor; }
   #motion-panel { position:absolute; z-index:4; bottom:132px; left:50%; transform:translateX(-50%);
     width:min(360px,calc(100% - 32px)); padding:12px 32px 12px 14px; font-size:12px; line-height:1.5; }
   #motion-panel[hidden], #motion-recenter[hidden] { display:none; }
@@ -194,7 +198,7 @@
 
   @media (max-width:860px) {
     #compass { right:16px; bottom:108px; }
-    #motion-move { right:32px; bottom:200px; }
+    #motion-controls { right:16px; bottom:200px; }
     #motion-panel { left:16px; bottom:108px; width:calc(100% - 132px); max-width:360px; transform:none; font-size:11px; }
     #tools { width:calc(100% - 32px); max-width:360px; }
     #tools button { flex:1; min-width:0; padding:10px 4px; font-size:11px; white-space:nowrap; }
@@ -279,11 +283,15 @@
       <svg viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg>
     </button>
   </div>
+  <button data-a="tour" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M6 4l13 8-13 8z"/></svg>자동 비행</button>
   <div class="lm-head"><span>LANDMARKS</span><span id="lm-count"></span></div>
   <div id="landmarks"></div>
 </aside>
 
-<button id="motion-move" class="card" hidden aria-pressed="false" aria-label="누른 채 기울여 이동" title="누른 채 기울여 이동">이동</button>
+<div id="motion-controls">
+<button id="motion-look" data-a="motion" class="card" aria-pressed="false" aria-label="누른 채 기울여 둘러보기" title="누른 채 기울여 둘러보기">둘러보기</button>
+<button id="motion-move" class="card" aria-pressed="false" aria-label="누른 채 기울여 이동" title="누른 채 기울여 이동">이동</button>
+</div>
 <button id="compass" class="card" aria-label="나침반: 북쪽을 위로 맞추기" title="북쪽을 위로 맞추기">
   <span data-direction="0" aria-hidden="true">N</span><span data-direction="90" aria-hidden="true">E</span>
   <span data-direction="180" aria-hidden="true">S</span><span data-direction="270" aria-hidden="true">W</span>
@@ -346,9 +354,7 @@
 </aside>
 <nav id="tools" class="card">
   <button data-a="home"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>서울 전체</button>
-  <button data-a="tour"><svg viewBox="0 0 24 24"><path d="M6 4l13 8-13 8z"/></svg>자동 비행</button>
   <button data-a="labels" class="on" aria-pressed="true" title="확대하면 주변 공원·대학·역·문화시설 이름표가 나타납니다"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>이름표</button>
-  <button data-a="motion" aria-pressed="false" title="휴대폰을 기울여 주변 둘러보기"><svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M10 17h4M3 8l-2 4 2 4M21 8l2 4-2 4"/></svg>기울여 보기</button>
   <button data-a="population" hidden aria-pressed="false" aria-controls="population-key"><svg viewBox="0 0 24 24"><path d="M4 20V12h4v8M10 20V4h4v16M16 20V8h4v12M2 20h20"/></svg>인구밀도</button>
   <button data-a="cropland" hidden aria-pressed="false" aria-controls="crop-key"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 17l14-9M5 12l10-7M5 7l5-3M4 4v17M20 4v17"/></svg>농경지</button>
   <button data-a="rain" hidden aria-pressed="false" aria-controls="rain-panel"><svg viewBox="0 0 24 24"><path d="M7 14a4 4 0 1 1 0-8 5 5 0 0 1 9-1 4 4 0 0 1 1 9M7 17l-1 3M12 17l-1 3M17 17l-1 3"/></svg>강수·적설</button>
@@ -484,7 +490,7 @@ import { City } from './app.js';
 import { NeighborhoodLabels, poiCategoryName } from './neighborhood-labels.js';
 import { mountCompass } from './compass.js';
 import { connectRailUI } from './rail.js';
-import { DeviceLook } from './device-look.js?v=4';
+import { DeviceLook } from './device-look.js?v=5';
 
 const city = new City(document.getElementById('c'));
 // 콘솔에서 씬을 만져볼 수 있게 열어둔다
@@ -737,20 +743,19 @@ const actions = {
     }catch(e){status.textContent='불러오지 못했습니다. 강수·적설을 다시 눌러주세요.';console.warn(e);}
     finally{setLayerBusy(false);btn.removeAttribute('aria-busy');}
   },
-  motion() { deviceLook.toggle(); },
   home() { stopTour(); poiLabels.select(null); document.getElementById('place').hidden=true; city.flyTo(HOME.lon, HOME.lat, HOME.dist, HOME.pitch, HOME.bearing); },
   tour(btn) {
     if (tour) return stopTour();
     let i = -1;
     const step = () => goto(i = (i + 1) % LM.length);
-    step(); tour = setInterval(step, 7000); btn.classList.add('on');
+    deviceLook.stop();step(); tour = setInterval(step, 7000); btn.classList.add('on');btn.setAttribute('aria-pressed','true');
   },
   labels(btn) { showLabels = btn.classList.toggle('on'); poiLabels.setEnabled(showLabels); btn.setAttribute('aria-pressed', String(showLabels)); },
   full() { document.fullscreenElement ? document.exitFullscreen() : document.body.requestFullscreen(); },
 };
 if(city.rail)connectRailUI(city,()=>{railRequestId++;city.rail.setEnabled(false);document.getElementById('rail-panel').hidden=true;});
-document.querySelectorAll('#tools button').forEach(b => b.onclick = () => actions[b.dataset.a](b));
-function stopTour() { clearInterval(tour); tour = null; document.querySelector('#tools [data-a=tour]').classList.remove('on'); }
+document.querySelectorAll('#tools button,#panel [data-a=tour]').forEach(b => b.onclick = () => actions[b.dataset.a](b));
+function stopTour() { clearInterval(tour); tour = null; const btn=document.querySelector('#panel [data-a=tour]');btn.classList.remove('on');btn.setAttribute('aria-pressed','false'); }
 
 const panel = document.getElementById('panel'), panelBtn = document.getElementById('panel-toggle');
 panelBtn.onclick = () => {

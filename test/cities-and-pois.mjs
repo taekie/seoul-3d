@@ -11,6 +11,7 @@ try{
  assert.equal(await p.title(),'채플힐 3D 아틀라스');
  assert.equal(await p.locator('#landmarks > button').count(),9);
  assert.equal(await p.evaluate(()=>city.groups.landmarks.children.length),9);
+ await p.click('#lm-btn');
  for(let i=0;i<9;i++){
    await p.locator('#landmarks button').nth(i).click();await p.waitForTimeout(2100);
    assert.match(await p.locator('#place-coord').textContent(),/79\.\d+° W/);
@@ -32,7 +33,7 @@ try{
    assert((await visible(category).allTextContents()).includes(name));
    const bounds=await p.evaluate(()=>city.data.meta.bbox);assert(bounds[3]>35.98);
  }
- await p.click('#info-btn');assert.equal(await p.locator('#city-switch a').count(),3);
+ await p.click('#info-btn');assert.equal(await p.locator('#city-switch a').count(),4);
  await p.setViewportSize({width:390,height:844});
  const rect=await p.locator('#city-switch').boundingBox();assert(rect.x>=0&&rect.x+rect.width<=390);
  await p.locator('#city-switch a').filter({hasText:'제주'}).click();await ready();

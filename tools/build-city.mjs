@@ -27,7 +27,7 @@ const lat2y = (lat, z) => (1 - Math.log(Math.tan(lat*Math.PI/180) + 1/Math.cos(l
 
 const ROAD_CLASS = { motorway: 3, trunk: 2.4, primary: 2, secondary: 1.5, tertiary: 1.1 };
 
-// 피복 종류 — 0 잔디 · 1 숲 · 2 골프장 · 3 밭·과수원 · 4 부지 · 5 공원
+// 피복 종류 — 0 잔디 · 1 숲 · 2 골프장 · 3 밭·과수원 · 4 부지 · 5 공원 · 6 암반
 // 1과 5에는 나무를 심는다. 5(공원·국립공원)는 숲 폴리곤과 통째로 겹치므로 바닥을 깔지 않는다.
 const SITE = new Set(['cemetery', 'school', 'university', 'theme_park', 'pitch', 'track', 'stadium', 'zoo']);
 
@@ -175,6 +175,7 @@ await Promise.all(Array.from({ length: CONC }, async (_, w) => {
         if (name === 'park') kind = 5;
         else if (name === 'landuse') { if (!SITE.has(cls)) continue; kind = 4; }
         else if (cls === 'wood') kind = 1;
+        else if (cls === 'rock') kind = 6;
         else if (sub === 'golf_course') kind = 2;      // class는 grass지만 색을 따로 준다
         else if (cls === 'grass') kind = 0;
         else if (cls === 'farmland') kind = 3;         // 밭·감귤과수원
@@ -185,7 +186,7 @@ await Promise.all(Array.from({ length: CONC }, async (_, w) => {
           const area = ringArea(ring);
           if (area < 2500) continue;
           const thinned = thin(ring, 15);
-          if (thinned.length >= 8) greens.push({ t: kind, r: thinned });
+          if (thinned.length >= 8) greens.push({ t: kind, r: thinned, holes: poly.slice(1).map(r=>thin(r,15)) });
           if (!treed) continue;
           let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
           for (let m = 0; m < ring.length; m += 2) {

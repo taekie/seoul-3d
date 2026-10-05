@@ -1,0 +1,77 @@
+import {chromium} from 'playwright';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const meta=JSON.parse(fs.readFileSync('data/korea.rain.2026.json'));
+const bytes=fs.readFileSync('data/korea.rain.2026.bin');
+assert.equal(meta.year,2026);assert.equal(meta.frameCount,40);
+assert.equal(meta.weeks.reduce((sum,w)=>sum+w.days,0),277);
+assert.equal(bytes.length,meta.frameCount*meta.cellCount*2);
+assert.equal(meta.weeks[0].start,'2026-01-01');assert.equal(meta.weeks.at(-1).end,'2026-10-04');
+for(let i=1;i<meta.weeks.length;i++)assert.equal(Date.parse(meta.weeks[i].start)-Date.parse(meta.weeks[i-1].end),86400000);
+const browser=await chromium.launch({args:['--use-gl=angle','--use-angle=metal']});
+try{
+const p=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[],requests=[];
+p.on('pageerror',e=>errors.push(e.message));p.on('console',m=>{if(m.type()==='error'&&/shader|compile|validate/i.test(m.text()))errors.push(m.text());});
+p.on('request',r=>requests.push(r.url()));
+await p.goto('http://localhost:8747/?city=korea');await p.waitForFunction(()=>window.poiLabels?.stats.loaded&&!document.getElementById('load'),null,{timeout:90000});
+assert(!requests.some(u=>u.includes('korea.rain.')));
+await p.route('**/data/korea.rain.2026.json',r=>r.fulfill({status:503,body:'Unavailable'}));
+await p.click('[data-a=rain]');await p.waitForFunction(()=>document.getElementById('rain-status').textContent.includes('못했습니다'));
+assert.equal(await p.locator('[data-a=rain]').getAttribute('aria-pressed'),'false');
+await p.unroute('**/data/korea.rain.2026.json');await p.click('[data-a=rain]');await p.waitForFunction(()=>city.rainfall.enabled);await p.waitForTimeout(400);
+assert(await p.evaluate(()=>{
+ const r=city.rainfall,mesh=city.groups.rainfall,offset=r.week*r.data.cellCount;
+ return mesh.visible&&mesh.count===r.data.cellCount&&r.cells.every((_,i)=>{
+  const v=r.values[offset+i],height=mesh.instanceMatrix.array[i*16+5];
+  return Math.abs(height-(v===r.data.nodata?0:v*.1*120))<.1;
+ });
+}),'Rain column heights must be linear in weekly mm, with no-data hidden');
+assert(await p.evaluate(async()=>{
+ const {rainGridPoint,rainLonLat}=await import('./rainfall.js');const grid=city.rainfall.data.grid;
+ const samples=[[126.9658,37.5714,118.60,267.07],[129.032,35.1047,212.63,135.52],[126.5297,33.5141,101.27,46.22]];
+ return samples.every(([lon,lat,x,y])=>{const q=rainGridPoint(lon,lat,grid),back=rainLonLat(...q,grid);return Math.hypot(q[0]-x,q[1]-y)<.01&&Math.hypot(back[0]-lon,back[1]-lat)<1e-7;});
+}),'WGS84 projection must match KMA station coordinates and round trip');
+await p.screenshot({path:'test/rainfall-desktop.png'});
+const peak=await p.evaluate(()=>city.rainfall.week);
+await p.locator('#rain-week').fill('0');assert.equal(await p.evaluate(()=>city.rainfall.week),0);
+assert((await p.locator('#rain-week-info').textContent()).includes('4일간'));
+await p.click('#rain-play');await p.waitForFunction(()=>city.rainfall.week>0);await p.click('#rain-play');
+await p.locator('#rain-week').fill(String(peak));
+await p.click('[data-t=night]');assert(await p.evaluate(()=>city.rainfall.enabled&&city.groups.rainfall.visible));
+assert.equal(await p.evaluate(()=>city.rainfall.week),peak);
+await p.click('[data-a=population]');await p.waitForFunction(()=>city.population.enabled);
+assert(await p.evaluate(()=>!city.rainfall.enabled&&!city.groups.rainfall.visible&&!city.rainfall.playing));
+await p.click('[data-a=rain]');await p.waitForFunction(()=>city.rainfall.enabled);
+assert(await p.evaluate(()=>!city.population.enabled&&!city.groups.population.visible));
+assert.equal(requests.filter(u=>u.endsWith('korea.rain.2026.bin')).length,1);
+assert(!requests.some(u=>u.includes('apihub.kma.go.kr')),'Browser must use only prebuilt local weather data');
+await p.route('**/data/korea.rain.json',r=>r.fulfill({status:503,body:'Unavailable'}));
+await p.selectOption('#rain-year','2025');await p.waitForFunction(()=>document.getElementById('rain-status').textContent.includes('못했습니다'));
+assert.equal(await p.evaluate(()=>city.rainfall.year),2026);
+assert.equal(await p.locator('#rain-year').inputValue(),'2026');
+assert(await p.evaluate(()=>city.rainfall.enabled&&city.groups.rainfall.visible));
+await p.unroute('**/data/korea.rain.json');
+await p.selectOption('#rain-year','2025');await p.waitForFunction(()=>city.rainfall.year===2025&&!document.getElementById('rain-year').disabled);
+assert.equal(await p.locator('.rain-bar').count(),53);assert.equal(await p.locator('.month-tick').count(),12);
+await p.locator('#rain-week').fill('0');
+await p.selectOption('#rain-year','2026');await p.waitForFunction(()=>city.rainfall.year===2026&&!document.getElementById('rain-year').disabled);
+assert.equal(await p.locator('.rain-bar').count(),40);assert.equal(await p.locator('.month-tick').count(),10);
+assert.equal(await p.evaluate(()=>city.rainfall.week),peak);
+assert.equal(requests.filter(u=>u.endsWith('korea.rain.2026.bin')).length,1);
+await p.selectOption('#rain-year','2025');await p.waitForFunction(()=>city.rainfall.year===2025&&!document.getElementById('rain-year').disabled);
+assert.equal(await p.evaluate(()=>city.rainfall.week),0);
+assert.equal(requests.filter(u=>u.endsWith('korea.rain.2025.bin')).length,1);
+await p.click('[data-t=day]');await p.setViewportSize({width:390,height:844});await p.reload();
+await p.waitForFunction(()=>window.poiLabels?.stats.loaded&&!document.getElementById('load'));
+// Closing during load must not reopen the panel when the response arrives.
+await p.route('**/data/korea.rain.2026.json',async r=>{await new Promise(resolve=>setTimeout(resolve,600));await r.continue();});
+await p.click('[data-a=rain]');await p.click('#rain-close');await p.waitForFunction(()=>!document.querySelector('[data-a=rain]').disabled);
+assert(await p.evaluate(()=>!city.rainfall.enabled&&document.getElementById('rain-panel').hidden));
+await p.unroute('**/data/korea.rain.2026.json');await p.click('[data-a=rain]');await p.waitForFunction(()=>city.rainfall.enabled);
+await p.screenshot({path:'test/rainfall-mobile.png'});
+assert(await p.evaluate(()=>document.documentElement.scrollWidth===innerWidth));
+const bounds=await p.locator('#rain-panel').boundingBox();assert(bounds.x>=0&&bounds.x+bounds.width<=390);
+await p.click('#rain-close');assert(await p.evaluate(()=>!city.groups.rainfall.visible));
+assert.deepEqual(errors,[]);
+console.log('PASS: 277 days/40 weeks and year switching, projection, linear rainfall columns, playback, themes, layers, lazy loading, retry, mobile and load cancellation');
+}finally{await browser.close()}

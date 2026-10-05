@@ -1,0 +1,42 @@
+{
+  "year": 2021,
+  "source": "ESA WorldCover 2021 v200",
+  "sourceURL": "https://esa-worldcover.org/en/data-access",
+  "doi": "https://doi.org/10.5281/zenodo.7254221",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "attribution": "© ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium",
+  "sources": [
+    "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_N33E123_Map.tif",
+    "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_N33E126_Map.tif",
+    "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_N33E129_Map.tif",
+    "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_N36E123_Map.tif",
+    "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_N36E126_Map.tif",
+    "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_N36E129_Map.tif",
+    "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_N39E123_Map.tif",
+    "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_N39E126_Map.tif",
+    "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_N39E129_Map.tif",
+    "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_N42E126_Map.tif",
+    "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_N42E129_Map.tif"
+  ],
+  "class": 40,
+  "classDefinition": "Annual herbaceous cropland; woody perennial crops and greenhouses are not included",
+  "nativeResolution": "10 m",
+  "stepDegrees": 0.005,
+  "unit": "percent of full geographic cell area classified as cropland",
+  "aggregation": "Count class 40 native pixels in each 60×60 block; divide by 3600; round percent. Cells with any NoData remain NoData. No COG overviews used.",
+  "projection": "Mercator texture aligned to korea.json bbox; nearest resampled from 0.005 degree fraction grid",
+  "bounds": [
+    124.0,
+    32.7,
+    132.1,
+    43.1
+  ],
+  "texture": {
+    "width": 1536,
+    "height": 2507,
+    "nodata": 255
+  },
+  "countryMask": "Natural Earth 1:10m KOR/PRK, clipped further to overview relief coastline",
+  "displayCaveat": "Coarse regional comparison, not parcel boundaries or an urban development suitability map",
+  "validCells": 918661
+}

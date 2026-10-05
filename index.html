@@ -24,6 +24,49 @@
   #title h1 { margin:2px 0 0; font-size:42px; letter-spacing:-.02em; display:flex; align-items:baseline; gap:12px; }
   #title h1 span { font-size:20px; letter-spacing:.18em; color:var(--muted); font-weight:500; }
   #title p { margin:4px 0 0; font-size:13px; color:var(--muted); }
+  #tools button[hidden], #population-key[hidden] { display:none; }
+  #crop-key[hidden] { display:none; }
+  #crop-key { position:absolute; left:32px; bottom:120px; width:245px; z-index:3; padding:11px 14px; font-size:11px; line-height:1.5; }
+  #crop-key .crop-row { display:flex; justify-content:space-between; align-items:center; gap:8px; }
+  #crop-key button { border:0; background:none; color:inherit; cursor:pointer; font-size:16px; }
+  #crop-key .crop-ramp { height:7px; border-radius:4px; margin:5px 0 2px; background:linear-gradient(90deg,rgba(226,212,76,0),rgba(226,212,76,.57),rgba(226,212,76,.9)); }
+  #crop-key small, #crop-key a { color:var(--muted); font-size:10px; }
+  @media(max-width:860px) { #crop-key { left:16px; bottom:115px; width:215px; padding:8px 11px; font-size:10px; } }
+  #population-key { position:absolute; left:32px; top:215px; z-index:3; padding:13px 15px; width:235px; font-size:11px; line-height:1.65; }
+  #population-key strong { display:block; font-size:13px; }
+  #population-key .ramp { height:7px; margin:7px 0 3px; border-radius:5px; background:linear-gradient(90deg,#fff2cc,#ffd45a,#f89535,#ed5a53,#c73832,#851d20); }
+  #population-key .ticks { display:flex; justify-content:space-between; font-size:9px; }
+  #population-key a { color:inherit; }
+  @media(max-width:860px) { #population-key { left:16px; top:210px; width:195px; padding:9px 11px; font-size:10px; } }
+  #rain-panel[hidden] { display:none; }
+  #rain-panel { position:absolute; top:210px; left:32px; z-index:3; width:275px; padding:15px 17px; font-size:11px; line-height:1.6; }
+  #rain-panel strong { font-size:14px; }
+  #rain-panel .rain-head, #rain-panel .rain-controls { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+  #rain-panel .rain-controls { margin:8px 0 3px; }
+  #rain-panel select { font:inherit; color:inherit; background:transparent; border:1px solid #ccd8db; border-radius:6px; padding:2px; }
+  #rain-panel button { font:inherit; border:0; border-radius:7px; padding:5px 9px; cursor:pointer; color:inherit; background:rgba(120,150,160,.13); }
+  #rain-panel button:disabled { opacity:.4; cursor:default; }
+  #rain-panel input { width:100%; margin:7px 0 2px; accent-color:#328bc0; }
+  #rain-panel .ramp { height:7px; border-radius:5px; margin-top:9px; background:linear-gradient(90deg,#edf8fc,#cceaf6,#81c6e5,#328fc8,#195298,#102958); }
+  #rain-panel .ticks { display:flex; justify-content:space-between; font-size:9px; }
+  #rain-panel small, #rain-panel a { color:var(--muted); font-size:10px; }
+  #rain-panel .rain-date { font-variant-numeric:tabular-nums; font-size:13px; font-weight:600; }
+  #rain-panel .rain-foot { margin-top:7px; }
+  #rain-chart { display:block; width:100%; height:94px; overflow:visible; }
+  #rain-chart text { fill:var(--muted); font:10px sans-serif; }
+  #rain-chart .rain-bar { fill:#81c6e5; }
+  #rain-chart .rain-bar.selected { fill:#195298; }
+  #rain-chart .chart-rule { stroke:var(--muted); opacity:.2; }
+  #rain-chart-marker { stroke:#195298; stroke-width:1; stroke-dasharray:2 2; }
+  #rain-chart-value { font-variant-numeric:tabular-nums; color:#195298; }
+  @media(max-width:860px) {
+    #rain-panel { top:210px; left:16px; width:215px; padding:10px 12px; }
+    body.korea #tools button { font-size:10px; padding:10px 2px; }
+    #rain-panel .rain-date { font-size:12px; }
+  }
+  #relief-key { width:210px; margin-top:12px; font-size:10px; color:var(--muted); }
+  #relief-key .ramp { height:6px; border-radius:4px; margin:5px 0; background:linear-gradient(90deg,#516d88,#608196 4.8%,#648e8d 12%,#6e956e 24%,#a5ae6d 40%,#c7b274 60%,#bc9278 80%,#eee5d6); }
+  #relief-key .ends { display:flex; justify-content:space-between; }
 
   #panel { position:absolute; top:96px; right:32px; width:288px; max-height:calc(100vh - 330px);
            z-index:3; display:none; flex-direction:column; padding:22px 0 0; }
@@ -60,8 +103,8 @@
   #lm-btn svg { width:21px; height:21px; stroke:currentColor; fill:none; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
   #lm-btn.on { background:var(--accent); color:#fff; }
 
-  #tools { position:absolute; bottom:26px; left:50%; transform:translateX(-50%); z-index:3; display:flex; padding:8px; gap:2px; }
-  #tools button { border:0; background:none; font:inherit; font-size:12px; padding:10px 18px; border-radius:11px; cursor:pointer;
+  #tools { width:max-content; max-width:calc(100% - 32px); position:absolute; bottom:26px; left:50%; transform:translateX(-50%); z-index:3; display:flex; padding:8px; gap:2px; }
+  #tools button { border:0; background:none; font:inherit; font-size:12px; padding:10px 18px; white-space:nowrap; border-radius:11px; cursor:pointer;
                   color:var(--ink); display:flex; flex-direction:column; align-items:center; gap:6px; }
   #tools button:hover { background:#eef4f1; }
   #tools button.on { color:var(--accent); }
@@ -140,6 +183,11 @@
   .poi-dot { width:6px; height:6px; border-radius:50%; flex:none; }
   @media (prefers-reduced-motion:reduce) { .map-label { transition:none; } }
   body.dark .label { background:rgba(20,30,36,.86); color:#e9f1ef; }
+  .geography-label[data-category=river] { color:#176c88; background:rgba(239,252,255,.9); border-color:rgba(54,141,167,.24); font-size:11px; }
+  .geography-label::after { height:var(--leader-length,14px); transform:rotate(var(--leader-angle,0rad)); transform-origin:top; }
+  .geography-label[data-category=mountain] { color:#506b43; background:rgba(247,250,236,.92); border-color:rgba(106,131,80,.24); font-size:11px; }
+  body.dark .geography-label[data-category=river] { color:#9cd9ed; background:rgba(18,46,58,.94); }
+  body.dark .geography-label[data-category=mountain] { color:#c2d5a8; background:rgba(34,47,36,.94); }
 
   @media (max-width:860px) {
     #compass { right:16px; bottom:108px; }
@@ -152,9 +200,49 @@
     #title h1 { font-size:28px; }
     #title h1 span { font-size:13px; }
     #title p { font-size:11px; }
+    #relief-key { width:155px; margin-top:8px; font-size:9px; }
     #panel { left:16px; right:16px; width:auto; top:88px; max-height:calc(100vh - 310px); }
     #topbar { right:16px; }
     #time { right:88px; } #time button span { display:none; }
+  }
+
+  body.rail-active #title { visibility:hidden; }
+  #rail-panel[hidden] { display:none; }
+  #rail-panel { position:absolute; top:110px; left:32px; width:292px; padding:18px; z-index:3; font-size:12px; line-height:1.5; }
+  #rail-panel .rail-row { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:9px; }
+  #rail-panel strong { font-size:16px; }
+  #rail-panel button, #rail-panel select { font:inherit; color:inherit; border:1px solid var(--line); background:var(--panel); border-radius:8px; padding:6px 8px; cursor:pointer; min-width:0; white-space:nowrap; }
+  #rail-panel button:disabled { opacity:.4; cursor:default; }
+  #rail-panel select { max-width:100%; }
+  #rail-clock { font-size:38px; font-weight:600; font-variant-numeric:tabular-nums; letter-spacing:-.05em; }
+  #rail-time { width:100%; accent-color:#d7a44c; margin:4px 0; }
+  #rail-panel .rail-ticks { display:flex; justify-content:space-between; color:var(--muted); font-size:10px; margin-bottom:10px; }
+  #rail-count { font-size:11px; font-variant-numeric:tabular-nums; }
+  #rail-panel small, #rail-detail { font-size:10px; color:var(--muted); }
+  #rail-train { width:100%; margin:8px 0; }
+  #rail-detail { min-height:30px; margin:0 0 8px; }
+  #rail-panel details { border-top:1px solid var(--line); margin-top:12px; padding-top:8px; font-size:10px; color:var(--muted); }
+  #rail-panel summary { cursor:pointer; }
+  #rail-panel a { color:inherit; }
+  #rail-legend { display:flex; gap:14px; margin:8px 0; font-size:11px; }
+  #rail-legend i { display:inline-block; width:7px; height:7px; border-radius:50%; margin-right:4px; }
+  @media(max-width:640px) {
+    #rail-panel { top:auto; bottom:110px; left:12px; width:calc(100% - 24px); padding:10px 14px; max-height:calc(100dvh - 200px); overflow:auto; }
+    #rail-clock { font-size:29px; }
+    #rail-panel > small, #rail-legend { display:none; }
+    #rail-panel strong { font-size:14px; }
+    #rail-panel .rail-ticks { margin-bottom:5px; }
+    #rail-panel #rail-options { display:inline-block; width:54%; vertical-align:top; }
+    #rail-panel #rail-options + details { display:inline-block; width:44%; vertical-align:top; }
+    #rail-panel #rail-options[open] { width:100%; }
+    #rail-panel .rail-row { margin-bottom:5px; }
+    #rail-panel details { margin-top:6px; padding-top:5px; }
+    body.korea #tools { max-width:420px; width:calc(100% - 16px); padding:6px 3px; }
+    body.korea #tools button { font-size:9px; padding:9px 1px; }
+    body.korea #tools button[data-a=motion], body.korea #tools button[data-a=home], body.korea #tools button[data-a=full] { font-size:0; }
+    body.korea #tools button[data-a=home]::after { content:'전체';font-size:9px; }
+    body.korea #tools button[data-a=full]::after { content:'전체화면';font-size:9px; }
+    body.korea #tools button[data-a=motion]::after { content:'기울임';font-size:9px; }
   }
 </style>
 </head>
@@ -197,20 +285,69 @@
   <svg class="compass-needle" viewBox="0 0 32 40" aria-hidden="true"><path class="compass-north" d="M16 2 24 22 16 18 8 22Z"/><path class="compass-south" d="M16 38 8 18 16 22 24 18Z"/><circle cx="16" cy="20" r="2" fill="var(--panel)"/></svg>
 </button>
 
-<div id="place" class="card">
+<div id="place" class="card" hidden>
   <div class="eyebrow">A CITY IN MINIATURE</div>
-  <h3 id="place-name">서울, 한눈에</h3>
-  <p id="place-desc">한강과 산, 그 사이에 펼쳐진 도시</p>
-  <div class="coord" id="place-coord">37.5450° N &nbsp; 126.9880° E</div>
+  <h3 id="place-name"></h3>
+  <p id="place-desc"></p>
+  <div class="coord" id="place-coord"></div>
 </div>
 
 <div id="hint">드래그 회전 · 1초 꾹 누르면 이동 · Space/Shift+드래그 이동 · 휠 확대</div>
 
+<aside id="crop-key" class="card" hidden aria-label="농경지 비율 범례">
+  <div class="crop-row"><strong>농경지 비율 · 2021</strong><button id="crop-close" aria-label="농경지 표시 끄기">×</button></div>
+  <div class="crop-ramp"></div><div class="crop-row"><small>0%</small><small>50%</small><small>100%</small></div>
+  <div><small>약 500m 격자 · 논·밭 중심의 위성 분류</small></div>
+  <small>인구 2025년과 시점 차이 · 개발 가능지 판정 아님</small>
+  <details><summary><small>자료 출처·범위</small></summary><small><a href="https://esa-worldcover.org/en/data-access" target="_blank" rel="noopener">ESA WorldCover 2021 v200</a> · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a><br>10m 원자료의 농경지 픽셀 비율을 집계했습니다. 과수원 등 목본 작물·온실은 이 분류에 포함되지 않습니다. 인구밀도는 기존 전체 격자 면적 기준입니다.<br>© ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium</small></details>
+  <div id="crop-status" role="status"></div>
+</aside>
+<aside id="population-key" class="card" hidden aria-label="인구밀도 범례">
+<strong>3D 인구밀도 · 2025</strong><span>약 5km 격자 · 명/km²</span>
+<div class="ramp"></div><div class="ticks"><span>0</span><span>1천</span><span>5천</span><span>1만</span><span>1.5만</span><span>2.5만+</span></div>
+<div>기둥 높이: 인구밀도에 정비례</div><div>밑면은 밝게 · 꼭대기는 밀도 색</div>
+<a href="https://www.worldpop.org/blog/worldpop-global2-global-high-resolution-population-estimates-for-2015-2030/" target="_blank" rel="noopener">WorldPop 추정 · UN 보정</a> · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>
+<div id="population-status" role="status"></div></aside>
+<aside id="rain-panel" class="card" hidden aria-label="주별 강수량">
+  <div class="rain-head"><strong>강수·적설 <select id="rain-year" aria-label="강수량 연도"><option value="2026">2026</option><option value="2025">2025</option></select></strong><button id="rain-close" aria-label="날씨 패널 닫기">×</button></div>
+  <select id="rain-metric" aria-label="날씨 지표" style="width:100%;margin:7px 0"><option value="rain">강수량 · 주간 누적</option><option value="snow-mean">쌓인 눈 · 주 평균</option><option value="snow-max">24시간 적설 증가 · 주 최대</option></select>
+  <small id="rain-through"></small>
+  <div id="rain-content" hidden>
+    <div class="rain-controls"><button id="rain-prev" aria-label="이전 주">‹</button><span class="rain-date" id="rain-date"></span><button id="rain-next" aria-label="다음 주">›</button></div>
+    <div class="rain-head"><small id="rain-chart-caption">남한 평균 · 주간 누적</small><small id="rain-chart-value"></small></div>
+    <svg id="rain-chart" viewBox="0 0 260 106" preserveAspectRatio="none" role="img" aria-label="남한 평균 주간 강수량"></svg>
+    <input id="rain-week" type="range" min="0" max="52" value="0" step="1" aria-label="강수량 주 선택">
+    <div class="rain-head"><small id="rain-week-info"></small><button id="rain-play" aria-pressed="false">재생</button></div>
+    <div class="ramp" id="rain-ramp"></div><div class="ticks" id="rain-ticks"><span>0</span><span>10</span><span>30</span><span>100</span><span>300</span><span>600+</span></div>
+    <small id="rain-measure">한 주 누적 mm · 막대 높이에 정비례</small><div><small id="rain-method"></small></div>
+    <div class="rain-foot"><a href="https://apihub.kma.go.kr/apiList.do?seqApi=2&amp;seqApiSub=248" target="_blank" rel="noopener">기상청 관측 기반 분석 · 2km</a><br><small>북한·결측 구역은 막대 없음</small></div>
+  </div>
+  <div id="rain-status" role="status"></div>
+</aside>
+<aside id="rail-panel" class="card" hidden aria-label="고속철도 운행 시뮬레이션">
+  <div class="rail-row"><strong>고속철도 시뮬레이션</strong><button id="rail-close" aria-label="철도 시뮬레이션 닫기">×</button></div>
+  <small>시간표로 달리는 한반도 · 실시간 아님</small>
+  <div id="rail-legend"><span><i style="background:#efb34f"></i>경부</span><span><i style="background:#40c8be"></i>호남</span><span><i style="background:#ef8096"></i>강릉</span></div>
+  <div class="rail-row"><output id="rail-clock">09:00</output><select id="rail-day" aria-label="운행 요일"><option value="0">월요일</option><option value="1">화요일</option><option value="2">수요일</option><option value="3">목요일</option><option value="4">금요일</option><option value="5">토요일</option><option value="6">일요일</option></select></div>
+  <input id="rail-time" type="range" min="0" max="1439" step="1" value="540" aria-label="시뮬레이션 시각 (한국 시간)">
+  <div class="rail-ticks"><span>00시</span><span>06시</span><span>12시</span><span>18시</span><span>24시</span></div>
+  <div class="rail-row"><button id="rail-play" aria-pressed="true">일시정지</button><select id="rail-speed" aria-label="재생 배속"><option value="60">60배속</option><option value="120" selected>120배속</option><option value="600">600배속</option><option value="1800">1800배속</option></select><select id="rail-line" aria-label="표시 노선"><option value="all">전체 노선</option><option value="gyeongbu">경부선</option><option value="honam">호남선</option><option value="gangneung">강릉선</option></select></div>
+  <div id="rail-count"></div>
+  <details id="rail-options" open><summary>열차 선택 · 운행 정보</summary>
+  <select id="rail-train" aria-label="운행 중인 열차 선택"><option>열차 선택…</option></select>
+  <p id="rail-detail"></p><button id="rail-focus" disabled>선택 열차 가까이 보기</button></details>
+  <details><summary>시간표 · 표시 범위</summary><p><a href="https://www.korail.com/file/cubedata/COMMON/jfile/202609/23/202609231a0cb38a2c5200.xlsx" target="_blank" rel="noopener">코레일 2026.10.01 시간표</a> · 요일별 정규편<br>경부·호남 고속선(수서 포함)과 강릉행. 수원·구포·서대전 경유, 동해행 및 기타 노선 제외.<br>역 연결 개략 노선 · 역간 등속 추정. 실제 선로·정차·지연·임시운행·병결은 재현하지 않습니다. 열차 크기는 확대했습니다.</p></details>
+  <div id="rail-status" role="status"></div>
+</aside>
 <nav id="tools" class="card">
   <button data-a="home"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>서울 전체</button>
   <button data-a="tour"><svg viewBox="0 0 24 24"><path d="M6 4l13 8-13 8z"/></svg>자동 비행</button>
   <button data-a="labels" class="on" aria-pressed="true" title="확대하면 주변 공원·대학·역·문화시설 이름표가 나타납니다"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>이름표</button>
   <button data-a="motion" aria-pressed="false" title="휴대폰을 기울여 주변 둘러보기"><svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M10 17h4M3 8l-2 4 2 4M21 8l2 4-2 4"/></svg>기울여 보기</button>
+  <button data-a="population" hidden aria-pressed="false" aria-controls="population-key"><svg viewBox="0 0 24 24"><path d="M4 20V12h4v8M10 20V4h4v16M16 20V8h4v12M2 20h20"/></svg>인구밀도</button>
+  <button data-a="cropland" hidden aria-pressed="false" aria-controls="crop-key"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 17l14-9M5 12l10-7M5 7l5-3M4 4v17M20 4v17"/></svg>농경지</button>
+  <button data-a="rain" hidden aria-pressed="false" aria-controls="rain-panel"><svg viewBox="0 0 24 24"><path d="M7 14a4 4 0 1 1 0-8 5 5 0 0 1 9-1 4 4 0 0 1 1 9M7 17l-1 3M12 17l-1 3M17 17l-1 3"/></svg>강수·적설</button>
+  <button data-a="rail" hidden aria-pressed="false" aria-controls="rail-panel"><svg viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="15" rx="3"/><path d="M6 10h12M9 18l-3 4M15 18l3 4M8 21h8M9 14h.01M15 14h.01"/></svg>고속철도</button>
   <button data-a="full"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>전체 화면</button>
 </nav>
 <div id="motion-panel" class="card" hidden>
@@ -249,6 +386,15 @@
 // ?city=jeju 로 도시를 고른다. 데이터·랜드마크는 tools/build-city.mjs와 landmarks.js에 있고,
 // 여기 있는 건 화면에 찍히는 문구와 첫 시점뿐이다.
 const CITY = {
+  korea: {
+    name:'한반도', en:'KOREAN PENINSULA', region:'KOREAN PENINSULA',
+    tag:'백두에서 한라까지, 산과 바다가 빚은 모형', all:'한반도 전체',
+    place:['한반도, 한눈에','산맥과 물길을 따라 둘러보세요. 서울·제주 ↗는 상세 지도로 연결됩니다.'],
+    coord:'38.0000° N   127.7000° E',
+    home:{lon:127.7,lat:37.95,dist:innerWidth<860?2100000:1700000,pitch:.85,bearing:-.12},
+    aboutTitle:'손안에 담긴 한반도',
+    aboutLede:'남북한의 산맥과 해안선, 주요 물길을 가벼운 지형 모형으로 담았습니다. 도시 이름을 눌러 둘러보고, 서울·제주에서는 기존 상세 미니어처로 들어갈 수 있습니다.',
+  },
   chapelhill: {
     name:'채플힐', en:'CHAPEL HILL', region:'NORTH CAROLINA, USA', tag:'캐롤라이나 블루, 숲속의 대학 도시', all:'채플힐 전체',
     place:['채플힐, 한눈에','UNC 캠퍼스와 프랭클린 스트리트, 카보로까지'], coord:'35.9130° N   79.0550° W',
@@ -279,18 +425,31 @@ const CITY_ID = CITY[new URLSearchParams(location.search).get('city')] ? new URL
   $('#title h1').innerHTML = c.name + ' <span>' + c.en + '</span>';
   $('#title p').textContent = c.tag;
   $('#load h1').textContent = c.name;
-  $('#place-name').textContent = c.place[0];
-  $('#place-desc').textContent = c.place[1];
-  $('#place-coord').textContent = c.coord;
   $('#about-title').textContent = c.aboutTitle;
   $('#about-lede').textContent = c.aboutLede;
+  if(CITY_ID==='korea'){
+    document.body.classList.add('korea');
+    $('#place').hidden=true;
+    $('#tools [data-a=rain]').hidden=false;
+    $('#tools [data-a=rail]').hidden=false;
+    $('#tools [data-a=population]').hidden=false;
+    $('#tools [data-a=cropland]').hidden=false;
+    $('#note').textContent='— Natural Earth · © OpenStreetMap · Mapzen · 부드러운 지형 모형';
+    $('#about-note').textContent='약 900m 격자의 지형에 가벼운 평활화만 적용하고 높이를 8배 강조했습니다. 청회색은 저지대, 녹색은 산지, 황토·밝은색은 더 높은 지형입니다. 색은 식생이나 눈 분포를 뜻하지 않습니다. 작은 섬·해안·물길은 개괄적으로 표현하며, 북쪽 가장자리는 원본 육지 자료의 범위를 따릅니다.';
+    const key=document.createElement('div');key.id='relief-key';key.innerHTML='<span>지형 높이에 따른 색</span><div class="ramp"></div><div class="ends"><span>저지대 · 0m</span><span>높은 산 · 2,500m</span></div>';$('#title').append(key);
+    $('#about dl').innerHTML='<dt>육지 범위 · 도시</dt><dd><a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener">Natural Earth 1:10m · Public domain</a></dd><dt>지형</dt><dd><a href="https://registry.opendata.aws/terrain-tiles/" target="_blank" rel="noopener">AWS Terrain Tiles / Mapzen</a></dd><dt>렌더링</dt><dd>Three.js</dd>';
+    $('#about dl').insertAdjacentHTML('beforeend','<dt>강줄기 · 산과 강 이름</dt><dd><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors · ODbL</a> / OpenFreeMap · 2026-08-30</dd>');
+    $('#about dl').insertAdjacentHTML('beforeend','<dt>인구밀도 · 선택 표시</dt><dd>WorldPop Global2 2025 UN 보정 추정 · 약 5km 격자. 바다를 포함한 격자 전체 면적으로 나눈 밀도이며 인구 총수가 아닙니다. <a href="https://www.worldpop.org/blog/worldpop-global2-global-high-resolution-population-estimates-for-2015-2030/" target="_blank" rel="noopener">원자료</a> · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a></dd>');
+    $('.pn-head h2').textContent='어디를 둘러볼까요?';
+    $('.lm-head span').textContent='CITIES · RIVERS · MOUNTAINS';
+  }
   if(CITY_ID==='jeju'){
     const term=document.createElement('dt');term.textContent='해수욕장 위치';
     const source=document.createElement('dd'),link=document.createElement('a');
     link.href='https://www.visitjeju.net/';link.textContent='제주관광공사 Visit Jeju';link.style.color='inherit';source.append(link);
     $('#about dl').append(term,source);
   }
-  for (const id of ['seoul','jeju','chapelhill']) {
+  for (const id of ['korea','seoul','jeju','chapelhill']) {
     const entry = CITY[id];
     const link = document.createElement('a');
     const url = new URL(location.href); url.searchParams.set('city', id);
@@ -319,6 +478,7 @@ import * as THREE from 'three';
 import { City } from './app.js';
 import { NeighborhoodLabels, poiCategoryName } from './neighborhood-labels.js';
 import { mountCompass } from './compass.js';
+import { connectRailUI } from './rail.js';
 import { DeviceLook } from './device-look.js?v=2';
 
 const city = new City(document.getElementById('c'));
@@ -346,18 +506,27 @@ setTimeout(() => {
 const list = document.getElementById('landmarks');
 document.getElementById('lm-count').textContent = LM.length + '곳';
 LM.forEach((lm, i) => {
+  if(CITY_ID==='korea' && (i===0||lm.kind!==LM[i-1].kind)){
+    const heading=document.createElement('div');heading.className='lm-head';heading.style.marginTop='14px';
+    heading.textContent=({city:'도시',river:'강과 물길',mountain:'산과 봉우리'})[lm.kind];list.append(heading);
+  }
   const b = document.createElement('button');
   b.innerHTML = `<span class="num">${String(i+1).padStart(2,'0')}</span><span class="nm"><b></b><i></i></span><span class="arrow">↗</span>`;
   b.querySelector('b').textContent = lm.name;
   b.querySelector('i').textContent = lm.en;
-  b.onclick = () => goto(i);
+  if(lm.detailCity)b.querySelector('i').textContent='상세 미니어처 열기 ↗';
+  b.onclick = () => goto(i, true);
   list.append(b);
 });
 
-function goto(i) {
+function goto(i, openDetail = false) {
   const lm = LM[i];
+  if(openDetail && lm.detailCity){
+    const url=new URL(location.href);url.searchParams.set('city',lm.detailCity);location.href=url.href;return;
+  }
   poiLabels.select('landmark:' + lm.id);
   city.focusLandmark(lm, (i * 1.1) % (Math.PI * 2) - Math.PI);
+  document.getElementById('place').hidden=Boolean(city.overview);
   document.getElementById('place-name').textContent = lm.name;
   document.getElementById('place-desc').textContent = lm.desc;
   document.getElementById('place-coord').textContent = coordinates(lm.lat,lm.lon);
@@ -366,9 +535,11 @@ function goto(i) {
 // Zoom-dependent neighbourhood labels, with a small screen-space collision budget.
 const poiLabels = new NeighborhoodLabels(city, document.getElementById('labels'), p => {
   stopTour();
-  if (p.lm) { goto(LM.findIndex(lm => lm.id === p.lm.id)); return; }
+  if(p.populationPlace){poiLabels.select(p.id);city.flyTo(p.lon,p.lat,Math.max(city.controls.minDistance,Math.min(180000,city.camera.position.distanceTo(city.controls.target)*.7)),.95,-.12);return;}
+  if (p.lm) { goto(LM.findIndex(lm => lm.id === p.lm.id), true); return; }
   const distance = Math.min(1800, Math.max(900, city.camera.position.distanceTo(city.controls.target) * .75));
   city.flyTo(p.lon, p.lat, distance, .65, -.35);
+  document.getElementById('place').hidden=false;
   document.getElementById('place-name').textContent = p.name;
   document.getElementById('place-desc').textContent = poiCategoryName(p.category);
   document.getElementById('place-coord').textContent = coordinates(p.lat,p.lon);
@@ -418,10 +589,151 @@ document.querySelectorAll('#time button').forEach(b => b.onclick = () => {
   document.body.classList.toggle('dark', b.dataset.t === 'night');
 });
 
-let tour = null;
+let tour = null, layerBusy=false, rainRequestId=0, railRequestId=0, cropRequestId=0;
+const setLayerBusy=busy=>{
+  layerBusy=busy;
+  for(const name of ['population','rain','rail'])document.querySelector(`[data-a=${name}]`).disabled=busy;
+  document.getElementById('rain-year').disabled=busy;
+  document.getElementById('rain-metric').disabled=busy;
+};
+const hidePopulation=()=>{
+  if(!city.population?.enabled)return;
+  city.population.enabled=false;city.groups.population.visible=false;
+  const btn=document.querySelector('[data-a=population]');btn.classList.remove('on');btn.setAttribute('aria-pressed','false');
+  document.getElementById('population-key').hidden=true;
+};
+if(city.rainfall){
+  const rain=city.rainfall,$=id=>document.getElementById(id);
+  let chartData=null;
+  const updateRainChart=()=>{
+    const weeks=rain.data.weeks,unit=rain.profile.unit,mean=w=>w[rain.profile.meanKey],x=i=>8+i/Math.max(1,weeks.length-1)*244;
+    if(chartData!==rain.data){
+      chartData=rain.data;
+      const maxMean=Math.max(...weeks.map(w=>mean(w)??0));
+      const step=unit==='cm'?(maxMean<1?.1:maxMean<5?1:5):50;
+      const ceiling=Number(Math.max(step,Math.ceil(maxMean/step)*step).toFixed(2));
+      const y=value=>78-value/ceiling*66;
+      let svg=[0,ceiling/2,ceiling].map(v=>`<line class="chart-rule" x1="8" x2="252" y1="${y(v)}" y2="${y(v)}"/>`).join('');
+      svg+=`<text x="252" y="9" text-anchor="end">${ceiling} ${unit}</text>`;
+      svg+=weeks.map((w,i)=>`<rect class="rain-bar" data-week="${i}" x="${x(i)-1.8}" y="${y(mean(w)??0)}" width="3.6" height="${78-y(mean(w)??0)}"><title>${w.start} – ${w.end}: ${mean(w)??'결측'} ${unit}</title></rect>`).join('');
+      // Locate calendar month starts between weekly samples, sharing the slider's index scale.
+      const first=new Date(weeks[0].start);
+      for(let date=new Date(Date.UTC(first.getUTCFullYear(),first.getUTCMonth(),1));+date<=Date.parse(weeks.at(-1).end);date.setUTCMonth(date.getUTCMonth()+1)){
+        const time=Math.max(+date,Date.parse(weeks[0].start)),month=date.getUTCMonth();
+        let i=weeks.findLastIndex(w=>Date.parse(w.start)<=time);i=Math.max(0,i);
+        const fraction=i<weeks.length-1?(time-Date.parse(weeks[i].start))/(Date.parse(weeks[i+1].start)-Date.parse(weeks[i].start)):0;
+        const px=x(i+fraction);
+        svg+=`<line class="chart-rule month-tick" x1="${px}" x2="${px}" y1="79" y2="84"/><text x="${px}" y="97" text-anchor="middle">${month+1}${month===first.getUTCMonth()?'월':''}</text>`;
+      }
+      svg+='<line id="rain-chart-marker" y1="12" y2="78"/>';
+      $('rain-chart').innerHTML=svg;
+    }
+    $('rain-chart').querySelectorAll('.rain-bar').forEach((bar,i)=>bar.classList.toggle('selected',i===rain.week));
+    const marker=$('rain-chart-marker');marker.setAttribute('x1',x(rain.week));marker.setAttribute('x2',x(rain.week));
+    const week=weeks[rain.week];$('rain-chart-value').textContent=mean(week)===null?'결측':`${mean(week).toFixed(1)} ${unit}`;
+    $('rain-chart').setAttribute('aria-label',`남한 평균 주간 날씨. 선택: ${week.start} – ${week.end}, ${mean(week)??'결측'} ${unit}`);
+  };
+  rain.onChange=()=>{
+    $('rain-panel').hidden=!rain.enabled;
+    $('relief-key').hidden=false;
+    if(!rain.enabled&&city.population.enabled)$('population-key').hidden=false;
+    const btn=document.querySelector('[data-a=rain]');btn.classList.toggle('on',rain.enabled);btn.setAttribute('aria-pressed',String(rain.enabled));
+    if(!rain.data)return;
+    const week=rain.data.weeks[rain.week];
+    updateRainChart();
+    $('rain-year').value=rain.year;
+    const snow=rain.metric!=='rain',total=rain.metric==='snow-mean';
+    $('rain-year').hidden=snow;$('rain-metric').value=rain.metric;
+    $('rain-chart-caption').textContent=snow?(total?'남한 평균 · 쌓인 눈':'남한 평균 · 각 격자 주 최대'):'남한 평균 · 주간 누적';
+    $('rain-measure').textContent=snow?'적설 cm · 막대 높이에 정비례':'한 주 누적 mm · 막대 높이에 정비례';
+    $('rain-method').textContent=snow?(total?'매일 09시 깊이의 평균':'매일 09시의 24시간 증가 중 최대 · 신적설 누계 아님')+(rain.data.complete===false?' · 이후 기간 수집 미완료':''):'';
+    $('rain-ramp').style.background=`linear-gradient(90deg,${rain.profile.colors.join(',')})`;
+    $('rain-ticks').innerHTML=rain.profile.stops.map((v,i)=>`<span>${v}${i===5?'+':''}</span>`).join('');
+    $('rain-through').textContent=`${rain.data.weeks[0].start} – ${rain.data.weeks.at(-1).end} · ${rain.data.complete===false?'일부 기간':'수집 완료'}`;
+    $('rain-panel').setAttribute('aria-label',`${rain.data.season??rain.year} 주별 날씨`);
+    $('rain-week').setAttribute('aria-label',`${rain.data.season??rain.year} 날씨 주 선택`);
+    $('rain-content').hidden=false;$('rain-week').max=rain.data.frameCount-1;$('rain-week').value=rain.week;
+    const date=iso=>`${Number(iso.slice(5,7))}.${Number(iso.slice(8,10))}`;
+    $('rain-date').textContent=`${date(week.start)} – ${date(week.end)}`;
+    $('rain-week').setAttribute('aria-valuetext',`${week.start}부터 ${week.end}까지의 ${snow?(total?'평균 적설 깊이':'24시간 적설 증가 최대'):'누적 강수량'}`);
+    $('rain-week-info').textContent=`${rain.week+1} / ${rain.data.frameCount}주${week.days<7?' · '+week.days+'일간':''}`;
+    $('rain-prev').disabled=rain.week===0;$('rain-next').disabled=rain.week===rain.data.frameCount-1;
+    $('rain-play').textContent=rain.playing?'정지':'재생';$('rain-play').setAttribute('aria-pressed',String(rain.playing));
+  };
+  const selectWeather=async key=>{
+    if(layerBusy)return;
+    rain.setPlaying(false);setLayerBusy(true);
+    $('rain-status').textContent='날씨 자료를 불러오는 중…';
+    try{await rain.load(key);rain.onChange();$('rain-status').textContent='';}
+    catch(error){rain.onChange();$('rain-status').textContent='불러오지 못했습니다. 다시 선택해 주세요.';console.warn(error);}
+    finally{setLayerBusy(false);}
+  };
+  $('rain-year').onchange=e=>selectWeather(Number(e.target.value));
+  $('rain-metric').onchange=e=>selectWeather(e.target.value==='rain'?rain.year:e.target.value);
+  $('rain-week').oninput=e=>{const week=Number(e.target.value);rain.setPlaying(false);rain.setWeek(week);};
+  $('rain-prev').onclick=()=>{rain.setPlaying(false);rain.setWeek(rain.week-1);};
+  $('rain-next').onclick=()=>{rain.setPlaying(false);rain.setWeek(rain.week+1);};
+  $('rain-play').onclick=()=>rain.setPlaying(!rain.playing);
+  $('rain-close').onclick=()=>{rainRequestId++;rain.setEnabled(false);$('rain-status').textContent='';};
+}
+if(city.cropland){
+  city.cropland.onChange=()=>{
+    const enabled=city.cropland.enabled,btn=document.querySelector('[data-a=cropland]');
+    btn.classList.toggle('on',enabled);btn.setAttribute('aria-pressed',String(enabled));document.getElementById('crop-key').hidden=!enabled;
+  };
+  document.getElementById('crop-close').onclick=()=>{cropRequestId++;city.cropland.setEnabled(false);document.getElementById('crop-status').textContent='';};
+}
 const actions = {
+  async cropland(btn){
+    const layer=city.cropland,status=document.getElementById('crop-status'),requestId=++cropRequestId;
+    if(layer.enabled){layer.setEnabled(false);return;}
+    btn.disabled=true;btn.setAttribute('aria-busy','true');document.getElementById('crop-key').hidden=false;status.textContent='농경지 자료를 불러오는 중…';
+    try{await layer.load();if(requestId!==cropRequestId)return;layer.setEnabled(true);status.textContent='';}
+    catch(error){if(requestId===cropRequestId)status.textContent='불러오지 못했습니다. 농경지를 다시 눌러주세요.';console.warn(error);}
+    finally{btn.disabled=false;btn.removeAttribute('aria-busy');}
+  },
+  async rail(btn) {
+    if(layerBusy)return;
+    const rail=city.rail,status=document.getElementById('rail-status');
+    const requestId=++railRequestId;
+    if(rail.enabled){rail.setEnabled(false);return;}
+    setLayerBusy(true);btn.setAttribute('aria-busy','true');
+    city.rainfall?.setEnabled(false);hidePopulation();
+    document.getElementById('rail-panel').hidden=false;status.textContent='시간표를 불러오는 중…';
+    try {
+      await rail.load();if(requestId!==railRequestId)return;rail.setEnabled(true);status.textContent='';stopTour();
+      city.flyTo(127.6,innerWidth<640?35.2:36.3,innerWidth<640?1250000:950000,.95,-.12);
+    } catch(error){status.textContent='시간표를 불러오지 못했습니다. 고속철도를 다시 눌러주세요.';console.warn(error);}
+    finally{setLayerBusy(false);btn.removeAttribute('aria-busy');}
+  },
+  async population(btn) {
+    if(layerBusy)return;setLayerBusy(true);
+    city.rainfall?.setEnabled(false);city.rail?.setEnabled(false);
+    const key=document.getElementById("population-key"),status=document.getElementById("population-status");
+    btn.disabled=true;btn.setAttribute("aria-busy","true");key.hidden=false;status.textContent=city.population.data?"":"인구 자료를 불러오는 중…";
+    try {
+      await city.population.toggle();
+      btn.classList.toggle("on",city.population.enabled);btn.setAttribute("aria-pressed",String(city.population.enabled));
+      key.hidden=!city.population.enabled;status.textContent="";
+    } catch(e) { status.textContent="불러오지 못했습니다. 인구밀도를 다시 눌러주세요.";console.warn(e); }
+    finally { setLayerBusy(false);btn.removeAttribute("aria-busy"); }
+  },
+  async rain(btn,key) {
+    if(layerBusy)return;
+    const rain=city.rainfall,panel=document.getElementById('rain-panel'),status=document.getElementById('rain-status');
+    if(rain.enabled){rain.setEnabled(false);return;}
+    city.rail?.setEnabled(false);
+    const requestId=++rainRequestId;
+    setLayerBusy(true);btn.setAttribute('aria-busy','true');
+    document.getElementById('population-key').hidden=true;
+    panel.hidden=false;status.textContent=rain.data?'':`${rain.year}년 날씨 자료를 불러오는 중…`;
+    try{
+      await rain.load(key);if(requestId!==rainRequestId)return;hidePopulation();rain.setEnabled(true);status.textContent='';
+    }catch(e){status.textContent='불러오지 못했습니다. 강수·적설을 다시 눌러주세요.';console.warn(e);}
+    finally{setLayerBusy(false);btn.removeAttribute('aria-busy');}
+  },
   motion() { deviceLook.toggle(); },
-  home() { stopTour(); poiLabels.select(null); city.flyTo(HOME.lon, HOME.lat, HOME.dist, HOME.pitch, HOME.bearing); },
+  home() { stopTour(); poiLabels.select(null); document.getElementById('place').hidden=true; city.flyTo(HOME.lon, HOME.lat, HOME.dist, HOME.pitch, HOME.bearing); },
   tour(btn) {
     if (tour) return stopTour();
     let i = -1;
@@ -431,6 +743,7 @@ const actions = {
   labels(btn) { showLabels = btn.classList.toggle('on'); poiLabels.setEnabled(showLabels); btn.setAttribute('aria-pressed', String(showLabels)); },
   full() { document.fullscreenElement ? document.exitFullscreen() : document.body.requestFullscreen(); },
 };
+if(city.rail)connectRailUI(city,()=>{railRequestId++;city.rail.setEnabled(false);document.getElementById('rail-panel').hidden=true;});
 document.querySelectorAll('#tools button').forEach(b => b.onclick = () => actions[b.dataset.a](b));
 function stopTour() { clearInterval(tour); tour = null; document.querySelector('#tools [data-a=tour]').classList.remove('on'); }
 
@@ -446,6 +759,15 @@ lmBtn.onclick = () => { const open=panel.classList.toggle('open'); lmBtn.classLi
 const about = document.getElementById('about');
 document.getElementById('info-btn').onclick = () => about.classList.add('open');
 about.onclick = e => { if (e.target === about || e.target.classList.contains('close')) about.classList.remove('open'); };
+if(city.cropland&&new URLSearchParams(location.search).get('cropland')==='1')actions.cropland(document.querySelector('[data-a=cropland]'));
+const initialWeather=new URLSearchParams(location.search).get('weather');
+if(city.rail&&new URLSearchParams(location.search).get('rail')==='1'){
+  actions.rail(document.querySelector('[data-a=rail]'));
+}else if(city.rainfall&&['snow-mean','snow-max'].includes(initialWeather)){
+  actions.rain(document.querySelector('[data-a=rain]'),initialWeather);
+}else if(city.population&&new URLSearchParams(location.search).get('population')==='1'){
+  actions.population(document.querySelector('[data-a=population]'));
+}
 </script>
 </body>
 </html>

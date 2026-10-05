@@ -15,7 +15,7 @@ const SEOUL = [
   { id:'gwangh',   name:'광화문',         en:'Gwanghwamun',        lon:126.97690, lat:37.57600, clear:390, cam:[1900,0.60], desc:'경복궁 앞, 도심의 축이 시작되는 문' },
   { id:'assembly', name:'국회의사당',      en:'National Assembly',  lon:126.91430, lat:37.53200, clear:350, cam:[2200,0.58], desc:'여의도의 청록 돔' },
   { id:'ddp',      name:'DDP',           en:'Dongdaemun DP',      lon:126.99920, lat:37.56680, clear:420, desc:'이음매 없는 은빛 곡면' },
-  { id:'seoulst',  name:'서울역',         en:'Seoul Station',      lon:126.97250, lat:37.55590, clear:330, desc:'붉은 벽돌의 옛 역사' },
+  { id:'seoulst',  name:'서울역',         en:'Seoul Station',      lon:126.97164, lat:37.55589, yaw:90, clear:330, desc:'붉은 벽돌의 옛 역사' },
   { id:'sungnye',  name:'숭례문',         en:'Sungnyemun',         lon:126.97530, lat:37.55990, clear:320, cam:[1700,0.60], desc:'남대문, 도성의 정문' },
   { id:'jamsil',   name:'잠실주경기장',    en:'Jamsil Stadium',     lon:127.07200, lat:37.51520, clear:510, desc:'1988년 올림픽의 무대' },
   { id:'coex',     name:'무역센터',       en:'Trade Tower',        lon:127.05920, lat:37.51100, clear:420, desc:'코엑스 위로 솟은 사각 기둥' },
@@ -630,6 +630,8 @@ export function buildLandmark(lm, themeName) {
   const b = BUILDERS[lm.id];
   if (!b) return null;
   const obj = b(themeName === 'night');
+  // yaw turns local +Z (south) toward east; Seoul's old station faces its eastern plaza.
+  obj.rotation.y+=(lm.yaw??0)*Math.PI/180;
   obj.updateMatrixWorld(true);
   const bounds=new THREE.Box3().setFromObject(obj);
   const batches=new Map();

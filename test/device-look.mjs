@@ -51,6 +51,30 @@ try{
  assert(Math.abs(released.radius-(await state()).radius)<.01,'Release must stop zoom');
  assert(distance(released.offset,(await state()).offset)<.001,'Release must rebase without snapping');
  await p.mouse.down();await p.evaluate(()=>window.dispatchEvent(new Event('blur')));assert.equal(await p.evaluate(()=>deviceLook.moving),false);await p.mouse.up();
+ // Isolate each physical sensor axis: the former combined-motion test missed cross-talk.
+ const axisResults=await p.evaluate(()=>{
+   const results=[];clearInterval(sensorInterval);
+   for(const angle of [0,90,-90,180])for(const action of ['right','left','down','up','heading']){
+     mockAngle=angle;sensorPose={alpha:125,beta:45,gamma:10};emitSensor();deviceLook.beginMove();
+     const target=city.controls.target.clone(),offset=city.camera.position.clone().sub(target),radius=offset.length();
+     const right=city.camera.matrix.elements.slice(0,3);right[1]=0;
+     const poses={0:{right:[0,15],down:[-15,0]},90:{right:[15,0],down:[0,15]},'-90':{right:[-15,0],down:[0,-15]},180:{right:[0,-15],down:[15,0]}};
+     let delta=poses[angle][action==='left'?'right':action==='up'?'down':action]||[0,0];
+     if(action==='left'||action==='up')delta=delta.map(x=>-x);
+     sensorPose={alpha:action==='heading'?205:125,beta:45+delta[0],gamma:10+delta[1]};emitSensor();
+     for(let i=0;i<20;i++){deviceLook.lastFrame=performance.now()-50;deviceLook.update(performance.now());}
+     const shift=city.controls.target.clone().sub(target);
+     results.push({angle,action,pan:shift.length(),right:shift.x*right[0]+shift.z*right[2],zoom:city.camera.position.distanceTo(city.controls.target)/radius});
+     deviceLook.releaseMove();
+   }
+   mockAngle=0;sensorPose={alpha:0,beta:60,gamma:0};emitSensor();deviceLook.calibrate();sensorInterval=setInterval(emitSensor,100);
+   return results;
+ });
+ for(const r of axisResults){
+   if(r.action==='right'||r.action==='left'){assert(Math.abs(r.zoom-1)<1e-6,JSON.stringify(r));assert(r.action==='right'?r.right>1:r.right< -1,JSON.stringify(r));}
+   else {assert(r.pan<.001,JSON.stringify(r));if(r.action==='down')assert(r.zoom<.95,JSON.stringify(r));else if(r.action==='up')assert(r.zoom>1.05,JSON.stringify(r));else assert(Math.abs(r.zoom-1)<1e-6,JSON.stringify(r));}
+ }
+ console.log('PASS: isolated left/right, up/down and compass heading at 0/90/-90/180 screen angles');
  await p.click('[data-a=labels]');
  const cdp=await p.context().newCDPSession(p),beforePan=await state();
  await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:170,y:370}]});

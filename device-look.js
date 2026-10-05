@@ -15,6 +15,7 @@ export class DeviceLook {
     this.forward=new THREE.Vector3();this.yaw=0;this.pitch=0;
     this.onOrientation=e=>{
       if(!this.enabled||!Number.isFinite(e.beta)||!Number.isFinite(e.gamma))return;
+      this.tilt={beta:e.beta,gamma:e.gamma};
       this.euler.set(radians(e.beta),radians(Number.isFinite(e.alpha)?e.alpha:0),-radians(e.gamma),'YXZ');
       this.q.setFromEuler(this.euler).multiply(this.phoneToCamera)
         .multiply(this.screenRotation.setFromAxisAngle(this.zAxis,-screenAngle()));
@@ -82,6 +83,7 @@ export class DeviceLook {
   calibrate() {
     if(!this.enabled||!this.latest)return;
     this.baseline=this.latest.clone().invert();
+    this.baseTilt=this.tilt?{...this.tilt}:null;
     this.baseTheta=this.city.controls.getAzimuthalAngle();this.basePhi=this.city.controls.getPolarAngle();
     this.yaw=0;this.pitch=0;this.needsRebase=false;this.recenter.hidden=false;
     this.message('기울여 둘러보기 · 손가락으로 이동·확대');
@@ -109,8 +111,17 @@ export class DeviceLook {
     }
     this.relative.copy(this.baseline).multiply(this.latest);
     this.forward.set(0,0,-1).applyQuaternion(this.relative);
-    const yaw=clamp(deadzone(Math.atan2(-this.forward.x,-this.forward.z))*1.2,-radians(30),radians(30));
-    const pitch=clamp(deadzone(Math.asin(clamp(this.forward.y,-1,1))),-radians(18),radians(18));
+    let yaw=clamp(deadzone(Math.atan2(-this.forward.x,-this.forward.z))*1.2,-radians(30),radians(30));
+    let pitch=clamp(deadzone(Math.asin(clamp(this.forward.y,-1,1))),-radians(18),radians(18));
+    if(this.moving&&this.baseTilt&&this.tilt){
+      // Navigation uses the physical screen axes, not camera heading (alpha).
+      // Rotate device beta/gamma into screen coordinates before assigning actions.
+      const wrap=degrees=>radians(((degrees+540)%360)-180);
+      const beta=wrap(this.tilt.beta-this.baseTilt.beta),gamma=wrap(this.tilt.gamma-this.baseTilt.gamma);
+      const angle=screenAngle(),c=Math.cos(angle),s=Math.sin(angle);
+      yaw=clamp(deadzone(gamma*c+beta*s)*1.2,-radians(30),radians(30));
+      pitch=clamp(deadzone(beta*c-gamma*s),-radians(18),radians(18));
+    }
     const dt=Math.min(.1,Math.max(0,(now-this.lastFrame)/1000));this.lastFrame=now;
     const blend=1-Math.exp(-dt/.12),oldYaw=this.yaw,oldPitch=this.pitch;
     this.yaw+=(yaw-this.yaw)*blend;this.pitch+=(pitch-this.pitch)*blend;

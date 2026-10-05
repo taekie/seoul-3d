@@ -37,8 +37,20 @@ try{
  assert(tilted.phi>initial.phi+.05,'Raising the phone must produce a lower viewing angle');
  assert(distance(initial.target,tilted.target)<.001);assert(Math.abs(initial.radius-tilted.radius)<.01);
  assert(Math.abs(tilted.theta-initial.theta)<=Math.PI/6+.01);assert(Math.abs(tilted.phi-initial.phi)<=Math.PI/10+.01);
- await p.click('#motion-recenter');await p.waitForTimeout(250);
+ assert(await p.locator('#motion-panel').isHidden());await p.evaluate(()=>deviceLook.calibrate());await p.waitForTimeout(250);
  assert(distance(tilted.offset,(await state()).offset)<.004,'Recenter must not snap the camera');
+ const moveBox=await p.locator('#motion-move').boundingBox();
+ assert(moveBox.y+moveBox.height< (await p.locator('#compass').boundingBox()).y);
+ await p.mouse.move(moveBox.x+moveBox.width/2,moveBox.y+moveBox.height/2);await p.mouse.down();
+ const beforeMove=await state();await p.evaluate(()=>sensorPose={alpha:0,beta:58,gamma:35});await p.waitForTimeout(1000);
+ const moved=await state();assert(distance(beforeMove.target,moved.target)>10,'Held tilt must pan');
+ assert(moved.radius<beforeMove.radius,'Held downward tilt must zoom in');
+ assert(distance(beforeMove.offset,moved.offset)<.001,'Held mode must preserve view angle');
+ await p.mouse.up();const released=await state();await p.waitForTimeout(400);
+ assert(distance(released.target,(await state()).target)<.001,'Release must stop movement');
+ assert(Math.abs(released.radius-(await state()).radius)<.01,'Release must stop zoom');
+ assert(distance(released.offset,(await state()).offset)<.001,'Release must rebase without snapping');
+ await p.mouse.down();await p.evaluate(()=>window.dispatchEvent(new Event('blur')));assert.equal(await p.evaluate(()=>deviceLook.moving),false);await p.mouse.up();
  await p.click('[data-a=labels]');
  const cdp=await p.context().newCDPSession(p),beforePan=await state();
  await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:170,y:370}]});
@@ -55,7 +67,7 @@ try{
  assert(distance(beforeLandscape.offset,(await state()).offset)<.003,'Screen rotation should recalibrate without jumping');
  await p.click('#compass');await p.waitForTimeout(1000);assert(Math.abs((await state()).theta)<.001,'North-up must not fight gyro');
  await p.click('[data-t=night]');await p.screenshot({path:'test/device-look-mobile.png'});
- const rects=await p.locator('#motion-panel,#tools,#compass').evaluateAll(es=>es.map(e=>e.getBoundingClientRect().toJSON()));
+ const rects=await p.locator('#motion-move,#tools,#compass').evaluateAll(es=>es.map(e=>e.getBoundingClientRect().toJSON()));
  for(const a of rects){assert(a.left>=0&&a.right<=390);}
  for(let i=0;i<rects.length;i++)for(let j=i+1;j<rects.length;j++){const a=rects[i],b=rects[j];assert(!(a.left<b.right&&a.right>b.left&&a.top<b.bottom&&a.bottom>b.top),'Sensor UI must not overlap other controls');}
  await p.click('[data-a=motion]');assert.equal((await state()).touch,initial.touch);

@@ -129,6 +129,9 @@
   .compass-needle { position:absolute; width:32px; height:40px; left:24px; top:20px; }
   .compass-north { fill:var(--accent); }
   .compass-south { fill:var(--muted); opacity:.4; }
+  #motion-move { position:absolute; right:48px; bottom:162px; z-index:4; width:50px; height:44px; border:1px solid var(--line); border-radius:16px; color:var(--ink); font-family:inherit; font-size:12px; font-weight:600; touch-action:none; user-select:none; -webkit-user-select:none; -webkit-touch-callout:none; cursor:grab; }
+  #motion-move[hidden] { display:none; }
+  #motion-move.on { background:var(--accent); color:white; cursor:grabbing; }
   #motion-panel { position:absolute; z-index:4; bottom:132px; left:50%; transform:translateX(-50%);
     width:min(360px,calc(100% - 32px)); padding:12px 32px 12px 14px; font-size:12px; line-height:1.5; }
   #motion-panel[hidden], #motion-recenter[hidden] { display:none; }
@@ -191,6 +194,7 @@
 
   @media (max-width:860px) {
     #compass { right:16px; bottom:108px; }
+    #motion-move { right:32px; bottom:200px; }
     #motion-panel { left:16px; bottom:108px; width:calc(100% - 132px); max-width:360px; transform:none; font-size:11px; }
     #tools { width:calc(100% - 32px); max-width:360px; }
     #tools button { flex:1; min-width:0; padding:10px 4px; font-size:11px; white-space:nowrap; }
@@ -279,6 +283,7 @@
   <div id="landmarks"></div>
 </aside>
 
+<button id="motion-move" class="card" hidden aria-pressed="false" aria-label="누른 채 기울여 이동" title="누른 채 기울여 이동">이동</button>
 <button id="compass" class="card" aria-label="나침반: 북쪽을 위로 맞추기" title="북쪽을 위로 맞추기">
   <span data-direction="0" aria-hidden="true">N</span><span data-direction="90" aria-hidden="true">E</span>
   <span data-direction="180" aria-hidden="true">S</span><span data-direction="270" aria-hidden="true">W</span>
@@ -479,7 +484,7 @@ import { City } from './app.js';
 import { NeighborhoodLabels, poiCategoryName } from './neighborhood-labels.js';
 import { mountCompass } from './compass.js';
 import { connectRailUI } from './rail.js';
-import { DeviceLook } from './device-look.js?v=2';
+import { DeviceLook } from './device-look.js?v=3';
 
 const city = new City(document.getElementById('c'));
 // 콘솔에서 씬을 만져볼 수 있게 열어둔다
@@ -566,7 +571,7 @@ poiLabels.load().then(pois=>{
 let showLabels = true, frames = 0, t0 = performance.now();
 const updateCompass=mountCompass(city,document.getElementById('compass'),()=>stopTour());
 const deviceLook=new DeviceLook(city,{
-  button:document.querySelector('[data-a=motion]'),panel:document.getElementById('motion-panel'),
+  moveButton:document.getElementById('motion-move'),button:document.querySelector('[data-a=motion]'),panel:document.getElementById('motion-panel'),
   status:document.getElementById('motion-status'),recenter:document.getElementById('motion-recenter'),onEnable:()=>stopTour(),
 });
 window.deviceLook=deviceLook;

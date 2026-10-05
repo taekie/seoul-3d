@@ -6,8 +6,8 @@ const screenAngle=()=>radians(screen.orientation?.angle??window.orientation??0);
 const deadzone=value=>Math.sign(value)*Math.max(0,Math.abs(value)-radians(1));
 
 export class DeviceLook {
-  constructor(city,{button,panel,status,recenter,onEnable}) {
-    Object.assign(this,{city,button,panel,status,recenter,onEnable});
+  constructor(city,{button,moveButton,panel,status,recenter,onEnable}) {
+    Object.assign(this,{city,button,moveButton,panel,status,recenter,onEnable});
     this.enabled=false;this.pending=false;this.token=0;this.latest=null;this.baseline=null;
     this.q=new THREE.Quaternion();this.relative=new THREE.Quaternion();this.euler=new THREE.Euler();
     this.screenRotation=new THREE.Quaternion();this.zAxis=new THREE.Vector3(0,0,1);
@@ -22,11 +22,33 @@ export class DeviceLook {
       clearTimeout(this.sensorTimeout);
       if(!this.baseline)this.calibrate();
     };
-    this.onScreenChange=()=>{if(this.enabled){this.baseline=null;this.latest=null;this.watchSensor();}};
+    this.onScreenChange=()=>{this.releaseMove();if(this.enabled){this.baseline=null;this.latest=null;this.watchSensor();}};
+    this.moveButton.addEventListener('pointerdown',e=>{
+      if(!this.enabled||!this.latest||this.movePointer!==undefined)return;
+      e.preventDefault();e.stopPropagation();this.movePointer=e.pointerId;
+      this.moveButton.setPointerCapture(e.pointerId);this.beginMove();
+    });
+    for(const event of ['pointerup','pointercancel','lostpointercapture'])this.moveButton.addEventListener(event,()=>this.releaseMove());
+    this.moveButton.addEventListener('contextmenu',e=>e.preventDefault());
+    this.moveButton.addEventListener('keydown',e=>{if([' ','Enter'].includes(e.key)){e.preventDefault();if(!e.repeat)this.beginMove();}});
+    this.moveButton.addEventListener('keyup',e=>{if([' ','Enter'].includes(e.key))this.releaseMove();});
+    this.moveButton.addEventListener('blur',()=>this.releaseMove());
+    window.addEventListener('blur',()=>this.releaseMove());
     this.recenter.addEventListener('click',()=>this.calibrate());
     document.addEventListener('visibilitychange',()=>{if(document.hidden&&(this.enabled||this.pending))this.stop('기울여 보기가 꺼졌습니다. 다시 켜서 계속 볼 수 있어요.');});
   }
-  message(text) {this.panel.hidden=false;this.status.textContent=text;}
+  beginMove() {
+    if(!this.enabled||!this.latest)return;
+    this.city.anim=null;this.calibrate();this.moving=true;
+    this.moveButton.classList.add('on');this.moveButton.setAttribute('aria-pressed','true');
+  }
+  releaseMove() {
+    this.movePointer=undefined;
+    if(!this.moving)return;
+    this.moving=false;this.moveButton.classList.remove('on');this.moveButton.setAttribute('aria-pressed','false');
+    this.calibrate();this.city.sensorMoving=false;
+  }
+  message(text) {this.panel.hidden=true;this.status.textContent=text;this.button.title=text;this.button.setAttribute('aria-label',text);}
   async toggle() {
     if(this.enabled||this.pending){this.stop();return;}
     if(!window.isSecureContext){this.message('아이폰 센서는 HTTPS 주소에서 사용할 수 있어요. HTTPS로 접속해 주세요.');return;}
@@ -41,7 +63,7 @@ export class DeviceLook {
       if(permission!=='granted'){this.stop('센서 접근이 허용되지 않았어요. Safari의 웹사이트 설정에서 동작·방향 접근을 확인해 주세요.');return;}
       this.pending=false;this.button.removeAttribute('aria-busy');this.enabled=true;
       this.onEnable();this.city.anim=null;
-      this.button.classList.add('on');this.button.setAttribute('aria-pressed','true');
+      this.moveButton.hidden=false;this.button.classList.add('on');this.button.setAttribute('aria-pressed','true');
       this.savedTouches={...this.city.controls.touches};
       Object.assign(this.city.controls.touches,{ONE:THREE.TOUCH.PAN,TWO:THREE.TOUCH.DOLLY_PAN});
       this.latest=null;this.baseline=null;this.needsRebase=false;this.lastFrame=performance.now();
@@ -70,7 +92,7 @@ export class DeviceLook {
     window.removeEventListener('orientationchange',this.onScreenChange);
     screen.orientation?.removeEventListener('change',this.onScreenChange);
     if(this.savedTouches)Object.assign(this.city.controls.touches,this.savedTouches);
-    this.savedTouches=null;this.enabled=false;this.pending=false;this.baseline=null;this.latest=null;
+    this.releaseMove();this.moveButton.hidden=true;this.savedTouches=null;this.enabled=false;this.pending=false;this.baseline=null;this.latest=null;
     this.city.sensorMoving=false;this.button.classList.remove('on');this.button.setAttribute('aria-pressed','false');
     this.button.removeAttribute('aria-busy');this.recenter.hidden=true;
     if(message)this.message(message);else this.panel.hidden=true;
@@ -94,6 +116,16 @@ export class DeviceLook {
     this.yaw+=(yaw-this.yaw)*blend;this.pitch+=(pitch-this.pitch)*blend;
     this.city.sensorMoving=Math.abs(this.yaw-oldYaw)+Math.abs(this.pitch-oldPitch)>.0002;
     const controls=this.city.controls,radius=this.city.camera.position.distanceTo(controls.target);
+    if(this.moving){
+      // Camera-relative movement and exponential zoom remain consistent at every map scale.
+      const right=new THREE.Vector3().setFromMatrixColumn(this.city.camera.matrix,0);right.y=0;right.normalize();
+      const shift=right.multiplyScalar(this.yaw*radius*dt*1.5);
+      controls.target.add(shift);this.city.camera.position.add(shift);
+      const nextRadius=clamp(radius*Math.exp(this.pitch*dt*2),controls.minDistance,controls.maxDistance);
+      this.city.camera.position.sub(controls.target).multiplyScalar(nextRadius/radius).add(controls.target);
+      this.city.sensorMoving=shift.lengthSq()>.001||Math.abs(nextRadius-radius)>.001;
+      controls.update();return;
+    }
     // Lowering the phone toward horizontal raises the view toward a bird's-eye angle.
     const phi=clamp(this.basePhi+this.pitch,Math.max(.15,controls.minPolarAngle),controls.maxPolarAngle);
     this.city.camera.position.setFromSphericalCoords(radius,phi,this.baseTheta+this.yaw).add(controls.target);

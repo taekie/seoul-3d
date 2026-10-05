@@ -126,7 +126,7 @@ export class NeighborhoodLabels {
     const distance=this.city.camera.position.distanceTo(this.city.controls.target);
     if(now>=this.nextLayout) {
       this.nextLayout=now+120;
-      const obstacles=[...document.querySelectorAll('#title,#panel,#place,#tools,#topbar,#time,#info-btn,#hint,#compass,#motion-panel,#population-key,#rain-panel,#rail-panel,#crop-key')].filter(el=>el.getClientRects().length&&getComputedStyle(el).visibility!=='hidden').map(el=>el.getBoundingClientRect());
+      const obstacles=[...document.querySelectorAll('#title,#panel,#place,#tools,#topbar,#time,#info-btn,#hint,#compass,#motion-move,#motion-panel,#population-key,#rain-panel,#rail-panel,#crop-key')].filter(el=>el.getClientRects().length&&getComputedStyle(el).visibility!=='hidden').map(el=>el.getBoundingClientRect());
       const candidates=[];
       for(const p of this.candidates(distance)){
         p.labelName=distance>=9000&&p.majorMountain?p.majorMountain:p.name;

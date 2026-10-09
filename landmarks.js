@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { EXTRA_SEOUL_LANDMARKS, createSeoulBuilders } from './seoul-landmarks.js';
 import { clay } from './miniature.js';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 
@@ -22,6 +23,7 @@ const SEOUL = [
   { id:'worldcup', name:'서울월드컵경기장', en:'Seoul World Cup Stadium', lon:126.89740, lat:37.56830, clear:490, desc:'방패연을 펼친 지붕' },
   { id:'parkone',  name:'파크원',         en:'Parc.1',             lon:126.92680, lat:37.52530, clear:260, desc:'여의도의 붉은 기둥' },
   { id:'magic',    name:'매직아일랜드',    en:'Magic Island',       lon:127.09830, lat:37.51100, clear:210, desc:'석촌호수 위의 작은 성' },
+  ...EXTRA_SEOUL_LANDMARKS,
 ];
 
 // 제주는 랜드마크 절반이 지형이다. 오름·바위는 지형 위에 덧대는 것이라
@@ -55,6 +57,7 @@ const CHAPELHILL = [
 ];
 export const LANDMARKS_BY_CITY = { seoul: SEOUL, jeju: JEJU, chapelhill: CHAPELHILL };
 export const landmarksOf = city => LANDMARKS_BY_CITY[city] ?? [];
+export const landmarkClearings = list => list.flatMap(l=>[...(l.clear?[{lon:l.lon,lat:l.lat,clear:l.clear}]:[]),...(l.features||[]).filter(f=>f.clear)]);
 
 const C = {
   concrete: 0xeee7d8, steel: 0xd3dfda, glassDark: 0x548d99, glassBlue: 0x8bc5d5,
@@ -139,11 +142,13 @@ const gateDetails = (g,w,d,y,h,columns) => {
 
 function group(...children) {
   const g = new THREE.Group();
-  g.add(...children.filter(Boolean));
+  const objects = children.filter(Boolean);
+  if (objects.length) g.add(...objects);
   return g;
 }
 
 const BUILDERS = {
+  ...createSeoulBuilders({box,cyl,sphere,hipRoof,rod,group,mat,C}),
   morrisgrove(night) {
     const g=group(box(130,2,110,0xc6ccb2));
     const wing=(w,d)=>group(box(w,11,d,0xd3a185,2),box(w+3,1.5,d+3,C.concrete,13));
@@ -626,10 +631,10 @@ const BUILDERS = {
   },
 };
 
-export function buildLandmark(lm, themeName) {
+export function buildLandmark(lm, themeName, city) {
   const b = BUILDERS[lm.id];
   if (!b) return null;
-  const obj = b(themeName === 'night');
+  const obj = b(themeName === 'night', city);
   // yaw turns local +Z (south) toward east; Seoul's old station faces its eastern plaza.
   obj.rotation.y+=(lm.yaw??0)*Math.PI/180;
   obj.updateMatrixWorld(true);

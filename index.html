@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>3D 아틀라스</title>
+<link rel="stylesheet" href="./map-export.css">
 <style>
   :root {
     --accent: #1f6b5a;
@@ -149,7 +150,7 @@
   /* 3D 위에 뜨는 랜드마크 이름표 */
   #labels { position:absolute; inset:0; z-index:2; pointer-events:none; }
   .label { position:absolute; transform:translate(-50%,-100%); white-space:nowrap; font-size:12px; font-weight:600;
-           color:var(--ink); background:rgba(255,255,255,.88); padding:3px 9px; border-radius:12px;
+           color:var(--ink); background:rgba(255,255,255,.35); padding:3px 9px; border-radius:12px;
            box-shadow:0 2px 8px rgba(30,50,45,.12); }
   .label::after { content:''; position:absolute; left:50%; top:100%; width:1px; height:14px; background:rgba(60,80,75,.35); }
 
@@ -187,15 +188,19 @@
   .map-label > span:last-child { overflow:hidden; text-overflow:ellipsis; }
   .map-label.selected { outline:2px solid var(--accent); }
   .map-label:focus-visible { outline:2px solid var(--accent); }
-  .poi-label { font-size:11px; font-weight:600; background:rgba(255,255,249,.94); }
-  .poi-dot { width:6px; height:6px; border-radius:50%; flex:none; }
+  .poi-label { font-size:11px; font-weight:600; background:rgba(255,255,249,.35); }
+  .mountain-icon { width:14px; height:12px; flex:none; fill:#558547; stroke:none; }
   @media (prefers-reduced-motion:reduce) { .map-label { transition:none; } }
-  body.dark .label { background:rgba(20,30,36,.86); color:#e9f1ef; }
-  .geography-label[data-category=river] { color:#176c88; background:rgba(239,252,255,.9); border-color:rgba(54,141,167,.24); font-size:11px; }
+  .label[data-category=mountain] { background:rgba(247,250,236,.25); }
+  .station-lines { display:inline-flex; gap:2px; flex:none; align-items:center; }
+  .station-line { display:inline-flex; align-items:center; justify-content:center; min-width:17px; height:17px; padding:0 3px; border-radius:9px; color:#fff; font-size:10px; font-weight:750; line-height:1; box-sizing:border-box; }
+  body.dark .label { background:rgba(20,30,36,.4); color:#e9f1ef; }
+  body.dark .label[data-category=mountain] { background:rgba(34,47,36,.25); }
+  .geography-label[data-category=river] { color:#176c88; background:rgba(239,252,255,.35); border-color:rgba(54,141,167,.24); font-size:11px; }
   .geography-label::after { height:var(--leader-length,14px); transform:rotate(var(--leader-angle,0rad)); transform-origin:top; }
-  .geography-label[data-category=mountain] { color:#506b43; background:rgba(247,250,236,.92); border-color:rgba(106,131,80,.24); font-size:11px; }
-  body.dark .geography-label[data-category=river] { color:#9cd9ed; background:rgba(18,46,58,.94); }
-  body.dark .geography-label[data-category=mountain] { color:#c2d5a8; background:rgba(34,47,36,.94); }
+  .geography-label[data-category=mountain] { color:#506b43; background:rgba(247,250,236,.25); border-color:rgba(106,131,80,.24); font-size:11px; }
+  body.dark .geography-label[data-category=river] { color:#9cd9ed; background:rgba(18,46,58,.4); }
+  body.dark .geography-label[data-category=mountain] { color:#c2d5a8; background:rgba(34,47,36,.25); }
 
   @media (max-width:860px) {
     #compass { right:16px; bottom:108px; }
@@ -254,6 +259,7 @@
     body.korea #tools button[data-a=motion]::after { content:'기울임';font-size:9px; }
   }
 </style>
+<link rel="stylesheet" href="./car-routing.css?v=1">
 </head>
 <body>
 <canvas id="c"></canvas>
@@ -275,6 +281,9 @@
     <svg viewBox="0 0 24 24"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
   </button>
   <button id="info-btn" class="card" aria-label="도시 전환 및 지도 정보">i</button>
+  <button id="map-export-btn" class="card" disabled aria-label="지도 캡처 및 손그림 프롬프트" title="지도 캡처 및 손그림 프롬프트">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h4l2-3h6l2 3h4v13H3z"/><circle cx="12" cy="13" r="4"/></svg>
+  </button>
 </div>
 
 <aside id="panel" class="card">
@@ -368,7 +377,7 @@
   <button id="motion-dismiss" aria-label="기울여 보기 닫기">×</button>
 </div>
 
-<div id="note">— OpenStreetMap 기반 · 높이 3× 과장 · 랜드마크는 캐리커쳐</div>
+<div id="note">— OpenStreetMap 기반 · 높이 2.5× 과장 · 랜드마크는 캐리커쳐</div>
 <div id="fps"></div>
 
 <div id="load"><div class="in">
@@ -385,7 +394,7 @@
   <div class="eyebrow">ABOUT THIS ATLAS</div>
   <h4 id="about-title"></h4>
   <p id="about-lede"></p>
-  <p id="about-note">건물은 OpenStreetMap에 수록된 윤곽을 사각 기둥 하나로 단순화한 모형입니다. 지형과 건물 높이는 보기 쉽도록 3배로 강조했습니다. 랜드마크는 특징만 남겨 크게 과장한 캐리커쳐이며, 실측 복원이 아닙니다.</p>
+  <p id="about-note">건물은 OpenStreetMap에 수록된 윤곽을 사각 기둥 하나로 단순화한 모형입니다. 지형과 건물 높이는 보기 쉽도록 2.5배로 강조했습니다. 랜드마크는 특징만 남겨 과장한 캐리커쳐이며, 실측 복원이 아닙니다.</p>
   <dl>
     <dt>건물 · 도로 · 수계 · 녹지</dt><dd>OpenFreeMap / OpenMapTiles · © OpenStreetMap contributors (ODbL) · 2026-08-30 스냅샷</dd>
     <dt>지형</dt><dd>AWS Terrain Tiles / Mapzen · SRTM 등</dd>
@@ -478,16 +487,40 @@ const CITY_ID = CITY[new URLSearchParams(location.search).get('city')] ? new URL
 }
 </script>
 
+<script>
+// Register before module imports so startup failures cannot leave a frozen loader.
+function showLoadError() {
+  const load = document.getElementById('load');
+  if (!load) return;
+  document.getElementById('load-msg').textContent = '지도를 불러오지 못했습니다. 새로고침해 주세요.';
+  document.getElementById('bar').style.background = '#b85c46';
+}
+addEventListener('error', showLoadError);
+addEventListener('unhandledrejection', showLoadError);
+</script>
 <script type="importmap">
 { "imports": {
   "three": "https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js",
-  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.185.1/examples/jsm/"
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.185.1/examples/jsm/",
+  "./spatial-instances.js": "./spatial-instances.js?v=20261009-terminal2",
+  "./surface-cover.js": "./surface-cover.js?v=20261009-terminal2",
+  "./car-routing.js": "./car-routing.js?v=20261009-terminal2",
+  "./app.js": "./app.js?v=20261009-terminal2",
+  "./landmarks.js": "./landmarks.js?v=20261009-terminal2",
+  "./seoul-landmarks.js": "./seoul-landmarks.js?v=20261009-terminal2",
+  "./miniature.js": "./miniature.js?v=20261009-terminal2",
+  "./bridge-trains.js": "./bridge-trains.js?v=20261009-terminal2",
+  "./city-life.js": "./city-life.js?v=20261009-terminal2",
+  "./neighborhood-labels.js": "./neighborhood-labels.js?v=20261009-terminal2",
+  "./map-export.js": "./map-export.js?v=20261009-terminal2"
 } }
 </script>
 
 <script type="module">
 import * as THREE from 'three';
-import { City } from './app.js?v=touch2';
+import { mountCarRouting } from './car-routing.js';
+import { City } from './app.js';
+import { mountMapExport } from './map-export.js';
 import { NeighborhoodLabels, poiCategoryName } from './neighborhood-labels.js';
 import { mountCompass } from './compass.js';
 import { connectRailUI } from './rail.js';
@@ -506,6 +539,7 @@ const coordinates = (lat,lon) => `${Math.abs(lat).toFixed(4)}° ${lat<0?'S':'N'}
 const HOME = CITY[CITY_ID].home;
 city.start();
 city.placeCamera(HOME.lon, HOME.lat, HOME.dist, HOME.pitch, HOME.bearing);
+mountMapExport(city, document.getElementById('map-export-btn'));
 
 bar.style.width = '100%';
 setTimeout(() => {
@@ -531,8 +565,10 @@ LM.forEach((lm, i) => {
   list.append(b);
 });
 
+let carRouting=null;
 function goto(i, openDetail = false) {
   const lm = LM[i];
+  if(carRouting?.selectPOI(lm))return;
   if(openDetail && lm.detailCity){
     const url=new URL(location.href);url.searchParams.set('city',lm.detailCity);location.href=url.href;return;
   }
@@ -546,6 +582,7 @@ function goto(i, openDetail = false) {
 
 // Zoom-dependent neighbourhood labels, with a small screen-space collision budget.
 const poiLabels = new NeighborhoodLabels(city, document.getElementById('labels'), p => {
+  if(carRouting?.selectPOI(p))return;
   stopTour();
   if(p.populationPlace){poiLabels.select(p.id);city.flyTo(p.lon,p.lat,Math.max(city.controls.minDistance,Math.min(180000,city.camera.position.distanceTo(city.controls.target)*.7)),.95,-.12);return;}
   if (p.lm) { goto(LM.findIndex(lm => lm.id === p.lm.id), true); return; }
@@ -756,6 +793,8 @@ const actions = {
 };
 if(city.rail)connectRailUI(city,()=>{railRequestId++;city.rail.setEnabled(false);document.getElementById('rail-panel').hidden=true;});
 document.querySelectorAll('#tools button,#panel [data-a=tour]').forEach(b => b.onclick = () => actions[b.dataset.a](b));
+carRouting=mountCarRouting(city,poiLabels,()=>{stopTour();document.getElementById('panel').classList.remove('open');document.getElementById('place').hidden=true;});
+window.carRouting=carRouting;
 function stopTour() { clearInterval(tour); tour = null; const btn=document.querySelector('#panel [data-a=tour]');btn.classList.remove('on');btn.setAttribute('aria-pressed','false'); }
 
 const panel = document.getElementById('panel'), panelBtn = document.getElementById('panel-toggle');

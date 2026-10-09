@@ -4,6 +4,8 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 
+export const HEIGHT_EXAGGERATION = 2.5;
+
 // One family of painted, non-metallic materials throughout the miniature.
 export const clay = (options = {}) => new THREE.MeshStandardMaterial({
   roughness: 0.88, metalness: 0, ...options,
@@ -60,7 +62,7 @@ export function waterAt(city, x, y) {
   const i = Math.round((x - t.minX) * m.sx), j = Math.round((t.maxY - y) * m.sy);
   if (i < 0 || j < 0 || i >= m.W || j >= m.H) return null;
   const value = m.data[j * m.W + i];
-  return value ? (value - 1) * 9 + (city.data.meta.sea && value === 1 ? 2 : 3) : null;
+  return value ? (value - 1) * 3 * HEIGHT_EXAGGERATION + (city.data.meta.sea && value === 1 ? 2 : 3) : null;
 }
 
 export function buildBanks(city) {
@@ -84,7 +86,7 @@ export function buildBanks(city) {
         const level = left ?? right, side = left === null ? 1 : -1;
         // Missing ocean coverage can look like land in the mask. Require real
         // raised ground behind the bank, rather than outlining an offshore seam.
-        if (t.at(x + nx * sample * side, y + ny * sample * side) < Math.max(2, (level - 3) / 3 + 1)) continue;
+        if (t.at(x + nx * sample * side, y + ny * sample * side) < Math.max(2, (level - 3) / HEIGHT_EXAGGERATION + 1)) continue;
         // Short ribbons, tucked just above the water, suggest a modelled bank.
         const x1 = ax + (bx - ax) * s / steps, y1 = ay + (by - ay) * s / steps;
         const x2 = ax + (bx - ax) * (s + 1) / steps, y2 = ay + (by - ay) * (s + 1) / steps;

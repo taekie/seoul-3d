@@ -1,0 +1,136 @@
+{
+  "source": "OpenFreeMap / OpenMapTiles · © OpenStreetMap contributors",
+  "sourceUrl": "https://tiles.openfreemap.org/planet/20260830_080001_pt",
+  "snapshot": "2026-08-30",
+  "license": "ODbL",
+  "criteria": "서울 주요 대학병원·대형 병원 14곳의 OSM 병원 POI. 안암병원은 응급의료센터 앵커 사용.",
+  "pois": [
+    {
+      "id": "poi:3695595052",
+      "name": "세브란스병원",
+      "category": "hospital",
+      "lon": 126.940391,
+      "lat": 37.562261,
+      "tier": 2,
+      "sourceUrl": "https://tiles.openfreemap.org/planet/20260830_080001_pt"
+    },
+    {
+      "id": "poi:4631876272",
+      "name": "강북삼성병원",
+      "category": "hospital",
+      "lon": 126.9679,
+      "lat": 37.568192,
+      "tier": 2,
+      "sourceUrl": "https://tiles.openfreemap.org/planet/20260830_080001_pt"
+    },
+    {
+      "id": "poi:2234348402",
+      "name": "서울대학교병원",
+      "category": "hospital",
+      "lon": 126.998734,
+      "lat": 37.579119,
+      "tier": 2,
+      "sourceUrl": "https://tiles.openfreemap.org/planet/20260830_080001_pt"
+    },
+    {
+      "id": "poi:5515885682",
+      "name": "건국대학교병원",
+      "category": "hospital",
+      "lon": 127.072318,
+      "lat": 37.540622,
+      "tier": 2,
+      "sourceUrl": "https://tiles.openfreemap.org/planet/20260830_080001_pt"
+    },
+    {
+      "id": "poi:5035052092",
+      "name": "서울아산병원",
+      "category": "hospital",
+      "lon": 127.109601,
+      "lat": 37.526303,
+      "tier": 2,
+      "sourceUrl": "https://tiles.openfreemap.org/planet/20260830_080001_pt"
+    },
+    {
+      "id": "poi:52357572461",
+      "name": "고려대학교 안암병원",
+      "category": "hospital",
+      "lon": 127.026147,
+      "lat": 37.586618,
+      "tier": 2,
+      "sourceUrl": "https://tiles.openfreemap.org/planet/20260830_080001_pt",
+      "anchorName": "고려대의료원 안암병원 응급의료센터"
+    },
+    {
+      "id": "poi:3687415371",
+      "name": "경희의료원",
+      "category": "hospital",
+      "lon": 127.051279,
+      "lat": 37.593589,
+      "tier": 2,
+      "sourceUrl": "https://tiles.openfreemap.org/planet/20260830_080001_pt"
+    },
+    {
+      "id": "poi:2504893442",
+      "name": "고려대학교구로병원",
+      "category": "hospital",
+      "lon": 126.884735,
+      "lat": 37.492043,
+      "tier": 2,
+      "sourceUrl": "https://tiles.openfreemap.org/planet/20260830_080001_pt"
+    },
+    {
+      "id": "poi:6145072432",
+      "name": "강남세브란스병원",
+      "category": "hospital",
+      "lon": 127.046526,
+      "lat": 37.492558,
+      "tier": 2,
+      "sourceUrl": "https://tiles.openfreemap.org/planet/20260830_080001_pt"
+    },
+    {
+      "id": "poi:4179948202",
+      "name": "삼성서울병원",
+      "category": "hospital",
+      "lon": 127.085343,
+      "lat": 37.48845,
+      "tier": 2,
+      "sourceUrl": "https://tiles.openfreemap.org/planet/20260830_080001_pt"
+    },
+    {
+      "id": "poi:4129701772",
+      "name": "가톨릭대학교 서울성모병원",
+      "category": "hospital",
+      "lon": 127.00552,
+      "lat": 37.500444,
+      "tier": 2,
+      "sourceUrl": "https://tiles.openfreemap.org/planet/20260830_080001_pt"
+    },
+    {
+      "id": "poi:4684384872",
+      "name": "이대목동병원",
+      "category": "hospital",
+      "lon": 126.886216,
+      "lat": 37.536534,
+      "tier": 2,
+      "sourceUrl": "https://tiles.openfreemap.org/planet/20260830_080001_pt"
+    },
+    {
+      "id": "poi:2969765822",
+      "name": "중앙대학교병원",
+      "category": "hospital",
+      "lon": 126.960728,
+      "lat": 37.506705,
+      "tier": 2,
+      "sourceUrl": "https://tiles.openfreemap.org/planet/20260830_080001_pt"
+    },
+    {
+      "id": "poi:1873544102",
+      "name": "한양대학교의료원",
+      "category": "hospital",
+      "lon": 127.043999,
+      "lat": 37.559335,
+      "tier": 2,
+      "sourceUrl": "https://tiles.openfreemap.org/planet/20260830_080001_pt"
+    }
+  ]
+}

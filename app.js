@@ -1,14 +1,14 @@
 import * as THREE from 'three';
+import { spatialInstances } from './spatial-instances.js';
 import { MapControls } from './map-controls.js?v=2';
 import { installPanGesture } from './pan-gesture.js';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
-import { landmarksOf, buildLandmark } from './landmarks.js';
-import { clay, miniatureFocus, waterAt, buildBanks } from './miniature.js';
+import { landmarksOf, buildLandmark, landmarkClearings } from './landmarks.js';
+import { clay, miniatureFocus, waterAt, buildBanks, HEIGHT_EXAGGERATION as EXAG } from './miniature.js';
 import { buildSurfaceCover, prepareSurfaceCover } from './surface-cover.js';
 import { buildCityLife, detailSeed, inPlaza } from './city-life.js';
 
 const R = 40075016.686;
-const EXAG = 3;               // 지형·건물 공통 과장
 const DEM_Z = 12;
 
 const lon2x = (lon, z) => (lon + 180) / 360 * 2 ** z;
@@ -178,6 +178,8 @@ export class City {
   constructor(canvas) {
     this.renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
     this.restPixelRatio = Math.min(devicePixelRatio, 1.75);
+    this.qualityPixelRatio = this.restPixelRatio;
+    this.qualityStart = 0; this.qualityFrames = 0;
     this.renderer.setPixelRatio(this.restPixelRatio);
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.autoUpdate = false;
@@ -219,6 +221,11 @@ export class City {
     this.focus.resize(w, h);
   }
 
+  setRenderPixelRatio(ratio) {
+    this.renderer.setPixelRatio(ratio);
+    this.focus.composer.setPixelRatio(ratio);
+  }
+
   async load(city, onProgress) {
     if (city === 'korea') {
       const { loadPeninsula } = await import('./peninsula.js');
@@ -226,14 +233,25 @@ export class City {
     }
     const base = `data/${city}`;
     onProgress?.('지형을 빚는 중', 0.05);
-    const [meta, bldBuf, treeBuf, surfaces] = await Promise.all([
+    const [meta, bldBuf, treeBuf, surfaces, riverTraffic, bridgeTrains, bridgeLabels] = await Promise.all([
       fetch(`${base}.json`).then(r => r.json()),
       fetch(`${base}.buildings.bin`).then(r => r.arrayBuffer()),
       fetch(`${base}.trees.bin`).then(r => r.arrayBuffer()),
       city==='seoul'?fetch(`${base}.surfaces.json`).then(r=>{if(!r.ok)throw new Error('서울 지표 자료를 불러오지 못했습니다.');return r.json();}):null,
+      city==='seoul'?fetch(`${base}.river-traffic.json`).then(r=>{if(!r.ok)throw new Error('한강변 교통 자료를 불러오지 못했습니다.');return r.json();}):null,
+      city==='seoul'?fetch(`${base}.bridge-trains.json`).then(r=>{if(!r.ok)throw new Error('한강 철교 자료를 불러오지 못했습니다.');return r.json();}):null,
+      city==='seoul'?fetch(`${base}.bridges.json`).then(r=>{if(!r.ok)throw new Error('한강 다리 자료를 불러오지 못했습니다.');return r.json();}):null,
     ]);
     if(surfaces)meta.greens=[...meta.greens.filter(p=>p.t===4||p.t===5),...surfaces.polygons];
+    if(city==='seoul') {
+      const response=await fetch('data/seoul.surface-overrides.json');
+      if(!response.ok)throw new Error('서울 녹지 보정 자료를 불러오지 못했습니다.');
+      meta.greens.push(...(await response.json()).polygons);
+    }
     this.data = meta;
+    this.riverTraffic = riverTraffic?.roads ?? [];
+    this.bridgeTrains = bridgeTrains?.routes ?? [];
+    this.roadBridgeLabels = (bridgeLabels?.pois??[]).filter(p=>!p.name.includes('철교'));
     this.cityId = city;
     this.landmarks = landmarksOf(city);
     this.plaza = city === 'seoul' ? {x:this.lonToX(126.9769),y:this.latToY(37.576)} : null;
@@ -263,7 +281,7 @@ export class City {
   clearGroups() {
     for (const g of Object.values(this.groups)) {
       this.scene.remove(g);
-      g.traverse(o => { o.geometry?.dispose?.(); if (o.material) [].concat(o.material).forEach(m => m.dispose()); });
+      g.traverse(o => { if(o.isInstancedMesh)o.dispose(); o.geometry?.dispose?.(); if (o.material) [].concat(o.material).forEach(m => m.dispose()); });
     }
     this.groups = {};
   }
@@ -325,7 +343,7 @@ export class City {
     geo.translate(0, 0.5, 0);                       // 바닥 기준
     const n = this.bld.length / 6;
     const U = this.unit;
-    const skip = this.landmarks.filter(l => l.clear).map(l => ({
+    const skip = landmarkClearings(this.landmarks).map(l => ({
       x: this.lonToX(l.lon), y: this.latToY(l.lat), r2: l.clear * l.clear,
     }));
     const mesh = new THREE.InstancedMesh(geo,
@@ -362,13 +380,13 @@ export class City {
     mesh.castShadow = true;
     mesh.receiveShadow = true;
     mesh.frustumCulled = false;
-    this.groups.buildings = mesh;
-    this.scene.add(mesh);
+    this.groups.buildings = spatialInstances(mesh);
+    this.scene.add(this.groups.buildings);
   }
 
   buildTrees() {
     const group = new THREE.Group(), U = this.unit;
-    const skip = this.landmarks.filter(l => l.clear).map(l => ({
+    const skip = landmarkClearings(this.landmarks).map(l => ({
       x: this.lonToX(l.lon), y: this.latToY(l.lat), r2: l.clear * l.clear,
     }));
     const rnd = (x, y, k) => { const v = Math.sin(x * 12.9898 + y * 78.233 + k * 37.719) * 43758.5453; return v - Math.floor(v); };
@@ -417,12 +435,12 @@ export class City {
       mesh.castShadow = true; mesh.receiveShadow = true; mesh.frustumCulled = false;
       mesh.instanceMatrix.needsUpdate = true;
       if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
-      group.add(mesh);
+      group.add(spatialInstances(mesh));
     });
     trunks.frustumCulled = false;
     trunks.instanceMatrix.needsUpdate = true;
-    group.add(trunks);
-    group.trunks = trunks;
+    group.trunks = spatialInstances(trunks);
+    group.add(group.trunks);
     group.count = total;
     this.groups.trees = group;
     this.scene.add(group);
@@ -550,6 +568,13 @@ export class City {
 
   buildRoads() {
     const t = this.theme, group = new THREE.Group(), fittings = [];
+    // Leave room for oversized Line 7 coaches under Cheongdam's road deck.
+    const lowerRail=this.bridgeTrains?.find(r=>r.name==='청담대교')?.points.map(p=>[this.lonToX(p[0]),this.latToY(p[1])])??[];
+    const aboveLowerRail=(x,y)=>lowerRail.some((b,i)=>{
+      if(!i)return false;const a=lowerRail[i-1],dx=b[0]-a[0],dy=b[1]-a[1];
+      const f=Math.max(0,Math.min(1,((x-a[0])*dx+(y-a[1])*dy)/(dx*dx+dy*dy||1)));
+      return (x-a[0]-f*dx)**2+(y-a[1]-f*dy)**2<60**2;
+    });
     this.bridgeRoutes = [];
     const matrix = new THREE.Matrix4(), position = new THREE.Vector3(), scale = new THREE.Vector3();
     const rotation = new THREE.Quaternion(), axis = new THREE.Vector3(0,1,0);
@@ -582,8 +607,9 @@ export class City {
             // coast, tile border or a tiny ditch. Existing road paths are retained.
             const eligible=!this.data.meta.sea && (rail || r.w>=2);
             const bridge=eligible && water!==null;
-            const h1=Math.max(ah+(bh-ah)*f, eligible && water1!==null ? water1+38 : -Infinity);
-            const h2=Math.max(ah+(bh-ah)*g, eligible && water2!==null ? water2+38 : -Infinity);
+            const deck=!rail&&aboveLowerRail(cx,cy)?90:38;
+            const h1=Math.max(ah+(bh-ah)*f, eligible && water1!==null ? water1+deck : -Infinity);
+            const h2=Math.max(ah+(bh-ah)*g, eligible && water2!==null ? water2+deck : -Infinity);
             verts.push(x1+nx,h1,-(y1+ny), x2+nx,h2,-(y2+ny), x2-nx,h2,-(y2-ny),
               x1+nx,h1,-(y1+ny), x2-nx,h2,-(y2-ny), x1-nx,h1,-(y1-ny));
             if (!bridge || water1===null || water2===null) continue;
@@ -623,9 +649,11 @@ export class City {
     for (const lm of this.landmarks) {
       const x = this.lonToX(lm.lon), y = this.latToY(lm.lat);
       const gy = this.groundAt(x, y, lm.foot) * EXAG + (lm.lift ?? 0);
-      const obj = buildLandmark(lm, this.themeName);
+      const obj = buildLandmark(lm, this.themeName, this);
       if (!obj) continue;
-      const [sh, sv] = lm.s ?? [1.7, 2.6];
+      const [baseSh, baseSv] = lm.s ?? [1.7, 2.6];
+      // Authored landmark heights used the original 3x vertical exaggeration.
+      const sh = baseSh * (this.cityId === 'seoul' ? 0.81 : 1), sv = baseSv * EXAG / 3 * (this.cityId === 'seoul' ? 0.9 : 1);
       obj.scale.set(sh, sv, sh);
       obj.position.set(x, gy, -y);
       obj.traverse(o => { o.castShadow = true; o.receiveShadow = true; });
@@ -682,6 +710,7 @@ export class City {
       this.flyTo(lm.lon, lm.lat, lm.cam[0], lm.cam[1], -.12, 1500);
       return;
     }
+    bearing = lm.bearing ?? bearing;
     const object = this.groups.landmarks.children.find(o => o.userData.id === lm.id);
     if (!object) return;
     const bounds = new THREE.Box3().setFromObject(object);
@@ -725,7 +754,7 @@ export class City {
       const fast = this.interacting || this.sensorMoving || now < this.interactionUntil;
       if (fast !== this.fastRender) {
         this.fastRender = fast;
-        this.renderer.setPixelRatio(fast ? Math.min(1, this.restPixelRatio) : this.restPixelRatio);
+        this.setRenderPixelRatio(fast ? Math.min(1, this.restPixelRatio) : this.qualityPixelRatio);
       }
       // 태양·그림자 카메라를 시야 중심에 붙여 그림자 해상도를 지킨다
       const c = this.controls.target;
@@ -746,6 +775,16 @@ export class City {
       if (fast || this.overview) this.renderer.render(this.scene, this.camera);
       else this.focus.render(distance);
       this.onFrame?.();
+      // Adapt only rendering resolution; retain geometry and full-resolution exports.
+      if(fast){this.qualityStart=0;this.qualityFrames=0;}
+      else if(!this.qualityStart)this.qualityStart=now;
+      else if(++this.qualityFrames && now-this.qualityStart>=2200){
+        const fps=this.qualityFrames*1000/(now-this.qualityStart);
+        const min=Math.min(1,this.restPixelRatio);
+        const ratio=THREE.MathUtils.clamp(this.qualityPixelRatio+(fps<28?-.25:fps>42?.25:0),min,this.restPixelRatio);
+        if(ratio!==this.qualityPixelRatio){this.qualityPixelRatio=ratio;this.setRenderPixelRatio(ratio);}
+        this.qualityStart=now;this.qualityFrames=0;
+      }
     };
     requestAnimationFrame(loop);
   }

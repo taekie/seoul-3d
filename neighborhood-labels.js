@@ -1,6 +1,7 @@
 import * as THREE from 'three';
+import { HEIGHT_EXAGGERATION, waterAt } from './miniature.js';
 
-const CATEGORIES={park:['공원','#4d9966'],university:['대학','#8d72b0'],station:['역','#4a93be'],culture:['문화시설','#c48256'],market:['시장','#bb765e'],mountain:['산·봉우리','#749365'],sight:['명소','#609a91'],beach:['해변·해수욕장','#45aaba'],hotel:['호텔','#a487bd'],department_store:['백화점','#cc8d69']};
+const CATEGORIES={bridge:['한강 다리','#71999c'],park:['공원','#4d9966'],university:['대학','#8d72b0'],station:['역','#4a93be'],culture:['문화시설','#c48256'],market:['시장','#bb765e'],mountain:['산·봉우리','#749365'],sight:['명소','#609a91'],beach:['해변·해수욕장','#45aaba'],hotel:['호텔','#a487bd'],hospital:['대형 병원','#689c9b'],apartment:['대단지 아파트','#8b9c8c'],department_store:['백화점','#cc8d69']};
 const RANGE={1:7800,2:4600,3:2600};
 const SEOUL_MOUNTAINS=/^(북한산|관악산|도봉산|아차산|인왕산|청계산|수락산|불암산|북악산|삼성산|남산)/;
 Object.assign(CATEGORIES,{school:['학교','#728fc2'],supermarket:['마트','#b58a4d'],convenience:['편의점','#bd9461'],pharmacy:['약국','#6aa38c'],cafe:['카페','#ae826a'],restaurant:['음식점','#c58a70'],shop:['가게','#ad8caa'],neighborhood:['동네·주거단지','#739e94']});
@@ -12,6 +13,7 @@ export class NeighborhoodLabels {
     this.city=city;this.host=host;this.onSelect=onSelect;
     this.enabled=true;this.selected=null;this.grid=new Map();this.nodes=new Map();this.visible=new Set();this.nextLayout=0;
     this.projected=new THREE.Vector3();this.size=2000;
+    this.lastCamera=new Float64Array(32).fill(NaN);this.nextStationaryCheck=0;
     this.measure=document.createElement('canvas').getContext('2d');this.measure.font='600 12px system-ui';
     this.landmarks=city.labelAnchors.map(a=>({id:'landmark:'+a.lm.id,name:a.lm.name,category:'landmark',tier:0,pos:a.pos.clone(),lm:a.lm}));
     this.stats={loaded:false,available:0,visible:0};
@@ -21,12 +23,19 @@ export class NeighborhoodLabels {
     try {
       const response=await fetch(`data/${this.city.cityId}.pois.json`);
       if(!response.ok)throw new Error(`HTTP ${response.status}`);
-      const data=await response.json();let places=[];
+      const data=await response.json();let places=[],pois=data.pois;
       if(this.city.cityId==='seoul'){
+        const extras=await Promise.all(['hotels','hospitals','bridges','label-details'].map(async kind=>{const r=await fetch(`data/seoul.${kind}.json`);if(!r.ok)throw new Error(`HTTP ${r.status}`);return (await r.json()).pois;}));
+        const details=extras.pop();
+        pois=pois.map(p=>{if(p.category!=='station')return p;const station=details.find(q=>q.category==='station'&&normalName(q.name)===normalName(p.name)&&Math.hypot((p.lon-q.lon)*88000,(p.lat-q.lat)*111320)<650);return station?{...p,lines:station.lines}:p;});
+        extras.push(details.filter(p=>p.category==='apartment'));
+        pois=[...pois.filter(p=>p.category!=='hotel'&&p.category!=='hospital'),...extras.flat().filter(p=>p.category!=='hotel'||(p.stars===5&&p.validUntil>=new Date().toISOString().slice(0,10)))];
         try{const r=await fetch('data/seoul.places.json');if(!r.ok)throw new Error(`HTTP ${r.status}`);places=(await r.json()).pois;}
         catch(error){console.warn('District names unavailable:',error.message);}
       }
-      this.setData([...data.pois,...places]);this.stats.loaded=true;return data.pois;
+      const details=this.city.landmarks.flatMap(l=>(l.features||[]).filter(f=>f.name!==l.name).map(f=>({...f,id:`landmark-detail:${l.id}:${f.name}`,category:'culture',tier:3,landmarkDetail:true,labelHeight:f.height*HEIGHT_EXAGGERATION*.9+35})));
+      pois=pois.filter(p=>!details.some(f=>normalName(p.name)===normalName(f.name)&&Math.hypot((p.lon-f.lon)*88000,(p.lat-f.lat)*111320)<180));
+      this.setData([...pois,...places,...details]);this.stats.loaded=true;return pois;
     } catch(error) {
       // The map and existing landmark labels remain usable without the optional layer.
       this.stats.error=String(error.message);
@@ -40,7 +49,9 @@ export class NeighborhoodLabels {
     for(const p of pois) {
       if(!CATEGORIES[p.category]||!Number.isFinite(p.lon)||!Number.isFinite(p.lat)||known.has(normalName(p.name)))continue;
       const x=this.city.lonToX(p.lon),z=-this.city.latToY(p.lat);
-      const entry={...p,pos:new THREE.Vector3(x,this.city.terrain.at(x,-z)*3+65,z)};
+      const ground=this.city.terrain.at(x,-z)*HEIGHT_EXAGGERATION;
+      const height=p.category==='bridge'?Math.max(ground,waterAt(this.city,x,-z)??ground)+85:ground+(p.labelHeight??65);
+      const entry={...p,pos:new THREE.Vector3(x,height,z)};
       if(this.city.cityId==='seoul'&&p.category==='mountain')entry.majorMountain=p.name.match(SEOUL_MOUNTAINS)?.[1];
       const key=Math.floor(x/this.size)+','+Math.floor(z/this.size);
       if(!this.grid.has(key))this.grid.set(key,[]);this.grid.get(key).push(entry);count++;
@@ -72,6 +83,8 @@ export class NeighborhoodLabels {
             else if(p.majorMountain)limit=Infinity;
             else if(p.category==='park'&&p.tier===1)limit=18000;
             else if(p.category==='university'&&p.tier===1)limit=12000;
+            else if(p.category==='apartment')limit=6500;
+            else if(p.category==='bridge')limit=26000;
           }
           if(distance>limit*(this.visible.has(p.id)?1.12:1))continue;
           if(Math.hypot(p.pos.x-center.x,p.pos.z-center.z)>radius)continue;
@@ -92,7 +105,7 @@ export class NeighborhoodLabels {
     if(v.z< -1||v.z>1||Math.abs(v.x)>1||Math.abs(v.y)>1)return null;
     const [dx,dy]=unshifted?[0,0]:(p.labelOffset||[0,0]);
     const x=(v.x*.5+.5)*innerWidth+dx,y=(-v.y*.5+.5)*innerHeight-14+dy;
-    const width=Math.min(230,this.measure.measureText(p.labelName||p.name).width+(this.city.overview?40:p.category==='landmark'?24:39));
+    const width=Math.min(230,this.measure.measureText(p.labelName||p.name).width+((p.category==='mountain'||p.lm?.kind==='mountain')?43:24)+(p.lines?.reduce((n,l)=>n+Math.max(17,l.label.length*10+6)+2,0)||0));
     return {x,y,left:x-width/2,right:x+width/2,top:y-(this.city.overview?23:27),bottom:y+(this.city.overview?2:14)};
   }
   node(p) {
@@ -102,14 +115,18 @@ export class NeighborhoodLabels {
     if(this.city.overview){
       el.dataset.category=p.lm.kind;
       el.classList.add('geography-label');
-      if(p.lm.kind!=='city'){
-        const icon=document.createElement('span');icon.textContent=p.lm.kind==='river'?'≈':'△';icon.setAttribute('aria-hidden','true');el.append(icon);
-      }
     }
-    if(p.category!=='landmark'){
-      const dot=document.createElement('span');dot.className='poi-dot';dot.style.background=CATEGORIES[p.category][1];dot.setAttribute('aria-hidden','true');el.append(dot);
-      el.title=CATEGORIES[p.category][0]+' · '+p.name;
+    if(p.category==='station'&&p.lines?.length){
+      const badges=document.createElement('span');badges.className='station-lines';
+      for(const line of p.lines){const badge=document.createElement('span');badge.className='station-line';badge.textContent=line.label;badge.style.backgroundColor=line.color;badge.title=line.name;badge.setAttribute('aria-label',line.name);badges.append(badge);}
+      el.append(badges);
     }
+    if(p.category==='mountain'||p.lm?.kind==='mountain'){
+      const icon=document.createElementNS('http://www.w3.org/2000/svg','svg');
+      icon.classList.add('mountain-icon');icon.setAttribute('viewBox','0 0 16 12');icon.setAttribute('aria-hidden','true');
+      icon.innerHTML='<path d="M1 11 6 2 11 11ZM8 11l3-6 4 6Z"/>';el.append(icon);
+    }
+    if(p.category!=='landmark')el.title=(p.category==='hotel'&&p.stars===5?'5성급 호텔':CATEGORIES[p.category][0])+' · '+p.name;
     const text=document.createElement('span');text.textContent=(p.labelName||p.name)+(p.lm?.detailCity?' ↗':'');el.append(text);
     if(p.lm?.detailCity)el.title=p.name+' 상세 미니어처 지도 열기';
     el.addEventListener('click',()=>{this.select(p.id);this.onSelect(p);});
@@ -122,17 +139,24 @@ export class NeighborhoodLabels {
     if(this.populationEnabled!==Boolean(population?.enabled)){
       this.populationEnabled=Boolean(population?.enabled);this.nextLayout=0;
     }
-    this.landmarks.forEach((p,i)=>p.pos.copy(population?.labelPosition(p.lm)||this.city.labelAnchors[i].pos));
+    let anchorsChanged=false;
+    this.landmarks.forEach((p,i)=>{const pos=population?.labelPosition(p.lm)||this.city.labelAnchors[i].pos;if(!p.pos.equals(pos))anchorsChanged=true;p.pos.copy(pos);});
+    const matrices=[this.city.camera.matrixWorld.elements,this.city.camera.projectionMatrix.elements];
+    let moved=false;for(let k=0;k<2;k++)for(let i=0;i<16;i++){const value=matrices[k][i],index=k*16+i;if(Math.abs(value-this.lastCamera[index])>1e-9||!Number.isFinite(this.lastCamera[index]))moved=true;this.lastCamera[index]=value;}
+    // Static camera: only refresh for selection, changing anchors or UI layout.
+    if(!moved&&!anchorsChanged&&this.nextLayout!==0&&now<this.nextStationaryCheck)return;
+    this.nextStationaryCheck=now+750;
     const distance=this.city.camera.position.distanceTo(this.city.controls.target);
     if(now>=this.nextLayout) {
       this.nextLayout=now+120;
-      const obstacles=[...document.querySelectorAll('#title,#panel,#place,#tools,#topbar,#time,#info-btn,#hint,#compass,#motion-controls,#motion-panel,#population-key,#rain-panel,#rail-panel,#crop-key')].filter(el=>el.getClientRects().length&&getComputedStyle(el).visibility!=='hidden').map(el=>el.getBoundingClientRect());
+      const obstacles=[...document.querySelectorAll('#title,#panel,#place,#tools,#topbar,#time,#info-btn,#hint,#compass,#motion-controls,#motion-panel,#population-key,#rain-panel,#rail-panel,#crop-key,#route-panel')].filter(el=>el.getClientRects().length&&getComputedStyle(el).visibility!=='hidden').map(el=>el.getBoundingClientRect());
+      obstacles.push(...(this.routePinBounds?.()||[]));
       const candidates=[];
       for(const p of this.candidates(distance)){
         p.labelName=distance>=9000&&p.majorMountain?p.majorMountain:p.name;
         if(!this.city.overview&&p.category==='landmark'&&this.city.camera.position.distanceTo(p.pos)>46000*this.city.scale)continue;
         const rect=this.screen(p,true);if(!rect||rect.left<8||rect.right>innerWidth-8||rect.top<8||rect.bottom>innerHeight-25)continue;
-        const priority=p.id===this.selected?2000:distance>=9000&&p.majorMountain?1400:p.category==='landmark'?1000+(p.lm?.priority||0)*10:p.placeClass?500+(p.placeClass==='borough'?30:0):(4-p.tier)*30;
+        const priority=p.id===this.selected?2000:distance>=9000&&p.majorMountain?1400:p.category==='landmark'?1000+(p.lm?.priority||0)*10:p.category==='bridge'?600:p.placeClass?500+(p.placeClass==='borough'?30:0):p.landmarkDetail?250:p.category==='station'?160:p.category==='apartment'?130:(4-p.tier)*30;
         const score=priority-Math.hypot(rect.x-innerWidth/2,rect.y-innerHeight/2)/innerWidth*20+(this.visible.has(p.id)?5:0);
         candidates.push({p,rect,score});
       }

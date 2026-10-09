@@ -1,0 +1,27 @@
+#map-export-btn { width:52px; height:52px; border:0; padding:0; display:grid; place-items:center; cursor:pointer; color:var(--accent); }
+#map-export-btn svg { width:23px; height:23px; fill:none; stroke:currentColor; stroke-width:1.7; stroke-linejoin:round; }
+#map-export-btn:disabled { opacity:.45; cursor:wait; }
+#map-export { color:var(--ink); width:min(640px, calc(100% - 32px)); max-height:calc(100dvh - 32px); border:0; padding:24px; overflow:auto; }
+#map-export::backdrop { background:rgba(12,26,23,.48); }
+#map-export [hidden] { display:none; }
+#map-export .export-head, #map-export .export-step { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+#map-export .export-head { position:sticky; top:-24px; z-index:1; padding:8px 0; background:var(--panel); }
+#map-export h2 { margin:0; font-size:21px; }
+#map-export button { font:inherit; color:var(--ink); border:1px solid var(--line); background:transparent; border-radius:9px; padding:9px 12px; cursor:pointer; }
+#map-export #export-close { border:0; font-size:25px; padding:0 4px; }
+#map-export .export-intro, #map-export .export-help { color:var(--muted); font-size:13px; line-height:1.65; }
+#export-preview { display:block; width:100%; max-height:38dvh; object-fit:contain; border-radius:9px; background:rgba(100,130,115,.08); }
+#export-status, #export-copy-status { font-size:12px; line-height:1.5; min-height:18px; }
+#map-export .export-primary { display:block; text-align:center; text-decoration:none; color:white; background:var(--accent); padding:12px; border-radius:10px; font-size:14px; font-weight:600; }
+#map-export .export-step { margin-top:20px; font-size:14px; }
+#map-export details { font-size:12px; }
+#map-export summary { cursor:pointer; padding:5px 0; }
+#export-prompt { position:static; display:block; width:100%; height:200px; resize:vertical; margin-top:8px; padding:10px; border:1px solid var(--line); border-radius:8px; background:transparent; color:var(--ink); font:12px/1.6 ui-monospace, monospace; }
+#map-export :focus-visible, #map-export-btn:focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
+@media(max-width:860px) {
+  #topbar { gap:6px; }
+  #map-export-btn { width:44px; height:52px; }
+  #map-export { padding:18px; }
+  #map-export .export-head { top:-18px; }
+  #map-export .export-step { flex-wrap:wrap; }
+}

@@ -1,0 +1,6884 @@
+{
+  "source": "서울교통공사 사이버스테이션 노선 정보 / © OpenStreetMap contributors",
+  "sourceUrl": "https://www.seoulmetro.co.kr/kr/cyberStation.do",
+  "apartmentLicense": "ODbL",
+  "checkedAt": "2026-10-09",
+  "apartmentCriteria": "주요 주거지역에서 이름과 닫힌 아파트 단지 경계가 확인되며 면적 50,000m² 이상인 곳. 알려진 세대수가 1,000 미만이면 제외. 전체 단지 목록은 아님.",
+  "pois": [
+    {
+      "id": "poi:108143946581",
+      "name": "고촌역",
+      "category": "station",
+      "lon": 126.77021,
+      "lat": 37.601261,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "김포",
+          "name": "김포골드라인",
+          "color": "#a18f57"
+        }
+      ]
+    },
+    {
+      "id": "poi:108143946601",
+      "name": "김포공항역",
+      "category": "station",
+      "lon": 126.801962,
+      "lat": 37.562329,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        },
+        {
+          "label": "공항",
+          "name": "공항철도",
+          "color": "#038fa0"
+        },
+        {
+          "label": "김포",
+          "name": "김포골드라인",
+          "color": "#a18f57"
+        },
+        {
+          "label": "서해",
+          "name": "서해",
+          "color": "#40a607"
+        }
+      ]
+    },
+    {
+      "id": "poi:111648533601",
+      "name": "옥수역",
+      "category": "station",
+      "lon": 127.017547,
+      "lat": 37.541374,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        },
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        }
+      ]
+    },
+    {
+      "id": "poi:112378293051",
+      "name": "신도림역",
+      "category": "station",
+      "lon": 126.891666,
+      "lat": 37.509134,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        },
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        }
+      ]
+    },
+    {
+      "id": "poi:116973047751",
+      "name": "수서역",
+      "category": "station",
+      "lon": 127.102278,
+      "lat": 37.486016,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        },
+        {
+          "label": "GTX-A",
+          "name": "GTX-A",
+          "color": "#9f6181"
+        },
+        {
+          "label": "수인분당",
+          "name": "수인분당선",
+          "color": "#a69500"
+        }
+      ]
+    },
+    {
+      "id": "poi:119422011681",
+      "name": "장자호수공원역",
+      "category": "station",
+      "lon": 127.137914,
+      "lat": 37.587405,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "8",
+          "name": "8호선",
+          "color": "#e74e6d"
+        }
+      ]
+    },
+    {
+      "id": "poi:119422016691",
+      "name": "구리역",
+      "category": "station",
+      "lon": 127.140838,
+      "lat": 37.602273,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "8",
+          "name": "8호선",
+          "color": "#e74e6d"
+        },
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        }
+      ]
+    },
+    {
+      "id": "poi:119422016701",
+      "name": "동구릉역",
+      "category": "station",
+      "lon": 127.138107,
+      "lat": 37.610513,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "8",
+          "name": "8호선",
+          "color": "#e74e6d"
+        }
+      ]
+    },
+    {
+      "id": "poi:119422016711",
+      "name": "다산역",
+      "category": "station",
+      "lon": 127.149764,
+      "lat": 37.624327,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "8",
+          "name": "8호선",
+          "color": "#e74e6d"
+        }
+      ]
+    },
+    {
+      "id": "poi:119422016721",
+      "name": "별내역",
+      "category": "station",
+      "lon": 127.127818,
+      "lat": 37.642034,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "8",
+          "name": "8호선",
+          "color": "#e74e6d"
+        },
+        {
+          "label": "경춘선",
+          "name": "경춘선",
+          "color": "#0ba382"
+        }
+      ]
+    },
+    {
+      "id": "poi:124557895801",
+      "name": "킨텍스역",
+      "category": "station",
+      "lon": 126.748323,
+      "lat": 37.665215,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "GTX-A",
+          "name": "GTX-A",
+          "color": "#9f6181"
+        }
+      ]
+    },
+    {
+      "id": "poi:124557895901",
+      "name": "연신내역",
+      "category": "station",
+      "lon": 126.920398,
+      "lat": 37.618931,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        },
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        },
+        {
+          "label": "GTX-A",
+          "name": "GTX-A",
+          "color": "#9f6181"
+        }
+      ]
+    },
+    {
+      "id": "poi:129693911841",
+      "name": "뚝섬역",
+      "category": "station",
+      "lon": 127.047411,
+      "lat": 37.547236,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        }
+      ]
+    },
+    {
+      "id": "poi:130513852071",
+      "name": "종합운동장역",
+      "category": "station",
+      "lon": 127.076207,
+      "lat": 37.511407,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        },
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        }
+      ]
+    },
+    {
+      "id": "poi:130559763911",
+      "name": "홍대입구역",
+      "category": "station",
+      "lon": 126.923445,
+      "lat": 37.556626,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        },
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        },
+        {
+          "label": "공항",
+          "name": "공항철도",
+          "color": "#038fa0"
+        }
+      ]
+    },
+    {
+      "id": "poi:14581095001",
+      "name": "중랑역",
+      "category": "station",
+      "lon": 127.076309,
+      "lat": 37.594975,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        },
+        {
+          "label": "경춘선",
+          "name": "경춘선",
+          "color": "#0ba382"
+        }
+      ]
+    },
+    {
+      "id": "poi:14904360812",
+      "name": "경찰병원역",
+      "category": "station",
+      "lon": 127.124246,
+      "lat": 37.495912,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        }
+      ]
+    },
+    {
+      "id": "poi:14917258432",
+      "name": "대방역",
+      "category": "station",
+      "lon": 126.925532,
+      "lat": 37.513011,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        },
+        {
+          "label": "신림",
+          "name": "신림",
+          "color": "#0781fa"
+        }
+      ]
+    },
+    {
+      "id": "poi:17897554241",
+      "name": "망우역",
+      "category": "station",
+      "lon": 127.091861,
+      "lat": 37.599633,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        },
+        {
+          "label": "경춘선",
+          "name": "경춘선",
+          "color": "#0ba382"
+        }
+      ]
+    },
+    {
+      "id": "poi:18491762011",
+      "name": "국회의사당역",
+      "category": "station",
+      "lon": 126.917962,
+      "lat": 37.528017,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        }
+      ]
+    },
+    {
+      "id": "poi:19947023391",
+      "name": "노들역",
+      "category": "station",
+      "lon": 126.95355,
+      "lat": 37.512973,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        }
+      ]
+    },
+    {
+      "id": "poi:20280510821",
+      "name": "신설동역",
+      "category": "station",
+      "lon": 127.024666,
+      "lat": 37.576054,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        },
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        },
+        {
+          "label": "우이신설",
+          "name": "우이신설경전철",
+          "color": "#878787"
+        }
+      ]
+    },
+    {
+      "id": "poi:20907332871",
+      "name": "한국항공대역",
+      "category": "station",
+      "lon": 126.868395,
+      "lat": 37.602783,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        }
+      ]
+    },
+    {
+      "id": "poi:20907332921",
+      "name": "곡산역",
+      "category": "station",
+      "lon": 126.801812,
+      "lat": 37.645746,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        },
+        {
+          "label": "서해",
+          "name": "서해",
+          "color": "#40a607"
+        }
+      ]
+    },
+    {
+      "id": "poi:20907332931",
+      "name": "백마역",
+      "category": "station",
+      "lon": 126.794474,
+      "lat": 37.658331,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        },
+        {
+          "label": "서해",
+          "name": "서해",
+          "color": "#40a607"
+        }
+      ]
+    },
+    {
+      "id": "poi:22404951691",
+      "name": "풍산역",
+      "category": "station",
+      "lon": 126.786245,
+      "lat": 37.672348,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        },
+        {
+          "label": "서해",
+          "name": "서해",
+          "color": "#40a607"
+        }
+      ]
+    },
+    {
+      "id": "poi:22461040561",
+      "name": "용답역",
+      "category": "station",
+      "lon": 127.050861,
+      "lat": 37.562091,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        }
+      ]
+    },
+    {
+      "id": "poi:2246265212",
+      "name": "박촌역",
+      "category": "station",
+      "lon": 126.745062,
+      "lat": 37.553636,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "인천1호선",
+          "name": "인천1호선",
+          "color": "#6496df"
+        }
+      ]
+    },
+    {
+      "id": "poi:23468588381",
+      "name": "신촌역",
+      "category": "station",
+      "lon": 126.94236,
+      "lat": 37.559781,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        },
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        }
+      ]
+    },
+    {
+      "id": "poi:2682331722",
+      "name": "부천시청역",
+      "category": "station",
+      "lon": 126.763998,
+      "lat": 37.504679,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:28474407721",
+      "name": "광명역",
+      "category": "station",
+      "lon": 126.884698,
+      "lat": 37.416378,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        }
+      ]
+    },
+    {
+      "id": "poi:28594389011",
+      "name": "사릉역",
+      "category": "station",
+      "lon": 127.176898,
+      "lat": 37.651098,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "경춘선",
+          "name": "경춘선",
+          "color": "#0ba382"
+        }
+      ]
+    },
+    {
+      "id": "poi:2876009471",
+      "name": "한성대입구역",
+      "category": "station",
+      "lon": 127.00596,
+      "lat": 37.588514,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "4",
+          "name": "4호선",
+          "color": "#0099d1"
+        }
+      ]
+    },
+    {
+      "id": "poi:31520041191",
+      "name": "귤현역",
+      "category": "station",
+      "lon": 126.742653,
+      "lat": 37.566355,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "인천1호선",
+          "name": "인천1호선",
+          "color": "#6496df"
+        }
+      ]
+    },
+    {
+      "id": "poi:32338693541",
+      "name": "부개역",
+      "category": "station",
+      "lon": 126.740604,
+      "lat": 37.488493,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        }
+      ]
+    },
+    {
+      "id": "poi:32788444681",
+      "name": "충정로역",
+      "category": "station",
+      "lon": 126.962911,
+      "lat": 37.559373,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        },
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:34012055051",
+      "name": "상동역",
+      "category": "station",
+      "lon": 126.753173,
+      "lat": 37.505836,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:34063787821",
+      "name": "서강대역",
+      "category": "station",
+      "lon": 126.935182,
+      "lat": 37.552352,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        }
+      ]
+    },
+    {
+      "id": "poi:34267245981",
+      "name": "종로5가역",
+      "category": "station",
+      "lon": 127.002023,
+      "lat": 37.570986,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        }
+      ]
+    },
+    {
+      "id": "poi:34313139121",
+      "name": "고속터미널역",
+      "category": "station",
+      "lon": 127.00492,
+      "lat": 37.505036,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        },
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        },
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        }
+      ]
+    },
+    {
+      "id": "poi:34368036701",
+      "name": "청량리역",
+      "category": "station",
+      "lon": 127.048259,
+      "lat": 37.580594,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        },
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        },
+        {
+          "label": "경춘선",
+          "name": "경춘선",
+          "color": "#0ba382"
+        },
+        {
+          "label": "수인분당",
+          "name": "수인분당선",
+          "color": "#a69500"
+        }
+      ]
+    },
+    {
+      "id": "poi:3551726961",
+      "name": "관악역",
+      "category": "station",
+      "lon": 126.909154,
+      "lat": 37.418726,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        }
+      ]
+    },
+    {
+      "id": "poi:3551727581",
+      "name": "제기동역",
+      "category": "station",
+      "lon": 127.034467,
+      "lat": 37.578379,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        }
+      ]
+    },
+    {
+      "id": "poi:3551727651",
+      "name": "신이문역",
+      "category": "station",
+      "lon": 127.067292,
+      "lat": 37.601639,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        }
+      ]
+    },
+    {
+      "id": "poi:3551727691",
+      "name": "회기역",
+      "category": "station",
+      "lon": 127.057625,
+      "lat": 37.589496,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        },
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        },
+        {
+          "label": "경춘선",
+          "name": "경춘선",
+          "color": "#0ba382"
+        }
+      ]
+    },
+    {
+      "id": "poi:3551727711",
+      "name": "월계역",
+      "category": "station",
+      "lon": 127.058864,
+      "lat": 37.633062,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        }
+      ]
+    },
+    {
+      "id": "poi:3551727731",
+      "name": "녹천역",
+      "category": "station",
+      "lon": 127.051397,
+      "lat": 37.644629,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        }
+      ]
+    },
+    {
+      "id": "poi:3551727761",
+      "name": "광운대역",
+      "category": "station",
+      "lon": 127.06182,
+      "lat": 37.623698,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        },
+        {
+          "label": "경춘선",
+          "name": "경춘선",
+          "color": "#0ba382"
+        }
+      ]
+    },
+    {
+      "id": "poi:3551727821",
+      "name": "창동역",
+      "category": "station",
+      "lon": 127.04798,
+      "lat": 37.652597,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        },
+        {
+          "label": "4",
+          "name": "4호선",
+          "color": "#0099d1"
+        }
+      ]
+    },
+    {
+      "id": "poi:3551727841",
+      "name": "방학역",
+      "category": "station",
+      "lon": 127.044305,
+      "lat": 37.66769,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        }
+      ]
+    },
+    {
+      "id": "poi:3551728081",
+      "name": "오류동역",
+      "category": "station",
+      "lon": 126.844534,
+      "lat": 37.494346,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        }
+      ]
+    },
+    {
+      "id": "poi:3551728101",
+      "name": "개봉역",
+      "category": "station",
+      "lon": 126.858755,
+      "lat": 37.494592,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        }
+      ]
+    },
+    {
+      "id": "poi:3551728121",
+      "name": "구일역",
+      "category": "station",
+      "lon": 126.869704,
+      "lat": 37.496205,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        }
+      ]
+    },
+    {
+      "id": "poi:3551728161",
+      "name": "중동역",
+      "category": "station",
+      "lon": 126.763966,
+      "lat": 37.486778,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        }
+      ]
+    },
+    {
+      "id": "poi:3551728171",
+      "name": "송내역",
+      "category": "station",
+      "lon": 126.752883,
+      "lat": 37.487706,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        }
+      ]
+    },
+    {
+      "id": "poi:3551728271",
+      "name": "소사역",
+      "category": "station",
+      "lon": 126.795589,
+      "lat": 37.482768,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        },
+        {
+          "label": "서해",
+          "name": "서해",
+          "color": "#40a607"
+        }
+      ]
+    },
+    {
+      "id": "poi:3551728281",
+      "name": "부천역",
+      "category": "station",
+      "lon": 126.782736,
+      "lat": 37.484109,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        }
+      ]
+    },
+    {
+      "id": "poi:3551730821",
+      "name": "과천역",
+      "category": "station",
+      "lon": 126.996959,
+      "lat": 37.433074,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "4",
+          "name": "4호선",
+          "color": "#0099d1"
+        }
+      ]
+    },
+    {
+      "id": "poi:3551730881",
+      "name": "경마공원역",
+      "category": "station",
+      "lon": 127.007897,
+      "lat": 37.443765,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "4",
+          "name": "4호선",
+          "color": "#0099d1"
+        }
+      ]
+    },
+    {
+      "id": "poi:3551730921",
+      "name": "일원역",
+      "category": "station",
+      "lon": 127.084377,
+      "lat": 37.483691,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        }
+      ]
+    },
+    {
+      "id": "poi:3551736261",
+      "name": "양원역",
+      "category": "station",
+      "lon": 127.107933,
+      "lat": 37.606582,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        }
+      ]
+    },
+    {
+      "id": "poi:3551736561",
+      "name": "한남역",
+      "category": "station",
+      "lon": 127.009243,
+      "lat": 37.529447,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        }
+      ]
+    },
+    {
+      "id": "poi:3686362571",
+      "name": "일산역",
+      "category": "station",
+      "lon": 126.769497,
+      "lat": 37.68222,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        },
+        {
+          "label": "서해",
+          "name": "서해",
+          "color": "#40a607"
+        }
+      ]
+    },
+    {
+      "id": "poi:3686362601",
+      "name": "수색역",
+      "category": "station",
+      "lon": 126.895555,
+      "lat": 37.58076,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        }
+      ]
+    },
+    {
+      "id": "poi:38246063731",
+      "name": "봉은사역",
+      "category": "station",
+      "lon": 127.060243,
+      "lat": 37.514185,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        }
+      ]
+    },
+    {
+      "id": "poi:38246063761",
+      "name": "언주역",
+      "category": "station",
+      "lon": 127.033877,
+      "lat": 37.507322,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        }
+      ]
+    },
+    {
+      "id": "poi:38246063821",
+      "name": "삼성중앙역",
+      "category": "station",
+      "lon": 127.053473,
+      "lat": 37.513096,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        }
+      ]
+    },
+    {
+      "id": "poi:38246063841",
+      "name": "사평역",
+      "category": "station",
+      "lon": 127.015139,
+      "lat": 37.504296,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        }
+      ]
+    },
+    {
+      "id": "poi:38246063871",
+      "name": "선정릉역",
+      "category": "station",
+      "lon": 127.04386,
+      "lat": 37.510254,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        },
+        {
+          "label": "수인분당",
+          "name": "수인분당선",
+          "color": "#a69500"
+        }
+      ]
+    },
+    {
+      "id": "poi:38246063901",
+      "name": "신논현역",
+      "category": "station",
+      "lon": 127.024532,
+      "lat": 37.504321,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        },
+        {
+          "label": "신분당",
+          "name": "신분당선",
+          "color": "#cd2234"
+        }
+      ]
+    },
+    {
+      "id": "poi:38311053601",
+      "name": "외대앞역",
+      "category": "station",
+      "lon": 127.06374,
+      "lat": 37.596305,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        }
+      ]
+    },
+    {
+      "id": "poi:38347322611",
+      "name": "구반포역",
+      "category": "station",
+      "lon": 126.986783,
+      "lat": 37.501291,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        }
+      ]
+    },
+    {
+      "id": "poi:38347322631",
+      "name": "흑석역",
+      "category": "station",
+      "lon": 126.963946,
+      "lat": 37.508381,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        }
+      ]
+    },
+    {
+      "id": "poi:38347322671",
+      "name": "신반포역",
+      "category": "station",
+      "lon": 126.996417,
+      "lat": 37.503602,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        }
+      ]
+    },
+    {
+      "id": "poi:52084862471",
+      "name": "온수역",
+      "category": "station",
+      "lon": 126.823533,
+      "lat": 37.492298,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        },
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:52253113741",
+      "name": "왕십리역",
+      "category": "station",
+      "lon": 127.038576,
+      "lat": 37.561487,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        },
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        },
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        },
+        {
+          "label": "수인분당",
+          "name": "수인분당선",
+          "color": "#a69500"
+        }
+      ]
+    },
+    {
+      "id": "poi:52732934971",
+      "name": "응봉역",
+      "category": "station",
+      "lon": 127.03473,
+      "lat": 37.550277,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        }
+      ]
+    },
+    {
+      "id": "poi:52732985721",
+      "name": "도봉역",
+      "category": "station",
+      "lon": 127.045544,
+      "lat": 37.67921,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        }
+      ]
+    },
+    {
+      "id": "poi:52733078941",
+      "name": "서빙고역",
+      "category": "station",
+      "lon": 126.988317,
+      "lat": 37.519576,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        }
+      ]
+    },
+    {
+      "id": "poi:53512299541",
+      "name": "양재역",
+      "category": "station",
+      "lon": 127.034145,
+      "lat": 37.484402,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        },
+        {
+          "label": "신분당",
+          "name": "신분당선",
+          "color": "#cd2234"
+        }
+      ]
+    },
+    {
+      "id": "poi:53512811221",
+      "name": "이촌역",
+      "category": "station",
+      "lon": 126.973366,
+      "lat": 37.52244,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "4",
+          "name": "4호선",
+          "color": "#0099d1"
+        },
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        }
+      ]
+    },
+    {
+      "id": "poi:54082737771",
+      "name": "복정역",
+      "category": "station",
+      "lon": 127.126713,
+      "lat": 37.470579,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "8",
+          "name": "8호선",
+          "color": "#e74e6d"
+        },
+        {
+          "label": "수인분당",
+          "name": "수인분당선",
+          "color": "#a69500"
+        }
+      ]
+    },
+    {
+      "id": "poi:54260809001",
+      "name": "운연역",
+      "category": "station",
+      "lon": 126.759632,
+      "lat": 37.439655,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "인천2호선",
+          "name": "인천2호선",
+          "color": "#cf843c"
+        }
+      ]
+    },
+    {
+      "id": "poi:54421835251",
+      "name": "탄현역",
+      "category": "station",
+      "lon": 126.761026,
+      "lat": 37.694106,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        }
+      ]
+    },
+    {
+      "id": "poi:54421852271",
+      "name": "행신역",
+      "category": "station",
+      "lon": 126.834058,
+      "lat": 37.612034,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        }
+      ]
+    },
+    {
+      "id": "poi:54443666451",
+      "name": "석수역",
+      "category": "station",
+      "lon": 126.902304,
+      "lat": 37.435131,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        }
+      ]
+    },
+    {
+      "id": "poi:54443696641",
+      "name": "독산역",
+      "category": "station",
+      "lon": 126.889483,
+      "lat": 37.466075,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        }
+      ]
+    },
+    {
+      "id": "poi:54460103271",
+      "name": "도농역",
+      "category": "station",
+      "lon": 127.161185,
+      "lat": 37.608784,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        }
+      ]
+    },
+    {
+      "id": "poi:54460133041",
+      "name": "양정역",
+      "category": "station",
+      "lon": 127.194616,
+      "lat": 37.60402,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        }
+      ]
+    },
+    {
+      "id": "poi:54473361601",
+      "name": "신내역",
+      "category": "station",
+      "lon": 127.103244,
+      "lat": 37.612646,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        },
+        {
+          "label": "경춘선",
+          "name": "경춘선",
+          "color": "#0ba382"
+        }
+      ]
+    },
+    {
+      "id": "poi:54485245431",
+      "name": "금천구청역",
+      "category": "station",
+      "lon": 126.893898,
+      "lat": 37.455813,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        }
+      ]
+    },
+    {
+      "id": "poi:54485263401",
+      "name": "강매역",
+      "category": "station",
+      "lon": 126.844529,
+      "lat": 37.612285,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        }
+      ]
+    },
+    {
+      "id": "poi:54485279191",
+      "name": "능곡역",
+      "category": "station",
+      "lon": 126.820518,
+      "lat": 37.61894,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        },
+        {
+          "label": "서해",
+          "name": "서해",
+          "color": "#40a607"
+        }
+      ]
+    },
+    {
+      "id": "poi:54514882691",
+      "name": "암사역사공원역",
+      "category": "station",
+      "lon": 127.137432,
+      "lat": 37.557047,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "8",
+          "name": "8호선",
+          "color": "#e74e6d"
+        }
+      ]
+    },
+    {
+      "id": "poi:57473972501",
+      "name": "보문역",
+      "category": "station",
+      "lon": 127.019371,
+      "lat": 37.585275,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        },
+        {
+          "label": "우이신설",
+          "name": "우이신설경전철",
+          "color": "#878787"
+        }
+      ]
+    },
+    {
+      "id": "poi:57709796391",
+      "name": "동작역",
+      "category": "station",
+      "lon": 126.978205,
+      "lat": 37.502972,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "4",
+          "name": "4호선",
+          "color": "#0099d1"
+        },
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        }
+      ]
+    },
+    {
+      "id": "poi:57720993111",
+      "name": "서울역",
+      "category": "station",
+      "lon": 126.97078,
+      "lat": 37.554555,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        },
+        {
+          "label": "4",
+          "name": "4호선",
+          "color": "#0099d1"
+        },
+        {
+          "label": "GTX-A",
+          "name": "GTX-A",
+          "color": "#9f6181"
+        },
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        },
+        {
+          "label": "공항",
+          "name": "공항철도",
+          "color": "#038fa0"
+        }
+      ]
+    },
+    {
+      "id": "poi:57724937391",
+      "name": "도곡역",
+      "category": "station",
+      "lon": 127.055469,
+      "lat": 37.490906,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        },
+        {
+          "label": "수인분당",
+          "name": "수인분당선",
+          "color": "#a69500"
+        }
+      ]
+    },
+    {
+      "id": "poi:57742825171",
+      "name": "구로역",
+      "category": "station",
+      "lon": 126.882509,
+      "lat": 37.503445,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        }
+      ]
+    },
+    {
+      "id": "poi:57748331371",
+      "name": "북한산보국문역",
+      "category": "station",
+      "lon": 127.008176,
+      "lat": 37.612179,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "우이신설",
+          "name": "우이신설경전철",
+          "color": "#878787"
+        }
+      ]
+    },
+    {
+      "id": "poi:57825039421",
+      "name": "안국역",
+      "category": "station",
+      "lon": 126.986171,
+      "lat": 37.576828,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        }
+      ]
+    },
+    {
+      "id": "poi:57999793401",
+      "name": "강일역",
+      "category": "station",
+      "lon": 127.175766,
+      "lat": 37.557481,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:58015720341",
+      "name": "천호역",
+      "category": "station",
+      "lon": 127.123404,
+      "lat": 37.538525,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        },
+        {
+          "label": "8",
+          "name": "8호선",
+          "color": "#e74e6d"
+        }
+      ]
+    },
+    {
+      "id": "poi:58111144441",
+      "name": "서원역",
+      "category": "station",
+      "lon": 126.93301,
+      "lat": 37.478209,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "신림",
+          "name": "신림",
+          "color": "#0781fa"
+        }
+      ]
+    },
+    {
+      "id": "poi:58122334651",
+      "name": "동대문역",
+      "category": "station",
+      "lon": 127.011491,
+      "lat": 37.571862,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        },
+        {
+          "label": "4",
+          "name": "4호선",
+          "color": "#0099d1"
+        }
+      ]
+    },
+    {
+      "id": "poi:58127400551",
+      "name": "삼각지역",
+      "category": "station",
+      "lon": 126.973886,
+      "lat": 37.535479,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "4",
+          "name": "4호선",
+          "color": "#0099d1"
+        },
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        }
+      ]
+    },
+    {
+      "id": "poi:58143127421",
+      "name": "도봉산역",
+      "category": "station",
+      "lon": 127.046081,
+      "lat": 37.689836,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        },
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:58355445021",
+      "name": "영등포역",
+      "category": "station",
+      "lon": 126.906933,
+      "lat": 37.515364,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        }
+      ]
+    },
+    {
+      "id": "poi:58406866701",
+      "name": "노량진역",
+      "category": "station",
+      "lon": 126.942038,
+      "lat": 37.514236,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        },
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        }
+      ]
+    },
+    {
+      "id": "poi:58406866711",
+      "name": "용산역",
+      "category": "station",
+      "lon": 126.964826,
+      "lat": 37.529953,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        },
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        }
+      ]
+    },
+    {
+      "id": "poi:58633356991",
+      "name": "종각역",
+      "category": "station",
+      "lon": 126.983183,
+      "lat": 37.570174,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        }
+      ]
+    },
+    {
+      "id": "poi:58633785801",
+      "name": "건대입구역",
+      "category": "station",
+      "lon": 127.070864,
+      "lat": 37.540443,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        },
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:58842504991",
+      "name": "갈매역",
+      "category": "station",
+      "lon": 127.114729,
+      "lat": 37.633946,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "경춘선",
+          "name": "경춘선",
+          "color": "#0ba382"
+        }
+      ]
+    },
+    {
+      "id": "poi:58842505311",
+      "name": "퇴계원역",
+      "category": "station",
+      "lon": 127.143531,
+      "lat": 37.648257,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "경춘선",
+          "name": "경춘선",
+          "color": "#0ba382"
+        }
+      ]
+    },
+    {
+      "id": "poi:58930302491",
+      "name": "가좌역",
+      "category": "station",
+      "lon": 126.915066,
+      "lat": 37.568677,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        }
+      ]
+    },
+    {
+      "id": "poi:58995274541",
+      "name": "남영역",
+      "category": "station",
+      "lon": 126.971322,
+      "lat": 37.540537,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        }
+      ]
+    },
+    {
+      "id": "poi:59168743871",
+      "name": "응암역",
+      "category": "station",
+      "lon": 126.915527,
+      "lat": 37.598431,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        }
+      ]
+    },
+    {
+      "id": "poi:59168743911",
+      "name": "합정역",
+      "category": "station",
+      "lon": 126.913655,
+      "lat": 37.549358,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        },
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        }
+      ]
+    },
+    {
+      "id": "poi:59168743941",
+      "name": "동묘앞역",
+      "category": "station",
+      "lon": 127.017435,
+      "lat": 37.573507,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        },
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        }
+      ]
+    },
+    {
+      "id": "poi:59168743951",
+      "name": "고려대역",
+      "category": "station",
+      "lon": 127.036012,
+      "lat": 37.59038,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        }
+      ]
+    },
+    {
+      "id": "poi:59195446871",
+      "name": "디지털미디어시티역",
+      "category": "station",
+      "lon": 126.900077,
+      "lat": 37.577674,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        },
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        },
+        {
+          "label": "공항",
+          "name": "공항철도",
+          "color": "#038fa0"
+        }
+      ]
+    },
+    {
+      "id": "poi:59215317031",
+      "name": "신천역",
+      "category": "station",
+      "lon": 126.786797,
+      "lat": 37.43931,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "서해",
+          "name": "서해",
+          "color": "#40a607"
+        }
+      ]
+    },
+    {
+      "id": "poi:59215317061",
+      "name": "시흥대야역",
+      "category": "station",
+      "lon": 126.793122,
+      "lat": 37.450345,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "서해",
+          "name": "서해",
+          "color": "#40a607"
+        }
+      ]
+    },
+    {
+      "id": "poi:59215317091",
+      "name": "소새울역",
+      "category": "station",
+      "lon": 126.797097,
+      "lat": 37.468876,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "서해",
+          "name": "서해",
+          "color": "#40a607"
+        }
+      ]
+    },
+    {
+      "id": "poi:59242680241",
+      "name": "선릉역",
+      "category": "station",
+      "lon": 127.048951,
+      "lat": 37.504475,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        },
+        {
+          "label": "수인분당",
+          "name": "수인분당선",
+          "color": "#a69500"
+        }
+      ]
+    },
+    {
+      "id": "poi:59258617511",
+      "name": "강남구청역",
+      "category": "station",
+      "lon": 127.041285,
+      "lat": 37.517177,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        },
+        {
+          "label": "수인분당",
+          "name": "수인분당선",
+          "color": "#a69500"
+        }
+      ]
+    },
+    {
+      "id": "poi:59273970451",
+      "name": "모란역",
+      "category": "station",
+      "lon": 127.129154,
+      "lat": 37.433738,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "8",
+          "name": "8호선",
+          "color": "#e74e6d"
+        },
+        {
+          "label": "수인분당",
+          "name": "수인분당선",
+          "color": "#a69500"
+        }
+      ]
+    },
+    {
+      "id": "poi:59275291471",
+      "name": "강남역",
+      "category": "station",
+      "lon": 127.027557,
+      "lat": 37.49795,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        },
+        {
+          "label": "신분당",
+          "name": "신분당선",
+          "color": "#cd2234"
+        }
+      ]
+    },
+    {
+      "id": "poi:59302870811",
+      "name": "가락시장역",
+      "category": "station",
+      "lon": 127.11864,
+      "lat": 37.492532,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        },
+        {
+          "label": "8",
+          "name": "8호선",
+          "color": "#e74e6d"
+        }
+      ]
+    },
+    {
+      "id": "poi:59306989851",
+      "name": "을지로3가역",
+      "category": "station",
+      "lon": 126.992528,
+      "lat": 37.566334,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        },
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        }
+      ]
+    },
+    {
+      "id": "poi:59306989961",
+      "name": "불광역",
+      "category": "station",
+      "lon": 126.92963,
+      "lat": 37.610879,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        },
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        }
+      ]
+    },
+    {
+      "id": "poi:59336870391",
+      "name": "구의역",
+      "category": "station",
+      "lon": 127.086223,
+      "lat": 37.537168,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        }
+      ]
+    },
+    {
+      "id": "poi:59336870561",
+      "name": "강변역",
+      "category": "station",
+      "lon": 127.094741,
+      "lat": 37.535109,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        }
+      ]
+    },
+    {
+      "id": "poi:59336870571",
+      "name": "잠실나루역",
+      "category": "station",
+      "lon": 127.103829,
+      "lat": 37.520691,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        }
+      ]
+    },
+    {
+      "id": "poi:59338969951",
+      "name": "충무로역",
+      "category": "station",
+      "lon": 126.99411,
+      "lat": 37.561202,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        },
+        {
+          "label": "4",
+          "name": "4호선",
+          "color": "#0099d1"
+        }
+      ]
+    },
+    {
+      "id": "poi:59338969981",
+      "name": "약수역",
+      "category": "station",
+      "lon": 127.010622,
+      "lat": 37.554751,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        },
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        }
+      ]
+    },
+    {
+      "id": "poi:59339470061",
+      "name": "교대역",
+      "category": "station",
+      "lon": 127.013701,
+      "lat": 37.49366,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        },
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        }
+      ]
+    },
+    {
+      "id": "poi:59340120131",
+      "name": "오금역",
+      "category": "station",
+      "lon": 127.128151,
+      "lat": 37.501981,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        },
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:59355544441",
+      "name": "한양대역",
+      "category": "station",
+      "lon": 127.043667,
+      "lat": 37.555729,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        }
+      ]
+    },
+    {
+      "id": "poi:59355544501",
+      "name": "성수역",
+      "category": "station",
+      "lon": 127.056102,
+      "lat": 37.544569,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        }
+      ]
+    },
+    {
+      "id": "poi:59357380631",
+      "name": "시청역",
+      "category": "station",
+      "lon": 126.977116,
+      "lat": 37.56548,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        },
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        }
+      ]
+    },
+    {
+      "id": "poi:59357380641",
+      "name": "을지로입구역",
+      "category": "station",
+      "lon": 126.98262,
+      "lat": 37.565947,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        }
+      ]
+    },
+    {
+      "id": "poi:59357380671",
+      "name": "을지로4가역",
+      "category": "station",
+      "lon": 126.998166,
+      "lat": 37.566645,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        },
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:59357382881",
+      "name": "신당역",
+      "category": "station",
+      "lon": 127.016255,
+      "lat": 37.565386,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        },
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        }
+      ]
+    },
+    {
+      "id": "poi:59357382901",
+      "name": "상왕십리역",
+      "category": "station",
+      "lon": 127.029253,
+      "lat": 37.564391,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        }
+      ]
+    },
+    {
+      "id": "poi:59378846911",
+      "name": "신촌역",
+      "category": "station",
+      "lon": 126.93691,
+      "lat": 37.55515,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        },
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        }
+      ]
+    },
+    {
+      "id": "poi:59378846961",
+      "name": "이대역",
+      "category": "station",
+      "lon": 126.945836,
+      "lat": 37.556775,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        }
+      ]
+    },
+    {
+      "id": "poi:59378846981",
+      "name": "아현역",
+      "category": "station",
+      "lon": 126.95612,
+      "lat": 37.55743,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        }
+      ]
+    },
+    {
+      "id": "poi:59379071091",
+      "name": "지축역",
+      "category": "station",
+      "lon": 126.913928,
+      "lat": 37.648117,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        }
+      ]
+    },
+    {
+      "id": "poi:59379071141",
+      "name": "원흥역",
+      "category": "station",
+      "lon": 126.873668,
+      "lat": 37.650512,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        }
+      ]
+    },
+    {
+      "id": "poi:59379071151",
+      "name": "원당역",
+      "category": "station",
+      "lon": 126.842898,
+      "lat": 37.653048,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        }
+      ]
+    },
+    {
+      "id": "poi:59379071241",
+      "name": "화정역",
+      "category": "station",
+      "lon": 126.832577,
+      "lat": 37.634647,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        }
+      ]
+    },
+    {
+      "id": "poi:59379071251",
+      "name": "대곡역",
+      "category": "station",
+      "lon": 126.810282,
+      "lat": 37.631779,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        },
+        {
+          "label": "GTX-A",
+          "name": "GTX-A",
+          "color": "#9f6181"
+        },
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        },
+        {
+          "label": "서해",
+          "name": "서해",
+          "color": "#40a607"
+        }
+      ]
+    },
+    {
+      "id": "poi:59379071341",
+      "name": "마두역",
+      "category": "station",
+      "lon": 126.777758,
+      "lat": 37.652003,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        }
+      ]
+    },
+    {
+      "id": "poi:59379071351",
+      "name": "정발산역",
+      "category": "station",
+      "lon": 126.773263,
+      "lat": 37.659711,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        }
+      ]
+    },
+    {
+      "id": "poi:59379071371",
+      "name": "대화역",
+      "category": "station",
+      "lon": 126.747465,
+      "lat": 37.676174,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        }
+      ]
+    },
+    {
+      "id": "poi:59416510831",
+      "name": "삼송역",
+      "category": "station",
+      "lon": 126.89548,
+      "lat": 37.65312,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        }
+      ]
+    },
+    {
+      "id": "poi:59689262721",
+      "name": "마곡나루역",
+      "category": "station",
+      "lon": 126.827915,
+      "lat": 37.566219,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        },
+        {
+          "label": "공항",
+          "name": "공항철도",
+          "color": "#038fa0"
+        }
+      ]
+    },
+    {
+      "id": "poi:60333126831",
+      "name": "당산역",
+      "category": "station",
+      "lon": 126.902475,
+      "lat": 37.534598,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        },
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        }
+      ]
+    },
+    {
+      "id": "poi:60333144121",
+      "name": "문래역",
+      "category": "station",
+      "lon": 126.894874,
+      "lat": 37.518385,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        }
+      ]
+    },
+    {
+      "id": "poi:60333144291",
+      "name": "구로디지털단지역",
+      "category": "station",
+      "lon": 126.90159,
+      "lat": 37.485275,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        }
+      ]
+    },
+    {
+      "id": "poi:60333144711",
+      "name": "신대방역",
+      "category": "station",
+      "lon": 126.913392,
+      "lat": 37.487595,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        }
+      ]
+    },
+    {
+      "id": "poi:60333144811",
+      "name": "신림역",
+      "category": "station",
+      "lon": 126.929678,
+      "lat": 37.484232,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        },
+        {
+          "label": "신림",
+          "name": "신림",
+          "color": "#0781fa"
+        }
+      ]
+    },
+    {
+      "id": "poi:60333147011",
+      "name": "봉천역",
+      "category": "station",
+      "lon": 126.941941,
+      "lat": 37.482389,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        }
+      ]
+    },
+    {
+      "id": "poi:60333147111",
+      "name": "서울대입구역",
+      "category": "station",
+      "lon": 126.952713,
+      "lat": 37.481222,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        }
+      ]
+    },
+    {
+      "id": "poi:60333147241",
+      "name": "낙성대역",
+      "category": "station",
+      "lon": 126.96349,
+      "lat": 37.477063,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        }
+      ]
+    },
+    {
+      "id": "poi:60333147821",
+      "name": "방배역",
+      "category": "station",
+      "lon": 126.99771,
+      "lat": 37.481465,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        }
+      ]
+    },
+    {
+      "id": "poi:60333149931",
+      "name": "서초역",
+      "category": "station",
+      "lon": 127.007682,
+      "lat": 37.491775,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        }
+      ]
+    },
+    {
+      "id": "poi:60333149951",
+      "name": "역삼역",
+      "category": "station",
+      "lon": 127.036961,
+      "lat": 37.500823,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        }
+      ]
+    },
+    {
+      "id": "poi:60333150031",
+      "name": "삼성역",
+      "category": "station",
+      "lon": 127.063145,
+      "lat": 37.508841,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        }
+      ]
+    },
+    {
+      "id": "poi:60333150101",
+      "name": "잠실새내역",
+      "category": "station",
+      "lon": 127.085574,
+      "lat": 37.51159,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        }
+      ]
+    },
+    {
+      "id": "poi:60333150171",
+      "name": "잠실역",
+      "category": "station",
+      "lon": 127.100138,
+      "lat": 37.513215,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        },
+        {
+          "label": "8",
+          "name": "8호선",
+          "color": "#e74e6d"
+        }
+      ]
+    },
+    {
+      "id": "poi:60333644401",
+      "name": "양천구청역",
+      "category": "station",
+      "lon": 126.865944,
+      "lat": 37.512296,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        }
+      ]
+    },
+    {
+      "id": "poi:60333644481",
+      "name": "신정네거리역",
+      "category": "station",
+      "lon": 126.853048,
+      "lat": 37.519985,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        }
+      ]
+    },
+    {
+      "id": "poi:60333645451",
+      "name": "도림천역",
+      "category": "station",
+      "lon": 126.882686,
+      "lat": 37.514453,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        }
+      ]
+    },
+    {
+      "id": "poi:60335442631",
+      "name": "대청역",
+      "category": "station",
+      "lon": 127.079549,
+      "lat": 37.493626,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        }
+      ]
+    },
+    {
+      "id": "poi:60335442641",
+      "name": "학여울역",
+      "category": "station",
+      "lon": 127.069883,
+      "lat": 37.496499,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        }
+      ]
+    },
+    {
+      "id": "poi:60335442661",
+      "name": "대치역",
+      "category": "station",
+      "lon": 127.063193,
+      "lat": 37.494473,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        }
+      ]
+    },
+    {
+      "id": "poi:60335442671",
+      "name": "매봉역",
+      "category": "station",
+      "lon": 127.046977,
+      "lat": 37.487071,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        }
+      ]
+    },
+    {
+      "id": "poi:60335442751",
+      "name": "남부터미널역",
+      "category": "station",
+      "lon": 127.016346,
+      "lat": 37.484943,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        }
+      ]
+    },
+    {
+      "id": "poi:60335443911",
+      "name": "잠원역",
+      "category": "station",
+      "lon": 127.011148,
+      "lat": 37.512751,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        }
+      ]
+    },
+    {
+      "id": "poi:60335443951",
+      "name": "신사역",
+      "category": "station",
+      "lon": 127.019516,
+      "lat": 37.516109,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        },
+        {
+          "label": "신분당",
+          "name": "신분당선",
+          "color": "#cd2234"
+        }
+      ]
+    },
+    {
+      "id": "poi:60335444051",
+      "name": "압구정역",
+      "category": "station",
+      "lon": 127.028496,
+      "lat": 37.526184,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        }
+      ]
+    },
+    {
+      "id": "poi:60335444121",
+      "name": "금호역",
+      "category": "station",
+      "lon": 127.015922,
+      "lat": 37.547971,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        }
+      ]
+    },
+    {
+      "id": "poi:60335444191",
+      "name": "동대입구역",
+      "category": "station",
+      "lon": 127.00573,
+      "lat": 37.559063,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        }
+      ]
+    },
+    {
+      "id": "poi:60335444291",
+      "name": "경복궁역",
+      "category": "station",
+      "lon": 126.973527,
+      "lat": 37.575786,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        }
+      ]
+    },
+    {
+      "id": "poi:60335444341",
+      "name": "독립문역",
+      "category": "station",
+      "lon": 126.957836,
+      "lat": 37.574557,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        }
+      ]
+    },
+    {
+      "id": "poi:60335444401",
+      "name": "무악재역",
+      "category": "station",
+      "lon": 126.950347,
+      "lat": 37.582316,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        }
+      ]
+    },
+    {
+      "id": "poi:60335444441",
+      "name": "홍제역",
+      "category": "station",
+      "lon": 126.944253,
+      "lat": 37.588688,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        }
+      ]
+    },
+    {
+      "id": "poi:60335444591",
+      "name": "녹번역",
+      "category": "station",
+      "lon": 126.935729,
+      "lat": 37.600972,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        }
+      ]
+    },
+    {
+      "id": "poi:60335445011",
+      "name": "구파발역",
+      "category": "station",
+      "lon": 126.918805,
+      "lat": 37.63689,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        }
+      ]
+    },
+    {
+      "id": "poi:60357467081",
+      "name": "정부과천청사역",
+      "category": "station",
+      "lon": 126.989749,
+      "lat": 37.426471,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "4",
+          "name": "4호선",
+          "color": "#0099d1"
+        }
+      ]
+    },
+    {
+      "id": "poi:60357467111",
+      "name": "대공원역",
+      "category": "station",
+      "lon": 127.006609,
+      "lat": 37.435804,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "4",
+          "name": "4호선",
+          "color": "#0099d1"
+        }
+      ]
+    },
+    {
+      "id": "poi:60357467181",
+      "name": "선바위역",
+      "category": "station",
+      "lon": 127.002114,
+      "lat": 37.451805,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "4",
+          "name": "4호선",
+          "color": "#0099d1"
+        }
+      ]
+    },
+    {
+      "id": "poi:60361546491",
+      "name": "불암산역",
+      "category": "station",
+      "lon": 127.078927,
+      "lat": 37.670098,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "4",
+          "name": "4호선",
+          "color": "#0099d1"
+        }
+      ]
+    },
+    {
+      "id": "poi:60361603011",
+      "name": "쌍문역",
+      "category": "station",
+      "lon": 127.03458,
+      "lat": 37.648401,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "4",
+          "name": "4호선",
+          "color": "#0099d1"
+        }
+      ]
+    },
+    {
+      "id": "poi:60361603061",
+      "name": "수유역",
+      "category": "station",
+      "lon": 127.025723,
+      "lat": 37.637994,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "4",
+          "name": "4호선",
+          "color": "#0099d1"
+        }
+      ]
+    },
+    {
+      "id": "poi:60361603151",
+      "name": "미아역",
+      "category": "station",
+      "lon": 127.026109,
+      "lat": 37.626494,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "4",
+          "name": "4호선",
+          "color": "#0099d1"
+        }
+      ]
+    },
+    {
+      "id": "poi:60361603161",
+      "name": "미아사거리역",
+      "category": "station",
+      "lon": 127.030089,
+      "lat": 37.613186,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "4",
+          "name": "4호선",
+          "color": "#0099d1"
+        }
+      ]
+    },
+    {
+      "id": "poi:60361603191",
+      "name": "길음역",
+      "category": "station",
+      "lon": 127.024854,
+      "lat": 37.603161,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "4",
+          "name": "4호선",
+          "color": "#0099d1"
+        }
+      ]
+    },
+    {
+      "id": "poi:60361603251",
+      "name": "혜화역",
+      "category": "station",
+      "lon": 127.001953,
+      "lat": 37.582138,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "4",
+          "name": "4호선",
+          "color": "#0099d1"
+        }
+      ]
+    },
+    {
+      "id": "poi:60361603411",
+      "name": "명동역",
+      "category": "station",
+      "lon": 126.986375,
+      "lat": 37.560896,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "4",
+          "name": "4호선",
+          "color": "#0099d1"
+        }
+      ]
+    },
+    {
+      "id": "poi:60361603421",
+      "name": "회현역",
+      "category": "station",
+      "lon": 126.978414,
+      "lat": 37.558697,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "4",
+          "name": "4호선",
+          "color": "#0099d1"
+        }
+      ]
+    },
+    {
+      "id": "poi:60361603461",
+      "name": "숙대입구역",
+      "category": "station",
+      "lon": 126.971955,
+      "lat": 37.545135,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "4",
+          "name": "4호선",
+          "color": "#0099d1"
+        }
+      ]
+    },
+    {
+      "id": "poi:60361603471",
+      "name": "신용산역",
+      "category": "station",
+      "lon": 126.967857,
+      "lat": 37.529174,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "4",
+          "name": "4호선",
+          "color": "#0099d1"
+        }
+      ]
+    },
+    {
+      "id": "poi:60361603671",
+      "name": "사당역",
+      "category": "station",
+      "lon": 126.98167,
+      "lat": 37.476582,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        },
+        {
+          "label": "4",
+          "name": "4호선",
+          "color": "#0099d1"
+        }
+      ]
+    },
+    {
+      "id": "poi:60361603701",
+      "name": "남태령역",
+      "category": "station",
+      "lon": 126.988698,
+      "lat": 37.464657,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "4",
+          "name": "4호선",
+          "color": "#0099d1"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393130421",
+      "name": "마천역",
+      "category": "station",
+      "lon": 127.152725,
+      "lat": 37.494954,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393130451",
+      "name": "거여역",
+      "category": "station",
+      "lon": 127.143772,
+      "lat": 37.493345,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393130481",
+      "name": "개롱역",
+      "category": "station",
+      "lon": 127.134846,
+      "lat": 37.498074,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393130521",
+      "name": "방이역",
+      "category": "station",
+      "lon": 127.126037,
+      "lat": 37.508645,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393130541",
+      "name": "올림픽공원역",
+      "category": "station",
+      "lon": 127.13093,
+      "lat": 37.516147,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        },
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393130561",
+      "name": "둔촌동역",
+      "category": "station",
+      "lon": 127.136246,
+      "lat": 37.527805,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393135891",
+      "name": "상일동역",
+      "category": "station",
+      "lon": 127.16678,
+      "lat": 37.556775,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393135931",
+      "name": "고덕역",
+      "category": "station",
+      "lon": 127.156384,
+      "lat": 37.555342,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393135961",
+      "name": "명일역",
+      "category": "station",
+      "lon": 127.144083,
+      "lat": 37.551952,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393136001",
+      "name": "굽은다리역",
+      "category": "station",
+      "lon": 127.142962,
+      "lat": 37.545636,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393136021",
+      "name": "길동역",
+      "category": "station",
+      "lon": 127.140205,
+      "lat": 37.538367,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393136041",
+      "name": "강동역",
+      "category": "station",
+      "lon": 127.132598,
+      "lat": 37.535798,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393136091",
+      "name": "광나루역",
+      "category": "station",
+      "lon": 127.103528,
+      "lat": 37.5453,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393136121",
+      "name": "아차산역",
+      "category": "station",
+      "lon": 127.089795,
+      "lat": 37.551697,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393136161",
+      "name": "장한평역",
+      "category": "station",
+      "lon": 127.064567,
+      "lat": 37.561491,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393136191",
+      "name": "답십리역",
+      "category": "station",
+      "lon": 127.052701,
+      "lat": 37.566815,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393136331",
+      "name": "마장역",
+      "category": "station",
+      "lon": 127.042884,
+      "lat": 37.566096,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393136371",
+      "name": "행당역",
+      "category": "station",
+      "lon": 127.029993,
+      "lat": 37.557608,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393136381",
+      "name": "신금호역",
+      "category": "station",
+      "lon": 127.020251,
+      "lat": 37.554427,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393136471",
+      "name": "광화문역",
+      "category": "station",
+      "lon": 126.976901,
+      "lat": 37.571615,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393136521",
+      "name": "서대문역",
+      "category": "station",
+      "lon": 126.966634,
+      "lat": 37.565794,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393136581",
+      "name": "애오개역",
+      "category": "station",
+      "lon": 126.956699,
+      "lat": 37.553428,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393136611",
+      "name": "공덕역",
+      "category": "station",
+      "lon": 126.950809,
+      "lat": 37.543654,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        },
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        },
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        },
+        {
+          "label": "공항",
+          "name": "공항철도",
+          "color": "#038fa0"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393136621",
+      "name": "마포역",
+      "category": "station",
+      "lon": 126.945992,
+      "lat": 37.539635,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393136631",
+      "name": "여의나루역",
+      "category": "station",
+      "lon": 126.932527,
+      "lat": 37.526852,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393136701",
+      "name": "여의도역",
+      "category": "station",
+      "lon": 126.924303,
+      "lat": 37.52167,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        },
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393136711",
+      "name": "신길역",
+      "category": "station",
+      "lon": 126.918746,
+      "lat": 37.516649,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        },
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393136791",
+      "name": "영등포시장역",
+      "category": "station",
+      "lon": 126.905141,
+      "lat": 37.522695,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393136821",
+      "name": "영등포구청역",
+      "category": "station",
+      "lon": 126.896338,
+      "lat": 37.524018,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        },
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393136831",
+      "name": "양평역",
+      "category": "station",
+      "lon": 126.886119,
+      "lat": 37.525635,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        },
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393139881",
+      "name": "오목교역",
+      "category": "station",
+      "lon": 126.875122,
+      "lat": 37.524563,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393139921",
+      "name": "목동역",
+      "category": "station",
+      "lon": 126.864517,
+      "lat": 37.526124,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393139941",
+      "name": "신정역",
+      "category": "station",
+      "lon": 126.855971,
+      "lat": 37.525039,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393139971",
+      "name": "까치산역",
+      "category": "station",
+      "lon": 126.846524,
+      "lat": 37.532114,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        },
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393140021",
+      "name": "화곡역",
+      "category": "station",
+      "lon": 126.840398,
+      "lat": 37.541672,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393140181",
+      "name": "우장산역",
+      "category": "station",
+      "lon": 126.836321,
+      "lat": 37.548894,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393140251",
+      "name": "발산역",
+      "category": "station",
+      "lon": 126.837464,
+      "lat": 37.558497,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393140271",
+      "name": "마곡역",
+      "category": "station",
+      "lon": 126.824745,
+      "lat": 37.560249,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393140281",
+      "name": "송정역",
+      "category": "station",
+      "lon": 126.811945,
+      "lat": 37.561278,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393140301",
+      "name": "개화산역",
+      "category": "station",
+      "lon": 126.80826,
+      "lat": 37.572878,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60393140331",
+      "name": "방화역",
+      "category": "station",
+      "lon": 126.812734,
+      "lat": 37.577406,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:60416730221",
+      "name": "봉화산역",
+      "category": "station",
+      "lon": 127.091099,
+      "lat": 37.617418,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        }
+      ]
+    },
+    {
+      "id": "poi:60416730231",
+      "name": "화랑대역",
+      "category": "station",
+      "lon": 127.083712,
+      "lat": 37.619785,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        }
+      ]
+    },
+    {
+      "id": "poi:60416730261",
+      "name": "석계역",
+      "category": "station",
+      "lon": 127.065838,
+      "lat": 37.614809,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        },
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        }
+      ]
+    },
+    {
+      "id": "poi:60416730291",
+      "name": "돌곶이역",
+      "category": "station",
+      "lon": 127.056493,
+      "lat": 37.610568,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        }
+      ]
+    },
+    {
+      "id": "poi:60416730301",
+      "name": "상월곡역",
+      "category": "station",
+      "lon": 127.048275,
+      "lat": 37.606238,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        }
+      ]
+    },
+    {
+      "id": "poi:60416730331",
+      "name": "월곡역",
+      "category": "station",
+      "lon": 127.041457,
+      "lat": 37.60192,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        }
+      ]
+    },
+    {
+      "id": "poi:60416730441",
+      "name": "안암역",
+      "category": "station",
+      "lon": 127.029279,
+      "lat": 37.58627,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        }
+      ]
+    },
+    {
+      "id": "poi:60416730491",
+      "name": "창신역",
+      "category": "station",
+      "lon": 127.015246,
+      "lat": 37.579804,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        }
+      ]
+    },
+    {
+      "id": "poi:60416730501",
+      "name": "청구역",
+      "category": "station",
+      "lon": 127.013776,
+      "lat": 37.560232,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        },
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        }
+      ]
+    },
+    {
+      "id": "poi:60416730601",
+      "name": "버티고개역",
+      "category": "station",
+      "lon": 127.006588,
+      "lat": 37.548231,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        }
+      ]
+    },
+    {
+      "id": "poi:60416730741",
+      "name": "한강진역",
+      "category": "station",
+      "lon": 127.001749,
+      "lat": 37.539796,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        }
+      ]
+    },
+    {
+      "id": "poi:60416730811",
+      "name": "이태원역",
+      "category": "station",
+      "lon": 126.994368,
+      "lat": 37.5345,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        }
+      ]
+    },
+    {
+      "id": "poi:60416730821",
+      "name": "녹사평역",
+      "category": "station",
+      "lon": 126.986579,
+      "lat": 37.534922,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        }
+      ]
+    },
+    {
+      "id": "poi:60416748941",
+      "name": "효창공원앞역",
+      "category": "station",
+      "lon": 126.961334,
+      "lat": 37.539341,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        },
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        }
+      ]
+    },
+    {
+      "id": "poi:60416748991",
+      "name": "대흥역",
+      "category": "station",
+      "lon": 126.942344,
+      "lat": 37.547699,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        }
+      ]
+    },
+    {
+      "id": "poi:60416749011",
+      "name": "광흥창역",
+      "category": "station",
+      "lon": 126.931964,
+      "lat": 37.547474,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        }
+      ]
+    },
+    {
+      "id": "poi:60416749021",
+      "name": "상수역",
+      "category": "station",
+      "lon": 126.922892,
+      "lat": 37.547759,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        }
+      ]
+    },
+    {
+      "id": "poi:60416749071",
+      "name": "망원역",
+      "category": "station",
+      "lon": 126.91013,
+      "lat": 37.556026,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        }
+      ]
+    },
+    {
+      "id": "poi:60416749091",
+      "name": "마포구청역",
+      "category": "station",
+      "lon": 126.903366,
+      "lat": 37.563558,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        }
+      ]
+    },
+    {
+      "id": "poi:60416749121",
+      "name": "월드컵경기장역",
+      "category": "station",
+      "lon": 126.899316,
+      "lat": 37.570191,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        }
+      ]
+    },
+    {
+      "id": "poi:60416749151",
+      "name": "증산역",
+      "category": "station",
+      "lon": 126.90991,
+      "lat": 37.584144,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        }
+      ]
+    },
+    {
+      "id": "poi:60416749161",
+      "name": "새절역",
+      "category": "station",
+      "lon": 126.913794,
+      "lat": 37.591651,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        }
+      ]
+    },
+    {
+      "id": "poi:60416749171",
+      "name": "구산역",
+      "category": "station",
+      "lon": 126.917217,
+      "lat": 37.611248,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        }
+      ]
+    },
+    {
+      "id": "poi:60416749271",
+      "name": "독바위역",
+      "category": "station",
+      "lon": 126.93302,
+      "lat": 37.618336,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        }
+      ]
+    },
+    {
+      "id": "poi:60416749391",
+      "name": "역촌역",
+      "category": "station",
+      "lon": 126.922758,
+      "lat": 37.606072,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        }
+      ]
+    },
+    {
+      "id": "poi:60466338571",
+      "name": "장암역",
+      "category": "station",
+      "lon": 127.05291,
+      "lat": 37.699972,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:60466338581",
+      "name": "어린이대공원역",
+      "category": "station",
+      "lon": 127.074389,
+      "lat": 37.547601,
+      "tier": 3,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:60466338611",
+      "name": "군자역",
+      "category": "station",
+      "lon": 127.07956,
+      "lat": 37.557243,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        },
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:60466338621",
+      "name": "중곡역",
+      "category": "station",
+      "lon": 127.084517,
+      "lat": 37.566304,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:60466338631",
+      "name": "용마산역",
+      "category": "station",
+      "lon": 127.086582,
+      "lat": 37.573992,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:60466338641",
+      "name": "사가정역",
+      "category": "station",
+      "lon": 127.088411,
+      "lat": 37.580696,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:60466338651",
+      "name": "면목역",
+      "category": "station",
+      "lon": 127.087601,
+      "lat": 37.588399,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:60466338681",
+      "name": "상봉역",
+      "category": "station",
+      "lon": 127.08559,
+      "lat": 37.596084,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        },
+        {
+          "label": "경의중앙",
+          "name": "경의·중앙선",
+          "color": "#5f9c82"
+        },
+        {
+          "label": "경춘선",
+          "name": "경춘선",
+          "color": "#0ba382"
+        }
+      ]
+    },
+    {
+      "id": "poi:60466338691",
+      "name": "중화역",
+      "category": "station",
+      "lon": 127.079517,
+      "lat": 37.601627,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:60466338701",
+      "name": "먹골역",
+      "category": "station",
+      "lon": 127.07765,
+      "lat": 37.611444,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:60466338711",
+      "name": "태릉입구역",
+      "category": "station",
+      "lon": 127.075671,
+      "lat": 37.61769,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "6",
+          "name": "6호선",
+          "color": "#d08d1a"
+        },
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:60466338741",
+      "name": "공릉역",
+      "category": "station",
+      "lon": 127.073042,
+      "lat": 37.625636,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:60466338751",
+      "name": "하계역",
+      "category": "station",
+      "lon": 127.068252,
+      "lat": 37.636019,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:60466338761",
+      "name": "중계역",
+      "category": "station",
+      "lon": 127.063875,
+      "lat": 37.645538,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:60466338771",
+      "name": "노원역",
+      "category": "station",
+      "lon": 127.060495,
+      "lat": 37.654589,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "4",
+          "name": "4호선",
+          "color": "#0099d1"
+        },
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:60466338801",
+      "name": "마들역",
+      "category": "station",
+      "lon": 127.057722,
+      "lat": 37.665036,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:60466338811",
+      "name": "수락산역",
+      "category": "station",
+      "lon": 127.055345,
+      "lat": 37.677804,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:60489535661",
+      "name": "광명사거리역",
+      "category": "station",
+      "lon": 126.854458,
+      "lat": 37.479422,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:60489535671",
+      "name": "철산역",
+      "category": "station",
+      "lon": 126.867596,
+      "lat": 37.476003,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:60489535691",
+      "name": "남구로역",
+      "category": "station",
+      "lon": 126.886666,
+      "lat": 37.48536,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:60489535721",
+      "name": "대림역",
+      "category": "station",
+      "lon": 126.894933,
+      "lat": 37.493439,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        },
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:60489535751",
+      "name": "신풍역",
+      "category": "station",
+      "lon": 126.908875,
+      "lat": 37.500168,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:60489535761",
+      "name": "보라매역",
+      "category": "station",
+      "lon": 126.920376,
+      "lat": 37.499929,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        },
+        {
+          "label": "신림",
+          "name": "신림",
+          "color": "#0781fa"
+        }
+      ]
+    },
+    {
+      "id": "poi:60489535781",
+      "name": "장승배기역",
+      "category": "station",
+      "lon": 126.939281,
+      "lat": 37.505019,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:60489535791",
+      "name": "상도역",
+      "category": "station",
+      "lon": 126.947671,
+      "lat": 37.503215,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:60489535801",
+      "name": "숭실대입구역",
+      "category": "station",
+      "lon": 126.954135,
+      "lat": 37.495686,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:60489535811",
+      "name": "남성역",
+      "category": "station",
+      "lon": 126.971891,
+      "lat": 37.484356,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:60489535831",
+      "name": "내방역",
+      "category": "station",
+      "lon": 126.993552,
+      "lat": 37.487646,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:60489535841",
+      "name": "반포역",
+      "category": "station",
+      "lon": 127.011636,
+      "lat": 37.508177,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:60489547851",
+      "name": "논현역",
+      "category": "station",
+      "lon": 127.021362,
+      "lat": 37.510981,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        },
+        {
+          "label": "신분당",
+          "name": "신분당선",
+          "color": "#cd2234"
+        }
+      ]
+    },
+    {
+      "id": "poi:60489547861",
+      "name": "학동역",
+      "category": "station",
+      "lon": 127.030749,
+      "lat": 37.513956,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:60489547871",
+      "name": "청담역",
+      "category": "station",
+      "lon": 127.051676,
+      "lat": 37.519091,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:60489551981",
+      "name": "자양역",
+      "category": "station",
+      "lon": 127.066739,
+      "lat": 37.531531,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:60491508421",
+      "name": "용두역",
+      "category": "station",
+      "lon": 127.038066,
+      "lat": 37.574073,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        }
+      ]
+    },
+    {
+      "id": "poi:60491508431",
+      "name": "신답역",
+      "category": "station",
+      "lon": 127.047127,
+      "lat": 37.569719,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "2",
+          "name": "2호선",
+          "color": "#10a643"
+        }
+      ]
+    },
+    {
+      "id": "poi:60506549471",
+      "name": "삼산체육관역",
+      "category": "station",
+      "lon": 126.742347,
+      "lat": 37.506496,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:60506549491",
+      "name": "신중동역",
+      "category": "station",
+      "lon": 126.776235,
+      "lat": 37.50304,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:60506549501",
+      "name": "춘의역",
+      "category": "station",
+      "lon": 126.787199,
+      "lat": 37.50373,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:60506549511",
+      "name": "부천종합운동장역",
+      "category": "station",
+      "lon": 126.79729,
+      "lat": 37.505458,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        },
+        {
+          "label": "서해",
+          "name": "서해",
+          "color": "#40a607"
+        }
+      ]
+    },
+    {
+      "id": "poi:60506549521",
+      "name": "까치울역",
+      "category": "station",
+      "lon": 126.811382,
+      "lat": 37.506241,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:60506549531",
+      "name": "천왕역",
+      "category": "station",
+      "lon": 126.838923,
+      "lat": 37.486365,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "7",
+          "name": "7호선",
+          "color": "#657931"
+        }
+      ]
+    },
+    {
+      "id": "poi:60943269211",
+      "name": "수진역",
+      "category": "station",
+      "lon": 127.140688,
+      "lat": 37.437444,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "8",
+          "name": "8호선",
+          "color": "#e74e6d"
+        }
+      ]
+    },
+    {
+      "id": "poi:60943269221",
+      "name": "신흥역",
+      "category": "station",
+      "lon": 127.147661,
+      "lat": 37.441005,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "8",
+          "name": "8호선",
+          "color": "#e74e6d"
+        }
+      ]
+    },
+    {
+      "id": "poi:60943269231",
+      "name": "단대오거리역",
+      "category": "station",
+      "lon": 127.156781,
+      "lat": 37.445085,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "8",
+          "name": "8호선",
+          "color": "#e74e6d"
+        }
+      ]
+    },
+    {
+      "id": "poi:60943269241",
+      "name": "남한산성입구역",
+      "category": "station",
+      "lon": 127.159812,
+      "lat": 37.451554,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "8",
+          "name": "8호선",
+          "color": "#e74e6d"
+        }
+      ]
+    },
+    {
+      "id": "poi:60943269251",
+      "name": "산성역",
+      "category": "station",
+      "lon": 127.149936,
+      "lat": 37.456869,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "8",
+          "name": "8호선",
+          "color": "#e74e6d"
+        }
+      ]
+    },
+    {
+      "id": "poi:60943269261",
+      "name": "남위례역",
+      "category": "station",
+      "lon": 127.139218,
+      "lat": 37.462771,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "8",
+          "name": "8호선",
+          "color": "#e74e6d"
+        }
+      ]
+    },
+    {
+      "id": "poi:60943269271",
+      "name": "장지역",
+      "category": "station",
+      "lon": 127.12607,
+      "lat": 37.47889,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "8",
+          "name": "8호선",
+          "color": "#e74e6d"
+        }
+      ]
+    },
+    {
+      "id": "poi:60943269301",
+      "name": "문정역",
+      "category": "station",
+      "lon": 127.122518,
+      "lat": 37.485837,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "8",
+          "name": "8호선",
+          "color": "#e74e6d"
+        }
+      ]
+    },
+    {
+      "id": "poi:60943269391",
+      "name": "송파역",
+      "category": "station",
+      "lon": 127.112181,
+      "lat": 37.499725,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "8",
+          "name": "8호선",
+          "color": "#e74e6d"
+        }
+      ]
+    },
+    {
+      "id": "poi:60943269401",
+      "name": "석촌역",
+      "category": "station",
+      "lon": 127.107112,
+      "lat": 37.505296,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "8",
+          "name": "8호선",
+          "color": "#e74e6d"
+        },
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        }
+      ]
+    },
+    {
+      "id": "poi:60943269411",
+      "name": "몽촌토성역",
+      "category": "station",
+      "lon": 127.112669,
+      "lat": 37.517534,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "8",
+          "name": "8호선",
+          "color": "#e74e6d"
+        }
+      ]
+    },
+    {
+      "id": "poi:60943269421",
+      "name": "강동구청역",
+      "category": "station",
+      "lon": 127.120625,
+      "lat": 37.530693,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "8",
+          "name": "8호선",
+          "color": "#e74e6d"
+        }
+      ]
+    },
+    {
+      "id": "poi:60943269431",
+      "name": "암사역",
+      "category": "station",
+      "lon": 127.12754,
+      "lat": 37.550106,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "8",
+          "name": "8호선",
+          "color": "#e74e6d"
+        }
+      ]
+    },
+    {
+      "id": "poi:61027063731",
+      "name": "둔촌오륜역",
+      "category": "station",
+      "lon": 127.138419,
+      "lat": 37.51984,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        }
+      ]
+    },
+    {
+      "id": "poi:61027063801",
+      "name": "한성백제역",
+      "category": "station",
+      "lon": 127.11621,
+      "lat": 37.51667,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        }
+      ]
+    },
+    {
+      "id": "poi:61027067851",
+      "name": "송파나루역",
+      "category": "station",
+      "lon": 127.112793,
+      "lat": 37.511245,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        }
+      ]
+    },
+    {
+      "id": "poi:61027067951",
+      "name": "석촌고분역",
+      "category": "station",
+      "lon": 127.096614,
+      "lat": 37.502445,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        }
+      ]
+    },
+    {
+      "id": "poi:61027068021",
+      "name": "삼전역",
+      "category": "station",
+      "lon": 127.08721,
+      "lat": 37.504534,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        }
+      ]
+    },
+    {
+      "id": "poi:61258287161",
+      "name": "백석역",
+      "category": "station",
+      "lon": 126.788036,
+      "lat": 37.643036,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        }
+      ]
+    },
+    {
+      "id": "poi:62716254861",
+      "name": "역곡역",
+      "category": "station",
+      "lon": 126.811811,
+      "lat": 37.48522,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        }
+      ]
+    },
+    {
+      "id": "poi:63124842261",
+      "name": "야탑역",
+      "category": "station",
+      "lon": 127.128714,
+      "lat": 37.411299,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "수인분당",
+          "name": "수인분당선",
+          "color": "#a69500"
+        }
+      ]
+    },
+    {
+      "id": "poi:63124842271",
+      "name": "태평역",
+      "category": "station",
+      "lon": 127.127743,
+      "lat": 37.43971,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "수인분당",
+          "name": "수인분당선",
+          "color": "#a69500"
+        }
+      ]
+    },
+    {
+      "id": "poi:63124842281",
+      "name": "가천대역",
+      "category": "station",
+      "lon": 127.126724,
+      "lat": 37.448701,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "수인분당",
+          "name": "수인분당선",
+          "color": "#a69500"
+        }
+      ]
+    },
+    {
+      "id": "poi:63124842291",
+      "name": "대모산입구역",
+      "category": "station",
+      "lon": 127.072747,
+      "lat": 37.491387,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "수인분당",
+          "name": "수인분당선",
+          "color": "#a69500"
+        }
+      ]
+    },
+    {
+      "id": "poi:63124842301",
+      "name": "개포동역",
+      "category": "station",
+      "lon": 127.066042,
+      "lat": 37.489102,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "수인분당",
+          "name": "수인분당선",
+          "color": "#a69500"
+        }
+      ]
+    },
+    {
+      "id": "poi:63124842311",
+      "name": "구룡역",
+      "category": "station",
+      "lon": 127.05946,
+      "lat": 37.486927,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "수인분당",
+          "name": "수인분당선",
+          "color": "#a69500"
+        }
+      ]
+    },
+    {
+      "id": "poi:63124842321",
+      "name": "한티역",
+      "category": "station",
+      "lon": 127.052867,
+      "lat": 37.496269,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "수인분당",
+          "name": "수인분당선",
+          "color": "#a69500"
+        }
+      ]
+    },
+    {
+      "id": "poi:63124842331",
+      "name": "압구정로데오역",
+      "category": "station",
+      "lon": 127.040711,
+      "lat": 37.527813,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "수인분당",
+          "name": "수인분당선",
+          "color": "#a69500"
+        }
+      ]
+    },
+    {
+      "id": "poi:63124842341",
+      "name": "서울숲역",
+      "category": "station",
+      "lon": 127.04474,
+      "lat": 37.543591,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "수인분당",
+          "name": "수인분당선",
+          "color": "#a69500"
+        }
+      ]
+    },
+    {
+      "id": "poi:66411988071",
+      "name": "양재시민의숲역",
+      "category": "station",
+      "lon": 127.038479,
+      "lat": 37.469711,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "신분당",
+          "name": "신분당선",
+          "color": "#cd2234"
+        }
+      ]
+    },
+    {
+      "id": "poi:66411988081",
+      "name": "청계산입구역",
+      "category": "station",
+      "lon": 127.054642,
+      "lat": 37.448309,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "신분당",
+          "name": "신분당선",
+          "color": "#cd2234"
+        }
+      ]
+    },
+    {
+      "id": "poi:67348949721",
+      "name": "성신여대입구역",
+      "category": "station",
+      "lon": 127.016475,
+      "lat": 37.592676,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "4",
+          "name": "4호선",
+          "color": "#0099d1"
+        },
+        {
+          "label": "우이신설",
+          "name": "우이신설경전철",
+          "color": "#878787"
+        }
+      ]
+    },
+    {
+      "id": "poi:72074426161",
+      "name": "종로3가역",
+      "category": "station",
+      "lon": 126.992324,
+      "lat": 37.570442,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "1",
+          "name": "1호선",
+          "color": "#052f93"
+        },
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        },
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:72654805041",
+      "name": "별내별가람역",
+      "category": "station",
+      "lon": 127.116269,
+      "lat": 37.667826,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "4",
+          "name": "4호선",
+          "color": "#0099d1"
+        }
+      ]
+    },
+    {
+      "id": "poi:77978619891",
+      "name": "미사역",
+      "category": "station",
+      "lon": 127.192824,
+      "lat": 37.563056,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "5",
+          "name": "5호선",
+          "color": "#a95094"
+        }
+      ]
+    },
+    {
+      "id": "poi:82329329471",
+      "name": "개화역",
+      "category": "station",
+      "lon": 126.797665,
+      "lat": 37.578537,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        }
+      ]
+    },
+    {
+      "id": "poi:83342349781",
+      "name": "주엽역",
+      "category": "station",
+      "lon": 126.761236,
+      "lat": 37.670153,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "3",
+          "name": "3호선",
+          "color": "#de6d00"
+        }
+      ]
+    },
+    {
+      "id": "poi:84015345661",
+      "name": "관악산역",
+      "category": "station",
+      "lon": 126.945326,
+      "lat": 37.468736,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "신림",
+          "name": "신림",
+          "color": "#0781fa"
+        }
+      ]
+    },
+    {
+      "id": "poi:84015345681",
+      "name": "서울대벤처타운역",
+      "category": "station",
+      "lon": 126.933707,
+      "lat": 37.472001,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "신림",
+          "name": "신림",
+          "color": "#0781fa"
+        }
+      ]
+    },
+    {
+      "id": "poi:84015345711",
+      "name": "당곡역",
+      "category": "station",
+      "lon": 126.927801,
+      "lat": 37.489698,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "신림",
+          "name": "신림",
+          "color": "#0781fa"
+        }
+      ]
+    },
+    {
+      "id": "poi:84015345721",
+      "name": "보라매병원역",
+      "category": "station",
+      "lon": 126.924271,
+      "lat": 37.492962,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "신림",
+          "name": "신림",
+          "color": "#0781fa"
+        }
+      ]
+    },
+    {
+      "id": "poi:84015345731",
+      "name": "보라매공원역",
+      "category": "station",
+      "lon": 126.918188,
+      "lat": 37.495295,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "신림",
+          "name": "신림",
+          "color": "#0781fa"
+        }
+      ]
+    },
+    {
+      "id": "poi:84015345781",
+      "name": "샛강역",
+      "category": "station",
+      "lon": 126.928284,
+      "lat": 37.517364,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        },
+        {
+          "label": "신림",
+          "name": "신림",
+          "color": "#0781fa"
+        }
+      ]
+    },
+    {
+      "id": "poi:91659881191",
+      "name": "상계역",
+      "category": "station",
+      "lon": 127.073439,
+      "lat": 37.660764,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "4",
+          "name": "4호선",
+          "color": "#0099d1"
+        }
+      ]
+    },
+    {
+      "id": "poi:91815797881",
+      "name": "선유도역",
+      "category": "station",
+      "lon": 126.893983,
+      "lat": 37.537861,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        }
+      ]
+    },
+    {
+      "id": "poi:91815797891",
+      "name": "신목동역",
+      "category": "station",
+      "lon": 126.883174,
+      "lat": 37.544212,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        }
+      ]
+    },
+    {
+      "id": "poi:91815797901",
+      "name": "염창역",
+      "category": "station",
+      "lon": 126.875396,
+      "lat": 37.547031,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        }
+      ]
+    },
+    {
+      "id": "poi:91815797911",
+      "name": "등촌역",
+      "category": "station",
+      "lon": 126.864576,
+      "lat": 37.551153,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        }
+      ]
+    },
+    {
+      "id": "poi:91815797921",
+      "name": "증미역",
+      "category": "station",
+      "lon": 126.861818,
+      "lat": 37.557511,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        }
+      ]
+    },
+    {
+      "id": "poi:91815797931",
+      "name": "가양역",
+      "category": "station",
+      "lon": 126.855102,
+      "lat": 37.561142,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        }
+      ]
+    },
+    {
+      "id": "poi:91815797941",
+      "name": "양천향교역",
+      "category": "station",
+      "lon": 126.841294,
+      "lat": 37.568452,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        }
+      ]
+    },
+    {
+      "id": "poi:91815797951",
+      "name": "신방화역",
+      "category": "station",
+      "lon": 126.816591,
+      "lat": 37.567499,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        }
+      ]
+    },
+    {
+      "id": "poi:91815797961",
+      "name": "공항시장역",
+      "category": "station",
+      "lon": 126.810599,
+      "lat": 37.56366,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "9",
+          "name": "9호선",
+          "color": "#b58600"
+        }
+      ]
+    },
+    {
+      "id": "poi:94177288971",
+      "name": "원종역",
+      "category": "station",
+      "lon": 126.804859,
+      "lat": 37.523844,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "서해",
+          "name": "서해",
+          "color": "#40a607"
+        }
+      ]
+    },
+    {
+      "id": "poi:94597395981",
+      "name": "정릉역",
+      "category": "station",
+      "lon": 127.013353,
+      "lat": 37.60283,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "우이신설",
+          "name": "우이신설경전철",
+          "color": "#878787"
+        }
+      ]
+    },
+    {
+      "id": "poi:94597396091",
+      "name": "솔샘역",
+      "category": "station",
+      "lon": 127.013841,
+      "lat": 37.620168,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "우이신설",
+          "name": "우이신설경전철",
+          "color": "#878787"
+        }
+      ]
+    },
+    {
+      "id": "poi:94597396121",
+      "name": "삼양사거리역",
+      "category": "station",
+      "lon": 127.020493,
+      "lat": 37.6212,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "우이신설",
+          "name": "우이신설경전철",
+          "color": "#878787"
+        }
+      ]
+    },
+    {
+      "id": "poi:94597396141",
+      "name": "삼양역",
+      "category": "station",
+      "lon": 127.018175,
+      "lat": 37.626923,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "우이신설",
+          "name": "우이신설경전철",
+          "color": "#878787"
+        }
+      ]
+    },
+    {
+      "id": "poi:94597396161",
+      "name": "화계역",
+      "category": "station",
+      "lon": 127.017488,
+      "lat": 37.634027,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "우이신설",
+          "name": "우이신설경전철",
+          "color": "#878787"
+        }
+      ]
+    },
+    {
+      "id": "poi:94597396181",
+      "name": "가오리역",
+      "category": "station",
+      "lon": 127.016571,
+      "lat": 37.641975,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "우이신설",
+          "name": "우이신설경전철",
+          "color": "#878787"
+        }
+      ]
+    },
+    {
+      "id": "poi:94597396261",
+      "name": "솔밭공원역",
+      "category": "station",
+      "lon": 127.013251,
+      "lat": 37.656072,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "우이신설",
+          "name": "우이신설경전철",
+          "color": "#878787"
+        }
+      ]
+    },
+    {
+      "id": "poi:94597396271",
+      "name": "북한산우이역",
+      "category": "station",
+      "lon": 127.012414,
+      "lat": 37.663325,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "우이신설",
+          "name": "우이신설경전철",
+          "color": "#878787"
+        }
+      ]
+    },
+    {
+      "id": "poi:96877383441",
+      "name": "인천대공원역",
+      "category": "station",
+      "lon": 126.752813,
+      "lat": 37.448548,
+      "tier": 2,
+      "lines": [
+        {
+          "label": "인천2호선",
+          "name": "인천2호선",
+          "color": "#cf843c"
+        }
+      ]
+    },
+    {
+      "id": "osm-apartment:way:503503947",
+      "name": "잠실래미안아이파크",
+      "category": "apartment",
+      "lon": 127.111063,
+      "lat": 37.518194,
+      "tier": 2,
+      "footprintM2": 111309,
+      "sourceUrl": "https://www.openstreetmap.org/way/503503947"
+    },
+    {
+      "id": "osm-apartment:way:503503948",
+      "name": "잠실르엘",
+      "category": "apartment",
+      "lon": 127.106888,
+      "lat": 37.517408,
+      "tier": 2,
+      "footprintM2": 69913,
+      "sourceUrl": "https://www.openstreetmap.org/way/503503948"
+    },
+    {
+      "id": "osm-apartment:way:471733248",
+      "name": "잠실 파크리오",
+      "category": "apartment",
+      "lon": 127.109961,
+      "lat": 37.520936,
+      "tier": 2,
+      "footprintM2": 259404,
+      "sourceUrl": "https://www.openstreetmap.org/way/471733248"
+    },
+    {
+      "id": "osm-apartment:way:867120831",
+      "name": "장미2차아파트",
+      "category": "apartment",
+      "lon": 127.102514,
+      "lat": 37.520292,
+      "tier": 2,
+      "footprintM2": 74209,
+      "sourceUrl": "https://www.openstreetmap.org/way/867120831"
+    },
+    {
+      "id": "osm-apartment:way:418647645",
+      "name": "올림픽선수기자촌2단지아파트",
+      "category": "apartment",
+      "lon": 127.135493,
+      "lat": 37.517589,
+      "tier": 2,
+      "footprintM2": 112140,
+      "sourceUrl": "https://www.openstreetmap.org/way/418647645"
+    },
+    {
+      "id": "osm-apartment:way:418641946",
+      "name": "올림픽훼미리타운아파트 2단지",
+      "category": "apartment",
+      "lon": 127.115216,
+      "lat": 37.488648,
+      "tier": 2,
+      "footprintM2": 179205,
+      "sourceUrl": "https://www.openstreetmap.org/way/418641946"
+    },
+    {
+      "id": "osm-apartment:way:474304292",
+      "name": "송파헬리오시티",
+      "category": "apartment",
+      "lon": 127.107424,
+      "lat": 37.497405,
+      "tier": 2,
+      "footprintM2": 355859,
+      "sourceUrl": "https://www.openstreetmap.org/way/474304292"
+    },
+    {
+      "id": "osm-apartment:way:1011006715",
+      "name": "수서주공1단지아파트",
+      "category": "apartment",
+      "lon": 127.100311,
+      "lat": 37.491037,
+      "tier": 2,
+      "footprintM2": 55486,
+      "sourceUrl": "https://www.openstreetmap.org/way/1011006715"
+    },
+    {
+      "id": "osm-apartment:way:361603599",
+      "name": "개포현대2차아파트",
+      "category": "apartment",
+      "lon": 127.051553,
+      "lat": 37.482538,
+      "tier": 2,
+      "footprintM2": 61432,
+      "sourceUrl": "https://www.openstreetmap.org/way/361603599"
+    },
+    {
+      "id": "osm-apartment:way:362627807",
+      "name": "개포경남아파트",
+      "category": "apartment",
+      "lon": 127.054234,
+      "lat": 37.484448,
+      "tier": 2,
+      "footprintM2": 54568,
+      "sourceUrl": "https://www.openstreetmap.org/way/362627807"
+    },
+    {
+      "id": "osm-apartment:way:379530474",
+      "name": "한보은마아파트",
+      "category": "apartment",
+      "lon": 127.065446,
+      "lat": 37.497608,
+      "tier": 2,
+      "footprintM2": 218879,
+      "sourceUrl": "https://www.openstreetmap.org/way/379530474"
+    },
+    {
+      "id": "osm-apartment:way:443011156",
+      "name": "래미안대치팰리스1단지아파트",
+      "category": "apartment",
+      "lon": 127.058144,
+      "lat": 37.494229,
+      "tier": 2,
+      "footprintM2": 69998,
+      "sourceUrl": "https://www.openstreetmap.org/way/443011156"
+    },
+    {
+      "id": "osm-apartment:way:469110558",
+      "name": "도곡렉슬아파트",
+      "category": "apartment",
+      "lon": 127.050608,
+      "lat": 37.493674,
+      "tier": 2,
+      "footprintM2": 146746,
+      "sourceUrl": "https://www.openstreetmap.org/way/469110558"
+    },
+    {
+      "id": "osm-apartment:way:165196918",
+      "name": "반포자이아파트",
+      "category": "apartment",
+      "lon": 127.013619,
+      "lat": 37.506309,
+      "tier": 2,
+      "footprintM2": 199556,
+      "sourceUrl": "https://www.openstreetmap.org/way/165196918"
+    },
+    {
+      "id": "osm-apartment:way:305066918",
+      "name": "래미안 퍼스티지 아파트",
+      "category": "apartment",
+      "lon": 126.998423,
+      "lat": 37.502766,
+      "tier": 2,
+      "footprintM2": 143273,
+      "sourceUrl": "https://www.openstreetmap.org/way/305066918"
+    },
+    {
+      "id": "osm-apartment:way:412614475",
+      "name": "아크로리버파크 아파트",
+      "category": "apartment",
+      "lon": 126.994074,
+      "lat": 37.506085,
+      "tier": 2,
+      "footprintM2": 71188,
+      "sourceUrl": "https://www.openstreetmap.org/way/412614475"
+    },
+    {
+      "id": "osm-apartment:way:412953594",
+      "name": "래미안원베일리아파트",
+      "category": "apartment",
+      "lon": 126.998126,
+      "lat": 37.506799,
+      "tier": 2,
+      "footprintM2": 137577,
+      "sourceUrl": "https://www.openstreetmap.org/way/412953594"
+    },
+    {
+      "id": "osm-apartment:way:413354843",
+      "name": "신반포2차아파트",
+      "category": "apartment",
+      "lon": 127.002662,
+      "lat": 37.51059,
+      "tier": 2,
+      "footprintM2": 101729,
+      "sourceUrl": "https://www.openstreetmap.org/way/413354843"
+    },
+    {
+      "id": "osm-apartment:way:413367377",
+      "name": "신반포4차아파트",
+      "category": "apartment",
+      "lon": 127.005806,
+      "lat": 37.508483,
+      "tier": 2,
+      "footprintM2": 72263,
+      "sourceUrl": "https://www.openstreetmap.org/way/413367377"
+    },
+    {
+      "id": "osm-apartment:way:414891728",
+      "name": "반포미도1차아파트",
+      "category": "apartment",
+      "lon": 127.008764,
+      "lat": 37.501236,
+      "tier": 2,
+      "footprintM2": 60694,
+      "sourceUrl": "https://www.openstreetmap.org/way/414891728"
+    },
+    {
+      "id": "osm-apartment:way:998065952",
+      "name": "신반포메이플자이아파트",
+      "category": "apartment",
+      "lon": 127.011606,
+      "lat": 37.511784,
+      "tier": 2,
+      "footprintM2": 72065,
+      "sourceUrl": "https://www.openstreetmap.org/way/998065952"
+    },
+    {
+      "id": "osm-apartment:way:305066917",
+      "name": "신동아아파트",
+      "category": "apartment",
+      "lon": 126.988787,
+      "lat": 37.518087,
+      "tier": 2,
+      "footprintM2": 104303,
+      "sourceUrl": "https://www.openstreetmap.org/way/305066917"
+    },
+    {
+      "id": "osm-apartment:way:432735924",
+      "name": "현대1,2차아파트",
+      "category": "apartment",
+      "lon": 127.028338,
+      "lat": 37.532787,
+      "tier": 2,
+      "footprintM2": 68296,
+      "sourceUrl": "https://www.openstreetmap.org/way/432735924"
+    },
+    {
+      "id": "osm-apartment:way:432735930",
+      "name": "현대6,7차아파트압구",
+      "category": "apartment",
+      "lon": 127.030114,
+      "lat": 37.529046,
+      "tier": 2,
+      "footprintM2": 73651,
+      "sourceUrl": "https://www.openstreetmap.org/way/432735930"
+    },
+    {
+      "id": "osm-apartment:way:436407134",
+      "name": "신현대아파트",
+      "category": "apartment",
+      "lon": 127.024356,
+      "lat": 37.52788,
+      "tier": 2,
+      "footprintM2": 150750,
+      "sourceUrl": "https://www.openstreetmap.org/way/436407134"
+    },
+    {
+      "id": "osm-apartment:way:276726789",
+      "name": "목동신시가지6단지",
+      "category": "apartment",
+      "lon": 126.885359,
+      "lat": 37.534596,
+      "tier": 2,
+      "footprintM2": 98461,
+      "sourceUrl": "https://www.openstreetmap.org/way/276726789"
+    },
+    {
+      "id": "osm-apartment:way:276727552",
+      "name": "목동3단지아파트",
+      "category": "apartment",
+      "lon": 126.873108,
+      "lat": 37.534389,
+      "tier": 2,
+      "footprintM2": 151058,
+      "sourceUrl": "https://www.openstreetmap.org/way/276727552"
+    },
+    {
+      "id": "osm-apartment:way:276727823",
+      "name": "목동2단지아파트",
+      "category": "apartment",
+      "lon": 126.87624,
+      "lat": 37.537717,
+      "tier": 2,
+      "footprintM2": 159484,
+      "sourceUrl": "https://www.openstreetmap.org/way/276727823"
+    },
+    {
+      "id": "osm-apartment:way:380232861",
+      "name": "목련아파트",
+      "category": "apartment",
+      "lon": 127.069064,
+      "lat": 37.646709,
+      "tier": 2,
+      "footprintM2": 64871,
+      "sourceUrl": "https://www.openstreetmap.org/way/380232861"
+    },
+    {
+      "id": "osm-apartment:way:380838520",
+      "name": "중계주공5단지아파트",
+      "category": "apartment",
+      "lon": 127.075756,
+      "lat": 37.652642,
+      "tier": 2,
+      "footprintM2": 94504,
+      "sourceUrl": "https://www.openstreetmap.org/way/380838520"
+    },
+    {
+      "id": "osm-apartment:way:380901787",
+      "name": "목화아파트",
+      "category": "apartment",
+      "lon": 127.069671,
+      "lat": 37.643416,
+      "tier": 2,
+      "footprintM2": 64700,
+      "sourceUrl": "https://www.openstreetmap.org/way/380901787"
+    },
+    {
+      "id": "osm-apartment:way:380906243",
+      "name": "중계주공9단지아파트",
+      "category": "apartment",
+      "lon": 127.074109,
+      "lat": 37.642943,
+      "tier": 2,
+      "footprintM2": 60157,
+      "sourceUrl": "https://www.openstreetmap.org/way/380906243"
+    },
+    {
+      "id": "osm-apartment:way:669367015",
+      "name": "라이프청구신동아아파트",
+      "category": "apartment",
+      "lon": 127.079686,
+      "lat": 37.652033,
+      "tier": 2,
+      "footprintM2": 50995,
+      "sourceUrl": "https://www.openstreetmap.org/way/669367015"
+    },
+    {
+      "id": "osm-apartment:way:380307804",
+      "name": "월계미성아파트",
+      "category": "apartment",
+      "lon": 127.067686,
+      "lat": 37.621112,
+      "tier": 2,
+      "footprintM2": 83919,
+      "sourceUrl": "https://www.openstreetmap.org/way/380307804"
+    },
+    {
+      "id": "osm-apartment:way:380307809",
+      "name": "삼호4차 아파트",
+      "category": "apartment",
+      "lon": 127.064774,
+      "lat": 37.626602,
+      "tier": 2,
+      "footprintM2": 53300,
+      "sourceUrl": "https://www.openstreetmap.org/way/380307809"
+    },
+    {
+      "id": "osm-apartment:way:380910505",
+      "name": "극동건영벽산아파트",
+      "category": "apartment",
+      "lon": 127.064,
+      "lat": 37.635306,
+      "tier": 2,
+      "footprintM2": 64580,
+      "sourceUrl": "https://www.openstreetmap.org/way/380910505"
+    },
+    {
+      "id": "osm-apartment:way:380910506",
+      "name": "현대우성아파트",
+      "category": "apartment",
+      "lon": 127.066346,
+      "lat": 37.636704,
+      "tier": 2,
+      "footprintM2": 63132,
+      "sourceUrl": "https://www.openstreetmap.org/way/380910506"
+    },
+    {
+      "id": "osm-apartment:way:380910508",
+      "name": "하계장미아파트",
+      "category": "apartment",
+      "lon": 127.0679,
+      "lat": 37.63387,
+      "tier": 2,
+      "footprintM2": 66469,
+      "sourceUrl": "https://www.openstreetmap.org/way/380910508"
+    },
+    {
+      "id": "osm-apartment:way:381034894",
+      "name": "태강아파트",
+      "category": "apartment",
+      "lon": 127.08322,
+      "lat": 37.623505,
+      "tier": 2,
+      "footprintM2": 52120,
+      "sourceUrl": "https://www.openstreetmap.org/way/381034894"
+    },
+    {
+      "id": "osm-apartment:way:548930502",
+      "name": "월계미륭아파트",
+      "category": "apartment",
+      "lon": 127.065496,
+      "lat": 37.623624,
+      "tier": 2,
+      "footprintM2": 50111,
+      "sourceUrl": "https://www.openstreetmap.org/way/548930502"
+    },
+    {
+      "id": "osm-apartment:way:1188029608",
+      "name": "태릉해링턴플레이스아파트",
+      "category": "apartment",
+      "lon": 127.083098,
+      "lat": 37.625935,
+      "tier": 2,
+      "footprintM2": 57662,
+      "sourceUrl": "https://www.openstreetmap.org/way/1188029608"
+    },
+    {
+      "id": "osm-apartment:way:229028635",
+      "name": "행당대림아파트",
+      "category": "apartment",
+      "lon": 127.027016,
+      "lat": 37.557991,
+      "tier": 2,
+      "footprintM2": 117315,
+      "sourceUrl": "https://www.openstreetmap.org/way/229028635"
+    },
+    {
+      "id": "osm-apartment:way:379962861",
+      "name": "행당동한진타운아파트",
+      "category": "apartment",
+      "lon": 127.028658,
+      "lat": 37.555944,
+      "tier": 2,
+      "footprintM2": 84025,
+      "sourceUrl": "https://www.openstreetmap.org/way/379962861"
+    },
+    {
+      "id": "osm-apartment:way:379966027",
+      "name": "금호벽산아파트",
+      "category": "apartment",
+      "lon": 127.026754,
+      "lat": 37.552544,
+      "tier": 2,
+      "footprintM2": 100674,
+      "sourceUrl": "https://www.openstreetmap.org/way/379966027"
+    },
+    {
+      "id": "osm-apartment:way:204029917",
+      "name": "답십리래미안위브",
+      "category": "apartment",
+      "lon": 127.053516,
+      "lat": 37.570807,
+      "tier": 2,
+      "footprintM2": 144104,
+      "sourceUrl": "https://www.openstreetmap.org/way/204029917"
+    },
+    {
+      "id": "osm-apartment:way:379891345",
+      "name": "장안현대홈타운아파트",
+      "category": "apartment",
+      "lon": 127.074384,
+      "lat": 37.569135,
+      "tier": 2,
+      "footprintM2": 77570,
+      "sourceUrl": "https://www.openstreetmap.org/way/379891345"
+    },
+    {
+      "id": "osm-apartment:way:381967101",
+      "name": "래미안명일역솔베뉴",
+      "category": "apartment",
+      "lon": 127.145345,
+      "lat": 37.552573,
+      "tier": 2,
+      "footprintM2": 61784,
+      "sourceUrl": "https://www.openstreetmap.org/way/381967101"
+    },
+    {
+      "id": "osm-apartment:way:381967102",
+      "name": "삼익그린2차 맨션 아파트",
+      "category": "apartment",
+      "lon": 127.148096,
+      "lat": 37.551941,
+      "tier": 2,
+      "footprintM2": 121027,
+      "sourceUrl": "https://www.openstreetmap.org/way/381967102"
+    },
+    {
+      "id": "osm-apartment:way:381967113",
+      "name": "명일주공9단지",
+      "category": "apartment",
+      "lon": 127.15077,
+      "lat": 37.547865,
+      "tier": 2,
+      "footprintM2": 73613,
+      "sourceUrl": "https://www.openstreetmap.org/way/381967113"
+    },
+    {
+      "id": "osm-apartment:way:569581172",
+      "name": "강동롯데캐슬퍼스트",
+      "category": "apartment",
+      "lon": 127.141584,
+      "lat": 37.556658,
+      "tier": 2,
+      "footprintM2": 155876,
+      "sourceUrl": "https://www.openstreetmap.org/way/569581172"
+    },
+    {
+      "id": "osm-apartment:way:614205744",
+      "name": "고덕래미안힐스테이트",
+      "category": "apartment",
+      "lon": 127.14839,
+      "lat": 37.559333,
+      "tier": 2,
+      "footprintM2": 187602,
+      "sourceUrl": "https://www.openstreetmap.org/way/614205744"
+    },
+    {
+      "id": "osm-apartment:way:700805021",
+      "name": "고덕상록아파트",
+      "category": "apartment",
+      "lon": 127.154562,
+      "lat": 37.556387,
+      "tier": 2,
+      "footprintM2": 57960,
+      "sourceUrl": "https://www.openstreetmap.org/way/700805021"
+    },
+    {
+      "id": "osm-apartment:way:799549197",
+      "name": "고덕아이파크",
+      "category": "apartment",
+      "lon": 127.15504,
+      "lat": 37.559033,
+      "tier": 2,
+      "footprintM2": 64848,
+      "sourceUrl": "https://www.openstreetmap.org/way/799549197"
+    },
+    {
+      "id": "osm-apartment:way:681812601",
+      "name": "삼부아파트",
+      "category": "apartment",
+      "lon": 126.931892,
+      "lat": 37.524579,
+      "tier": 2,
+      "footprintM2": 62844,
+      "sourceUrl": "https://www.openstreetmap.org/way/681812601"
+    },
+    {
+      "id": "osm-apartment:relation:6114970",
+      "name": "잠실 트리지움",
+      "category": "apartment",
+      "lon": 127.089547,
+      "lat": 37.509686,
+      "tier": 2,
+      "footprintM2": 177153,
+      "sourceUrl": "https://www.openstreetmap.org/relation/6114970"
+    },
+    {
+      "id": "osm-apartment:relation:6114971",
+      "name": "잠실 레이크팰리스",
+      "category": "apartment",
+      "lon": 127.094371,
+      "lat": 37.508425,
+      "tier": 2,
+      "footprintM2": 135067,
+      "sourceUrl": "https://www.openstreetmap.org/relation/6114971"
+    },
+    {
+      "id": "osm-apartment:relation:6114967",
+      "name": "잠실 엘스",
+      "category": "apartment",
+      "lon": 127.081438,
+      "lat": 37.51416,
+      "tier": 2,
+      "footprintM2": 249798,
+      "sourceUrl": "https://www.openstreetmap.org/relation/6114967"
+    },
+    {
+      "id": "osm-apartment:relation:19585227",
+      "name": "올림픽파크 포레온",
+      "category": "apartment",
+      "lon": 127.13949,
+      "lat": 37.524017,
+      "tier": 2,
+      "footprintM2": 461218,
+      "sourceUrl": "https://www.openstreetmap.org/relation/19585227"
+    },
+    {
+      "id": "osm-apartment:relation:19936205",
+      "name": "디에이치퍼스티어아이파크아파트",
+      "category": "apartment",
+      "lon": 127.057093,
+      "lat": 37.48168,
+      "tier": 2,
+      "footprintM2": 143969,
+      "sourceUrl": "https://www.openstreetmap.org/relation/19936205"
+    },
+    {
+      "id": "osm-apartment:relation:11949447",
+      "name": "목동5단지아파트",
+      "category": "apartment",
+      "lon": 126.880602,
+      "lat": 37.534009,
+      "tier": 2,
+      "footprintM2": 196552,
+      "sourceUrl": "https://www.openstreetmap.org/relation/11949447"
+    },
+    {
+      "id": "osm-apartment:relation:15343663",
+      "name": "목동신시가지1단지",
+      "category": "apartment",
+      "lon": 126.879104,
+      "lat": 37.539701,
+      "tier": 2,
+      "footprintM2": 165779,
+      "sourceUrl": "https://www.openstreetmap.org/relation/15343663"
+    },
+    {
+      "id": "osm-apartment:relation:13088738",
+      "name": "공릉 풍림아이원아파트",
+      "category": "apartment",
+      "lon": 127.067418,
+      "lat": 37.629072,
+      "tier": 2,
+      "footprintM2": 64114,
+      "sourceUrl": "https://www.openstreetmap.org/relation/13088738"
+    },
+    {
+      "id": "osm-apartment:relation:11911485",
+      "name": "e편한세상금호파크힐스아파트",
+      "category": "apartment",
+      "lon": 127.022856,
+      "lat": 37.554104,
+      "tier": 2,
+      "footprintM2": 55714,
+      "sourceUrl": "https://www.openstreetmap.org/relation/11911485"
+    },
+    {
+      "id": "osm-apartment:relation:9312278",
+      "name": "고덕 그라시움",
+      "category": "apartment",
+      "lon": 127.162284,
+      "lat": 37.558037,
+      "tier": 2,
+      "footprintM2": 157031,
+      "sourceUrl": "https://www.openstreetmap.org/relation/9312278"
+    },
+    {
+      "id": "osm-apartment:relation:9460523",
+      "name": "시범아파트",
+      "category": "apartment",
+      "lon": 126.937202,
+      "lat": 37.52067,
+      "tier": 2,
+      "footprintM2": 109237,
+      "sourceUrl": "https://www.openstreetmap.org/relation/9460523"
+    }
+  ]
+}

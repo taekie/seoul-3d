@@ -7,9 +7,10 @@ export function prepareSurfaceCover(city){
  const t=city.terrain,W=2048,H=Math.max(1,Math.round(W*(t.maxY-t.minY)/(t.maxX-t.minX)));
  const canvas=new OffscreenCanvas(W,H),ctx=canvas.getContext('2d',{willReadFrequently:true});
  const sx=W/(t.maxX-t.minX),sy=H/(t.maxY-t.minY);
- for(const kind of ORDER){
-  ctx.fillStyle=`rgb(${(kind+1)*24},0,0)`;
-  for(const poly of city.data.greens){if(poly.t!==kind)continue;
+ const passes=[...ORDER.map(kind=>city.data.greens.filter(p=>p.t===kind&&!p.override)),city.data.greens.filter(p=>p.override)];
+ for(const polygons of passes){
+  for(const poly of polygons){
+   ctx.fillStyle=`rgb(${(poly.t+1)*24},0,0)`;
    ctx.beginPath();for(const ring of [poly.r,...(poly.holes||[])]){
     ring.forEach((value,i)=>{if(i%2)return;const x=(value-t.minX)*sx,y=(t.maxY-ring[i+1])*sy;if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);});ctx.closePath();
    }ctx.fill('evenodd');

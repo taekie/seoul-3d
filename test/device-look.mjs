@@ -6,7 +6,7 @@ try{
  p.on('pageerror',e=>errors.push(e.message));
  await p.addInitScript(()=>{
    window.sensorPermission='granted';window.mockAngle=0;window.sensorPose={alpha:0,beta:60,gamma:0};
-   window.DeviceOrientationEvent={requestPermission:()=>{window.permissionHadGesture=navigator.userActivation.isActive;return window.sensorPermission==='pending'?new Promise(r=>window.resolvePermission=r):Promise.resolve(window.sensorPermission);}};
+   window.DeviceOrientationEvent={requestPermission:()=>{window.permissionHadGesture=navigator.userActivation.isActive;if(!window.permissionHadGesture)throw new DOMException('User activation required','NotAllowedError');return window.sensorPermission==='pending'?new Promise(r=>window.resolvePermission=r):Promise.resolve(window.sensorPermission);}};
    Object.defineProperty(screen.orientation,'angle',{configurable:true,get:()=>window.mockAngle});
    window.emitSensor=()=>{const e=new Event('deviceorientation');Object.assign(e,window.sensorPose);window.dispatchEvent(e);};
    window.sensorInterval=setInterval(emitSensor,50);
@@ -17,7 +17,15 @@ try{
  const hold=async selector=>{const r=await p.locator(selector).boundingBox();await p.mouse.move(r.x+r.width/2,r.y+r.height/2);await p.mouse.down();await p.waitForTimeout(150);};
  assert(await p.locator('#motion-look').isVisible());assert(await p.locator('#motion-move').isVisible());
  assert.equal(await p.locator('#tools [data-a=motion],#tools [data-a=tour]').count(),0);
- const initial=await state();await hold('#motion-look');assert((await state()).enabled);assert(await p.evaluate(()=>permissionHadGesture));
+ const initial=await state();
+ // First touch requests permission on release, when mobile activation is available.
+ const firstCDP=await p.context().newCDPSession(p),firstRect=await p.locator('#motion-look').boundingBox();
+ await firstCDP.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:firstRect.x+20,y:firstRect.y+20}]});
+ assert(!(await state()).enabled);assert(!(await state()).pending);
+ await firstCDP.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
+ await p.waitForFunction(()=>deviceLook.permissionGranted);assert(!(await state()).enabled);assert(await p.evaluate(()=>permissionHadGesture));
+ assert(await p.locator('#motion-panel').isVisible());assert.match(await p.textContent('#motion-status'),/다시 누른 채/);
+ await hold('#motion-look');assert((await state()).enabled);
  await p.evaluate(()=>sensorPose.beta=40);await p.waitForTimeout(500);assert((await state()).phi<initial.phi-.1);
  await p.mouse.up();const stopped=await state();assert(!stopped.enabled);
  await p.evaluate(()=>sensorPose.beta=80);await p.waitForTimeout(250);assert.equal((await state()).phi,stopped.phi);
@@ -54,9 +62,9 @@ try{
  await p.mouse.up();
  await hold('#motion-move');await p.evaluate(()=>document.querySelector('#motion-move').dispatchEvent(new Event('pointercancel')));assert(!(await state()).enabled);await p.mouse.up();
  await p.locator('#motion-look').focus();await p.keyboard.down('Space');await p.waitForTimeout(100);assert((await state()).enabled);await p.keyboard.up('Space');assert(!(await state()).enabled);
- await p.evaluate(()=>sensorPermission='pending');await hold('#motion-look');assert((await state()).pending);await p.mouse.up();await p.evaluate(()=>resolvePermission('granted'));await p.waitForTimeout(100);assert(!(await state()).enabled,'Permission resolving after release must not latch mode');
- await p.evaluate(()=>sensorPermission='denied');await hold('#motion-move');assert(!(await state()).enabled);await p.mouse.up();
- await p.evaluate(()=>sensorPermission='granted');await hold('#motion-look');await p.evaluate(()=>window.dispatchEvent(new Event('blur')));assert(!(await state()).enabled);await p.mouse.up();
+ await p.evaluate(()=>{sensorPermission='pending';deviceLook.permissionGranted=false;});await p.locator('#motion-look').focus();await p.keyboard.down('Space');assert((await state()).pending);await p.keyboard.up('Space');await p.evaluate(()=>resolvePermission('granted'));await p.waitForTimeout(100);assert(!(await state()).enabled,'Permission resolving after release must not latch mode');
+ await p.evaluate(()=>{sensorPermission='denied';deviceLook.permissionGranted=false;});await hold('#motion-move');await p.mouse.up();await p.waitForTimeout(100);assert(!(await state()).enabled);assert(await p.locator('#motion-panel').isVisible());assert.match(await p.textContent('#motion-status'),/허용되지/);
+ await p.evaluate(()=>{sensorPermission='granted';deviceLook.permissionGranted=true;});await hold('#motion-look');await p.evaluate(()=>window.dispatchEvent(new Event('blur')));assert(!(await state()).enabled);await p.mouse.up();
  const cdp=await p.context().newCDPSession(p),touchRect=await p.locator('#motion-look').boundingBox();
  await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:touchRect.x+20,y:touchRect.y+20}]});await p.waitForTimeout(100);assert((await state()).enabled);
  await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});assert(!(await state()).enabled);

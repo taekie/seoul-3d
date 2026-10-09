@@ -300,7 +300,7 @@
 
 <div id="motion-controls">
 <button id="motion-look" data-a="motion" class="card" aria-pressed="false" aria-label="누른 채 기울여 둘러보기" title="누른 채 기울여 둘러보기"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M10 17h4M3 8l-2 4 2 4M21 8l2 4-2 4"/></svg></button>
-<button id="motion-move" class="card" aria-pressed="false" aria-label="누른 채 기울여 이동" title="누른 채 기울여 이동"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M3 12h18M8 7l4-4 4 4M8 17l4 4 4-4M7 8l-4 4 4 4M17 8l4 4-4 4"/></svg></button>
+<button id="motion-move" class="card" aria-pressed="false" aria-label="누른 채 기울여 이동" title="누른 채 기울여 이동"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v5M12 15v5M4 12h5M15 12h5"/><path d="m9.5 6.5 2.5-3 2.5 3M9.5 17.5l2.5 3 2.5-3M6.5 9.5l-3 2.5 3 2.5M17.5 9.5l3 2.5-3 2.5"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg></button>
 </div>
 <button id="compass" class="card" aria-label="나침반: 북쪽을 위로 맞추기" title="북쪽을 위로 맞추기">
   <span data-direction="0" aria-hidden="true">N</span><span data-direction="90" aria-hidden="true">E</span>
@@ -502,17 +502,17 @@ addEventListener('unhandledrejection', showLoadError);
 { "imports": {
   "three": "https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js",
   "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.185.1/examples/jsm/",
-  "./spatial-instances.js": "./spatial-instances.js?v=20261009-terminal2",
-  "./surface-cover.js": "./surface-cover.js?v=20261009-terminal2",
-  "./car-routing.js": "./car-routing.js?v=20261009-terminal2",
-  "./app.js": "./app.js?v=20261009-terminal2",
-  "./landmarks.js": "./landmarks.js?v=20261009-terminal2",
-  "./seoul-landmarks.js": "./seoul-landmarks.js?v=20261009-terminal2",
-  "./miniature.js": "./miniature.js?v=20261009-terminal2",
-  "./bridge-trains.js": "./bridge-trains.js?v=20261009-terminal2",
-  "./city-life.js": "./city-life.js?v=20261009-terminal2",
-  "./neighborhood-labels.js": "./neighborhood-labels.js?v=20261009-terminal2",
-  "./map-export.js": "./map-export.js?v=20261009-terminal2"
+  "./spatial-instances.js": "./spatial-instances.js?v=20261010-sensor1",
+  "./surface-cover.js": "./surface-cover.js?v=20261010-sensor1",
+  "./car-routing.js": "./car-routing.js?v=20261010-sensor1",
+  "./app.js": "./app.js?v=20261010-sensor1",
+  "./landmarks.js": "./landmarks.js?v=20261010-sensor1",
+  "./seoul-landmarks.js": "./seoul-landmarks.js?v=20261010-sensor1",
+  "./miniature.js": "./miniature.js?v=20261010-sensor1",
+  "./bridge-trains.js": "./bridge-trains.js?v=20261010-sensor1",
+  "./city-life.js": "./city-life.js?v=20261010-sensor1",
+  "./neighborhood-labels.js": "./neighborhood-labels.js?v=20261010-sensor1",
+  "./map-export.js": "./map-export.js?v=20261010-sensor1"
 } }
 </script>
 
@@ -524,7 +524,7 @@ import { mountMapExport } from './map-export.js';
 import { NeighborhoodLabels, poiCategoryName } from './neighborhood-labels.js';
 import { mountCompass } from './compass.js';
 import { connectRailUI } from './rail.js';
-import { DeviceLook } from './device-look.js?v=5';
+import { DeviceLook } from './device-look.js?v=6';
 
 const city = new City(document.getElementById('c'));
 // 콘솔에서 씬을 만져볼 수 있게 열어둔다

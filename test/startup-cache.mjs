@@ -17,7 +17,7 @@ try {
   for (const name of ['app','landmarks','seoul-landmarks','miniature','city-life','neighborhood-labels','map-export']) {
     const urls = requests.filter(url => url.pathname === `/${name}.js`);
     assert(urls.length, `${name} must load`);
-    assert(urls.every(url => url.searchParams.get('v') === '20261009-terminal2'), `${name} must bypass stale cache`);
+    assert(urls.every(url => url.searchParams.get('v') === '20261010-sensor1'), `${name} must bypass stale cache`);
   }
   assert.deepEqual(errors, []);
   const broken = await browser.newPage();

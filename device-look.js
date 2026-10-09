@@ -8,7 +8,7 @@ const deadzone=value=>Math.sign(value)*Math.max(0,Math.abs(value)-radians(1));
 export class DeviceLook {
   constructor(city,{button,moveButton,panel,status,recenter,onEnable}) {
     Object.assign(this,{city,button,moveButton,panel,status,recenter,onEnable});
-    this.enabled=false;this.pending=false;this.token=0;this.latest=null;this.baseline=null;
+    this.enabled=false;this.pending=false;this.token=0;this.latest=null;this.baseline=null;this.permissionGranted=false;
     this.q=new THREE.Quaternion();this.relative=new THREE.Quaternion();this.euler=new THREE.Euler();
     this.screenRotation=new THREE.Quaternion();this.zAxis=new THREE.Vector3(0,0,1);
     this.phoneToCamera=new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1,0,0),-Math.PI/2);
@@ -28,9 +28,13 @@ export class DeviceLook {
       control.addEventListener('pointerdown',e=>{
         if(this.holdMode)return;
         e.preventDefault();e.stopPropagation();control.setPointerCapture(e.pointerId);
-        this.holdMode=mode;this.toggle();
+        this.holdMode=mode;
+        // Touch activation is available on release, not necessarily pointerdown.
+        this.awaitingPermission=typeof window.DeviceOrientationEvent?.requestPermission==='function'&&!this.permissionGranted;
+        if(!this.awaitingPermission)this.toggle();
       });
-      for(const event of ['pointerup','pointercancel','lostpointercapture'])control.addEventListener(event,()=>{if(this.holdMode===mode)this.stop();});
+      control.addEventListener('pointerup',()=>{if(this.holdMode!==mode)return;const request=this.awaitingPermission;this.stop();if(request)this.toggle();});
+      for(const event of ['pointercancel','lostpointercapture'])control.addEventListener(event,()=>{if(this.holdMode===mode)this.stop();});
       control.addEventListener('contextmenu',e=>e.preventDefault());
       control.addEventListener('keydown',e=>{if([' ','Enter'].includes(e.key)){e.preventDefault();if(!e.repeat&&!this.holdMode){this.holdMode=mode;this.toggle();}}});
       control.addEventListener('keyup',e=>{if([' ','Enter'].includes(e.key)&&this.holdMode===mode)this.stop();});
@@ -51,19 +55,21 @@ export class DeviceLook {
     this.moving=false;this.moveButton.classList.remove('on');this.moveButton.setAttribute('aria-pressed','false');
     this.calibrate();this.city.sensorMoving=false;
   }
-  message(text) {this.panel.hidden=true;this.status.textContent=text;this.button.title=text;this.button.setAttribute('aria-label',text);}
+  message(text,visible=false) {this.panel.hidden=!visible;this.status.textContent=text;for(const control of [this.button,this.moveButton])control.title=text;this.button.setAttribute('aria-label',text);}
   async toggle() {
     if(this.enabled||this.pending){this.stop();return;}
     if(!window.isSecureContext){this.stop('아이폰 센서는 HTTPS 주소에서 사용할 수 있어요. HTTPS로 접속해 주세요.');return;}
     const api=window.DeviceOrientationEvent;
     if(!api){this.stop('이 브라우저에서는 기울기 센서를 사용할 수 없어요. 아이폰 Safari에서 열어 주세요.');return;}
     const token=++this.token;this.pending=true;this.button.setAttribute('aria-busy','true');
-    this.message('휴대폰을 편하게 들고 센서 접근을 허용해 주세요.');
+    this.message('휴대폰을 편하게 들고 센서 접근을 허용해 주세요.',true);
     try{
       // Must remain in the button's user-activation call chain on iOS.
-      const permission=typeof api.requestPermission==='function'?await api.requestPermission():'granted';
-      if(token!==this.token)return;
+      const permission=this.permissionGranted||typeof api.requestPermission!=='function'?'granted':await api.requestPermission();
+      if(permission==='granted')this.permissionGranted=true;
+      if(token!==this.token){if(permission==='granted'&&!this.enabled&&!this.pending)this.message('센서가 허용됐어요. 버튼을 다시 누른 채 기울여 주세요.',true);return;}
       if(permission!=='granted'){this.stop('센서 접근이 허용되지 않았어요. Safari의 웹사이트 설정에서 동작·방향 접근을 확인해 주세요.');return;}
+      if(!this.holdMode){this.stop('센서가 허용됐어요. 버튼을 다시 누른 채 기울여 주세요.');return;}
       this.pending=false;this.button.removeAttribute('aria-busy');this.enabled=true;
       this.onEnable();this.city.anim=null;
       this.moving=this.holdMode==='move';
@@ -75,7 +81,7 @@ export class DeviceLook {
       window.addEventListener('deviceorientation',this.onOrientation);
       window.addEventListener('orientationchange',this.onScreenChange);
       screen.orientation?.addEventListener('change',this.onScreenChange);
-      this.message('센서를 기다리는 중… 휴대폰을 조금 기울여 보세요.');this.watchSensor();
+      this.message('센서를 기다리는 중… 휴대폰을 조금 기울여 보세요.',true);this.watchSensor();
     }catch{
       if(token===this.token)this.stop('센서에 접근하지 못했어요. 아이폰 Safari에서 HTTPS 주소로 다시 열어 주세요.');
     }
@@ -98,10 +104,10 @@ export class DeviceLook {
     window.removeEventListener('orientationchange',this.onScreenChange);
     screen.orientation?.removeEventListener('change',this.onScreenChange);
     if(this.savedTouches)Object.assign(this.city.controls.touches,this.savedTouches);
-    this.releaseMove();this.holdMode=null;this.savedTouches=null;this.enabled=false;this.pending=false;this.baseline=null;this.latest=null;
+    this.releaseMove();this.holdMode=null;this.awaitingPermission=false;this.savedTouches=null;this.enabled=false;this.pending=false;this.baseline=null;this.latest=null;
     this.city.sensorMoving=false;for(const control of [this.button,this.moveButton]){control.classList.remove('on');control.setAttribute('aria-pressed','false');}
     this.button.removeAttribute('aria-busy');this.recenter.hidden=true;
-    if(message)this.message(message);else this.panel.hidden=true;
+    if(message)this.message(message,true);else this.panel.hidden=true;
   }
   update(now) {
     if(!this.enabled||!this.baseline||!this.latest){this.city.sensorMoving=false;return;}
